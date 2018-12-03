@@ -1,5 +1,5 @@
 import * as Anim from './anims';
-import Highway from '../thirdparty/highway.min';
+import Highway from '@dogstudio/highway';
 
 // Renderer
 class HomeRenderer extends Highway.Renderer {
@@ -8,7 +8,7 @@ class HomeRenderer extends Highway.Renderer {
   }
 
   onEnterCompleted() {
-
+    Anim.scrollIntoProject();
   }
 
   onLeave() {

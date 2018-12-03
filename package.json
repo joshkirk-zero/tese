@@ -22,6 +22,7 @@
     "whatwg-fetch": "^3.0.0"
   },
   "dependencies": {
+    "@dogstudio/highway": "^2.1.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
     "gsap": "^2.0.2",

@@ -1,6 +1,6 @@
-import Highway from './thirdparty/highway.min';
-import * as Func from './_functions';
-
+import Highway from '@dogstudio/highway';
+import { globalObject, getViewport } from './_functions';
+import { TweenMax, Sine } from 'gsap';
 // Renderers
 import HomeRenderer from './home/init';
 import ProjectRenderer from './project/init';
@@ -10,6 +10,7 @@ import Fade from './transitions/fade';
 import NextProject from './transitions/nextProject';
 
 import * as Global from './global/init';
+// import {globalObject} from "./_functions";
 
 if ('scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'manual';
@@ -17,6 +18,8 @@ if ('scrollRestoration' in window.history) {
 
 document.addEventListener('DOMContentLoaded', () => {
   const projectsContainer = document.querySelector('.projects-wrapper');
+  const projectLinks = projectsContainer.querySelectorAll('a');
+  const projectsBackdrop = document.querySelector('.switch-overlay');
   const trigger = document.querySelector('.cta-trigger .trigger');
 
   // Highway
@@ -27,17 +30,19 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     transitions: {
       default: Fade,
-      nextProject: NextProject
+      contextual: {
+        nextProject: NextProject
+      }
     }
   });
 
-  H.on('NAVIGATE_IN', () => { // to, location
-    Global.onEnter();
+  H.on('NAVIGATE_IN', (to, location) => { // to, location
+    Global.onEnter(to, location);
   });
 
-  H.on('NAVIGATE_END', () => { // to, from, location
-    Global.onEnterCompleted();
-
+  H.on('NAVIGATE_END', (from, to, location) => { // to, from, location
+    Global.onEnterCompleted(from, to, location);
+    globalObject.comingFromFooter = false;
     // Page View, fire GA here
   });
 
@@ -46,6 +51,15 @@ document.addEventListener('DOMContentLoaded', () => {
       trigger.click();
     }
   });
+
+  for (let i = 0; i < projectLinks.length; i++) {
+    projectLinks[i].addEventListener('click', () => {
+      TweenMax.delayedCall(0.4, () => {
+        TweenMax.set([projectsContainer, projectsBackdrop], { opacity: 0 });
+        globalObject.openCloseMenu.progress(0);
+      });
+    });
+  }
 
   Global.firstLoad();
 });
@@ -61,11 +75,11 @@ window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
 
   resizeTimer = setTimeout(() => {
-    if (Func.globalObject.ww !== Func.getViewport().width) {
+    if (globalObject.ww !== getViewport().width) {
       // update the globalobject with current values first
-      Func.globalObject.ww = Func.getViewport().width;
+      globalObject.ww = getViewport().width;
     }
 
-    Func.globalObject.wh = Func.getViewport().height;
+    globalObject.wh = getViewport().height;
   }, 100);
 });

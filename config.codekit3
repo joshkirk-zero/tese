@@ -68,9 +68,9 @@
 	"\/src\/facebook-careers.html": {
 		"cB": 0,
 		"ft": 8192,
-		"oA": 1,
+		"oA": 0,
 		"oAP": "\/src\/facebook-careers.html",
-		"oF": 1
+		"oF": 0
 		},
 	"\/src\/fonts\/Grandmaster-Black.woff": {
 		"cB": 0,
@@ -123,9 +123,9 @@
 	"\/src\/index.html": {
 		"cB": 0,
 		"ft": 8192,
-		"oA": 1,
+		"oA": 0,
 		"oAP": "\/src\/index.html",
-		"oF": 1
+		"oF": 0
 		},
 	"\/src\/js": {
 		"ft": 65536,
@@ -136,16 +136,16 @@
 	"\/src\/laquinta-hotels.html": {
 		"cB": 0,
 		"ft": 8192,
-		"oA": 1,
+		"oA": 0,
 		"oAP": "\/src\/laquinta-hotels.html",
-		"oF": 1
+		"oF": 0
 		},
 	"\/src\/microsoft-teams.html": {
 		"cB": 0,
 		"ft": 8192,
-		"oA": 1,
+		"oA": 0,
 		"oAP": "\/src\/microsoft-teams.html",
-		"oF": 1
+		"oF": 0
 		},
 	"\/src\/styles\/styles.scss": {
 		"aP": 1,

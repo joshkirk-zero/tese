@@ -36,13 +36,9 @@ export const globalObject = {
   menuModels: [],
   modelsLoaded: false,
   header: '',
-  readyToSwitch: false
-
-
-  /* to be used in a pjax scenario */
-  // "pageReady": false, // flag for page ready fade in
-  // "firstContainerOut": false, // flag for onLeave for old barba container
-  // "linkNavigation": false, // navigation via internal link
+  readyToSwitch: false,
+  comingFromFooter: false,
+  openCloseMenu: ''
 };
 
 
@@ -88,6 +84,9 @@ export const getWheelDir = (target) => {
   target.addEventListener('DOMMouseScroll', mouseWheelHandler, false);
 };
 
+export const lerp = (a, b, n) => {
+  return (1 - n) * a + n * b;
+};
 
 /**
 
@@ -99,74 +98,68 @@ export const getWheelDir = (target) => {
  set with VH to get messed up.
 
  -------------------------------------------------- * */
-export const normalizeWheelSpeed = (target) => {
-  const PIXEL_STEP = 10;
-  const LINE_HEIGHT = 40;
-  const PAGE_HEIGHT = 800;
-
-  let isFirefox = false;
-  if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
-    isFirefox = true;
-  }
-
-  const normalizeWheel = (event) => {
-    let sX = 0;
-    let sY = 0;
-    let pX = 0;
-    let pY = 0;
-
-    // Legacy
-    if ('detail' in event) { sY = event.detail; }
-    if ('wheelDelta' in event) { sY = -event.wheelDelta / 120; }
-    if ('wheelDeltaY' in event) { sY = -event.wheelDeltaY / 120; }
-    if ('wheelDeltaX' in event) { sX = -event.wheelDeltaX / 120; }
-
-    // side scrolling on FF with DOMMouseScroll
-    if ('axis' in event && event.axis === event.HORIZONTAL_AXIS) {
-      sX = sY;
-      sY = 0;
-    }
-
-    pX = sX * PIXEL_STEP;
-    pY = sY * PIXEL_STEP;
-
-    if ('deltaY' in event) { pY = event.deltaY; }
-    if ('deltaX' in event) { pX = event.deltaX; }
-
-    if ((pX || pY) && event.deltaMode) {
-      if (event.deltaMode === 1) {
-        pX *= LINE_HEIGHT;
-        pY *= LINE_HEIGHT;
-      } else {
-        pX *= PAGE_HEIGHT;
-        pY *= PAGE_HEIGHT;
-      }
-    }
-
-    // Fall-back if spin cannot be determined
-    if (pX && !sX) { sX = (pX < 1) ? -1 : 1; }
-    if (pY && !sY) { sY = (pY < 1) ? -1 : 1; }
-
-    return {
-      spinX: sX,
-      spinY: sY,
-      pixelX: pX,
-      pixelY: pY
-    };
-
-  };
-
-  /**
-   * The best combination if you prefer spinX + spinY normalization.  It favors
-   * the older DOMMouseScroll for Firefox, as FF does not include wheelDelta with
-   * 'wheel' event, making spin speed determination impossible.
-   */
-  if (isFirefox) {
-    target.addEventListener('DOMMouseScroll', normalizeWheel, false);
-  } else {
-    target.addEventListener('wheel', normalizeWheel, false);
-  }
-};
+// export const normalizeWheelSpeed = (target) => {
+//   const PAGE_HEIGHT = globalObject.wh;
+//
+//   let isFirefox = false;
+//   if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+//     isFirefox = true;
+//   }
+//   let prevsX = 0;
+//   let prevsY = 0;
+//   let prevpX = 0;
+//   let prevpY = 0;
+//   const normalizeWheel = (event) => {
+//     let sX = 0;
+//     let sY = 0;
+//     let pX = 0;
+//     let pY = 0;
+//
+//     // Legacy
+//     if ('detail' in event) { sY = event.detail; }
+//     if ('wheelDelta' in event) { sY = -event.wheelDelta; }
+//     if ('wheelDeltaY' in event) { sY = -event.wheelDeltaY; }
+//     if ('wheelDeltaX' in event) { sX = -event.wheelDeltaX; }
+//
+//     if ('deltaY' in event) { pY = event.deltaY; }
+//     if ('deltaX' in event) { pX = event.deltaX; }
+//
+//     if ((pX || pY) && event.deltaMode) {
+//       if (event.deltaMode === 1) {
+//         pX *= LINE_HEIGHT;
+//         pY *= LINE_HEIGHT;
+//       } else {
+//         pX *= PAGE_HEIGHT;
+//         pY *= PAGE_HEIGHT;
+//       }
+//     }
+//
+//     // Fall-back if spin cannot be determined
+//     if (pX && !sX) { sX = (pX < 1) ? -1 : 1; }
+//     if (pY && !sY) { sY = (pY < 1) ? -1 : 1; }
+//
+//     // lerp(, this.vars.current, this.vars.ease);
+//     console.log(sY);
+//
+//     return {
+//       spinX: sX,
+//       spinY: sY,
+//       pixelX: pX,
+//       pixelY: pY
+//     };
+//   };
+//
+//   /**
+//    * The best combination if you prefer spinX + spinY normalization.  It favors
+//    * the older DOMMouseScroll for Firefox, as FF does not include wheelDelta with
+//    * 'wheel' event, making spin speed determination impossible.
+//    */
+//   if (isFirefox) {
+//     document.getElementById('container').addEventListener('DOMMouseScroll', normalizeWheel, false);
+//   } else {
+//     document.getElementById('container').addEventListener('wheel', normalizeWheel, false);
+//   }
+// };
 
 
 /**

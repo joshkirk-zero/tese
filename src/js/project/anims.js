@@ -66,7 +66,7 @@ export const scrollAwayFromHero = () => {
 
   const fadeEls = document.querySelectorAll('.cta-trigger .cta, .arrow, .title-meta');
   const staggerFadeEls = document.querySelectorAll('.vert-left .meta');
-  const staggerFadeScaleEls = document.querySelectorAll('.socials a');
+  const staggerFadeScaleEls = document.querySelectorAll('.socials');
 
   const scrollWords = document.querySelectorAll('.scroll-prompt p span:first-child');
   const scrollWordsWraps = new SplitText(scrollWords, { type: 'words' }).words;
@@ -78,18 +78,20 @@ export const scrollAwayFromHero = () => {
     .staggerFromTo(scrollWordsChars, 1, { y: 0 }, { y: -29, ease: Sine.easeInOut, force3D: true }, 0.017)
     .staggerFromTo(scrollWordsChars, 0.8, { rotationX: 0, skewX: 0, x: 0 }, { rotationX: -60, x: -2, skewX: -7, ease: Sine.easeInOut, force3D: true }, 0.017, 'start')
     .staggerFromTo(scrollWordsChars, 0.9, { opacity: 1 }, { opacity: 0 }, 0.015, 'charsStart')
-    .staggerFromTo(staggerFadeScaleEls, 1.2, { autoAlpha: 1, scale: 1 }, { autoAlpha: 0, scale: 0.98, ease: Sine.easeInOut, force3D: true }, -0.055, 'start')
+    .fromTo(staggerFadeScaleEls, 1.2, { autoAlpha: 1, scale: 1 }, { autoAlpha: 0, scale: 0.98, ease: Sine.easeInOut, force3D: true }, -0.055, 'start')
     .fromTo(staggerFadeEls, 1.2, { autoAlpha: 1 }, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true }, 'start')
     .fromTo(fadeEls, 1.2, { autoAlpha: 1 }, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true }, 'start');
 
   const checkOffset = () => {
-    let percentageThrough = (window.pageYOffset / measureElHeight).toFixed(3);
-    if (percentageThrough <= 0) {
-      percentageThrough = 0;
-    } else if (percentageThrough >= 1) {
-      percentageThrough = 1;
+    if (!globalObject.comingFromFooter) {
+      let percentageThrough = (window.pageYOffset / measureElHeight).toFixed(3);
+      if (percentageThrough <= 0) {
+        percentageThrough = 0;
+      } else if (percentageThrough >= 1) {
+        percentageThrough = 1;
+      }
+      scrollAwayTL.progress(percentageThrough);
     }
-    scrollAwayTL.progress(percentageThrough);
   };
 
   window.addEventListener('scroll', checkOffset);

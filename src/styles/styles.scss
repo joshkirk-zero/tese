@@ -74,9 +74,13 @@ a {
   text-decoration: none;
   color: inherit;
 }
+html, body {
+  overflow: hidden;
+}
 html, body, #container {
   width: 100%;
-  //scroll-behavior: smooth;
+  overflow-x: hidden;
+  overflow-y: auto;
   &.locked {
     height: 100%;
     min-height: 100%;
@@ -93,8 +97,7 @@ body {
   height: 100%;
 }
 #container {
-  //height: 100%;
-  //overflow: hidden;
+
 }
 .global-els {
   position: fixed;
@@ -113,7 +116,7 @@ body {
   position: fixed;
   width: 100%;
   height: 100%;
-  z-index: 2;
+  z-index: 4;
   top: 0;
   opacity: 1;
   visibility: visible;
@@ -189,29 +192,31 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   position: relative;
   //overflow: hidden;
 }
+.measure-el {
+  height: 72%;
+  width: 1px;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 .project-hero {
   padding-left: 16.5vw;
   @media (min-width: 1500px) {
     padding-left: 14vw;
   }
-  .measure-el {
-    height: 72%;
-    width: 2px;
-    opacity: 1;
-    background-color: red;
-    pointer-events: none;
-    z-index: 99;
-    position: absolute;
-    top: 0;
-    right: 0;
-    span {
-      font-size: 60px;
-      color: red;
-      position: absolute;
-      left: -15px;
-      transform: translate(-100%, 100%);
-      bottom: -3px;
-      line-height: 1;
+  .large-svg-title {
+    .wiper {
+      span {
+        width: 25%;
+        left: -90px;
+        height: calc(100% - 8px);
+      }
+    }
+    .svg-wrapper {
+      float: left;
+      clear: both;
     }
   }
 }
@@ -220,13 +225,16 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   width: 100%;
   height: 100%;
 }
+.profile-wrapper {
+  display: flex;
+  flex-direction: row;
+}
 .profile {
   width: 100%;
   max-width: 365px;
-  position: relative;
-  top: 50%;
-  float: right;
-  transform: translate3d(0, -50%, 0);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   .welcome {
     font-stretch: expanded;
     line-height: 1.67;
@@ -236,6 +244,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     color: $brown;
     font-family: $gtAmerica;
     margin-bottom: 5px;
+    margin-top: 115%;
     > div {
       overflow: hidden;
     }
@@ -247,7 +256,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   letter-spacing: 0.1px;
   color: $ltBrown;
   font-family: $lucida;
-  font-size: 24px;
+  font-size: 19px;
   > div {
     overflow: hidden;
   }
@@ -276,13 +285,17 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       position: absolute;
       left: 0;
       display: none;
+      transform: translateZ(0);
+      transform-style: preserve-3d;
+      perspective: 600px;
       > div {
-        //margin-right: 1px;
+        transform: translateZ(25px);
         &:last-child {
           margin-right: 0;
         }
         div {
           will-change: transform;
+          transform-origin: 50% 0;
         }
       }
       &:first-child {
@@ -398,10 +411,10 @@ h1, h2, h3, h4, h5, h6, p, a, li {
 }
 .cta-trigger {
   height: 20px;
-  width: 37vw;
   position: absolute;
   right: 0;
   top: 24px;
+  width: 483px;
   .text {
     color: $brown;
     font-stretch: expanded;
@@ -409,11 +422,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     font-family: $gtAmerica;
     letter-spacing: 1px;
     position: absolute;
-    padding-left: 22px;
-    top: 50%;
     line-height: 1;
     cursor: pointer;
-    transform: translateY(-50%);
+    padding-top: 5px;
     p, span {
       display: inline-block;
     }
@@ -498,26 +509,67 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   visibility: hidden;
   pointer-events: none;
 }
+.wiper {
+  position: absolute;
+  transform-origin: 100% 50%;
+  background-color: #1f271b;
+  z-index: 2;
+  width: 100%;
+  right: -1px;
+  height: 100%;
+  span {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $pink;
+    width: 20%;
+    transform-origin: 0 50%;
+  }
+}
 .home {
   .you-can {
     height: 100%;
     display: inline-block;
     padding: 6px 1px;
-    span {
-      overflow: hidden;
+    .wiper {
+      span {
+        left: -90px;
+        width: 25%;
+      }
+    }
+    > span {
+      display: inline-block;
+      position: relative;
       svg {
         height: 100%;
         width: auto;
+        position: relative;
       }
       &:first-child {
-        display: block;
         height: 50%;
         padding-bottom: 3px;
+        .svg-wrapper {
+          width: 95%;
+        }
+        .wiper {
+          width: 95%;
+          left: 0;
+          height: 99.5%;
+        }
+
       }
       &:last-child {
-        display: block;
         padding-top: 3px;
         height: 50%;
+        .svg-wrapper {
+          width: 94%;
+        }
+        .wiper {
+          width: 94.1%;
+          left: 0;
+          height: 99.5%;
+        }
       }
     }
   }
@@ -528,6 +580,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   display: inline-block;
   .svg-wrapper {
     height: 50%;
+    position: relative;
     &:nth-last-child(2) {
       padding-bottom: 7px;
     }
@@ -559,13 +612,60 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   position: relative;
   transform: translateY(-50%);
 }
+
+.svg-wrapper, .svg-wrapper-inner {
+  position: relative;
+  height: 100%;
+  display: block;
+}
+.svg-wrapper-inner {
+  overflow: hidden;
+}
+.svg-wrapper {
+  &:after {
+    height: 100%;
+    position: absolute;
+    right: -2px;
+    width: 2px;
+    background: #1f271b;
+    content: '';
+    top: 0;
+    z-index: 2;
+  }
+}
 .projects-wrapper {
   pointer-events: all;
   position: absolute;
   z-index: 2;
+  padding: 0 110px 0 200px;
+  .large-svg-title {
+    .wiper {
+      span {
+        width: 26%;
+        left: -40px;
+      }
+    }
+    .svg-wrapper {
+      float: left;
+      clear: both;
+    }
+  }
   .projects {
     height: 100%;
     float: right;
+    .wiper {
+      span {
+        width: 40%;
+        left: -60px;
+      }
+    }
+    a:first-child {
+      .wiper {
+        span {
+          width: 49%;
+        }
+      }
+    }
     h3 {
       font-stretch: expanded;
       line-height: 1.5;
@@ -573,7 +673,10 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       font-family: $gtAmerica;
       color: $ltBrown;
       font-size: 24px;
-      width: 151px;
+      width: 171px;
+      > div {
+        overflow: hidden;
+      }
     }
     p {
       font-stretch: expanded;
@@ -582,6 +685,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       font-size: 12px;
       margin-top: 10px;
       color: $brown;
+      > div {
+        overflow: hidden;
+      }
     }
     .project-link  {
       float: left;
@@ -591,6 +697,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
         display: inline-block;
         vertical-align: middle;
         margin-right: 22px;
+        position: relative;
         svg {
           height: 100%;
           width: auto;
@@ -602,7 +709,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
         margin-top: 2px;
       }
       &:nth-child(odd) {
-        margin-right: 145px;
+        margin-right: 120px;
       }
       &:nth-child(-n+2) {
         padding-bottom: 7px;
@@ -612,7 +719,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       }
       &:nth-child(3) {
         clear: left;
-        margin-right: 135px;
+        margin-right: 110px;
         .svg-wrapper {
           margin-right: 18px;
         }
@@ -742,8 +849,11 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   left: -10px;
   transform: translateX(-100%);
   top: 0;
+  > div {
+    overflow: hidden;
+  }
 }
-.next-footer {
+.project-footer {
   .eyebrow {
     color: $brown;
     line-height: 1.67;
@@ -759,22 +869,27 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     transform: translateY(-100%);
     left: 0;
   }
-  a {
-    .svg-wrapper {
-      pointer-events: none;
+  .svg-wrapper {
+    float: left;
+    clear: left;
+  }
+  .eyebrow, .idx {
+    > div {
+      overflow: hidden;
     }
   }
 }
-.stop {
-  img {
-    margin-bottom: 0;
-  }
-}
-.next-footer {
+.project-footer {
   height: 100vh;
   width: 100%;
   position: relative;
   padding-left: 16.5vw;
+  @media (min-width: 1500px) {
+    padding-left: 14vw;
+  }
+  .wiper span {
+    left: -90px;
+  }
   .large-svg-title {
     height: 33.8vw;
     top: 50%;
