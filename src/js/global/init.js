@@ -11,7 +11,7 @@ export const onEnterCompleted = (from, to, location) => {
 
 export const firstLoad = () => {
   const namespace = document.querySelector('[data-router-view]').dataset.routerView;
-  Anim.projectsTriggerHover();
+  Anim.projectsTriggerGestures();
   Anim.pageEntrance(namespace);
   Anim.openCloseProjectsMenu();
   Anim.prepScrollBasedLoadins();

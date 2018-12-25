@@ -244,7 +244,10 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     color: $brown;
     font-family: $gtAmerica;
     margin-bottom: 5px;
-    margin-top: 115%;
+    margin-top: 45vh;
+    @media (max-height: 820px) {
+      margin-top: 38vh;
+    }
     > div {
       overflow: hidden;
     }
@@ -442,27 +445,40 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     float: right;
     cursor: pointer;
     position: relative;
+    overflow: hidden;
+    .background {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      background: $pink;
+      transform-origin: 50% 50%;
+    }
     span {
       background-color:#F2E3BC;
       width: 8px;
       height: 8px;
       position: absolute;
-      &:nth-child(1) {
+      &:nth-child(odd) {
+        background-color: $baseBrown;
+        width: 8px;
+        height: 8px;
+      }
+      &:nth-child(1), &:nth-child(2) {
         transform-origin: 100% 100%;
         left: 0;
         top: 0;
       }
-      &:nth-child(2) {
+      &:nth-child(3), &:nth-child(4) {
         transform-origin: 0 100%;
         right: 0;
         top: 0;
       }
-      &:nth-child(3) {
+      &:nth-child(5), &:nth-child(6) {
         transform-origin: 100% 0;
         left: 0;
         bottom: 0;
       }
-      &:nth-child(4) {
+      &:nth-child(7), &:nth-child(8) {
         transform-origin: 0 0;
         right: 0;
         bottom: 0;
@@ -641,8 +657,8 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   .large-svg-title {
     .wiper {
       span {
-        width: 26%;
-        left: -40px;
+        width: 24%;
+        left: -55px;
       }
     }
     .svg-wrapper {
@@ -655,17 +671,17 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     float: right;
     .wiper {
       span {
-        width: 40%;
+        width: 52%;
         left: -60px;
       }
     }
-    a:first-child {
-      .wiper {
-        span {
-          width: 49%;
-        }
-      }
-    }
+    //a:first-child {
+    //  .wiper {
+    //    span {
+    //      width: 49%;
+    //    }
+    //  }
+    //}
     h3 {
       font-stretch: expanded;
       line-height: 1.5;

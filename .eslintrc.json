@@ -75,7 +75,7 @@
     "no-useless-return": "warn",
     "object-curly-newline": ["warn", { "consistent": true }],
     "object-curly-spacing": "warn",
-    "object-shorthand": "warn",
+    "object-shorthand": "off",
     "object-property-newline": "off",
     "operator-linebreak": "off",
     "padded-blocks": "warn",

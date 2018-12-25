@@ -76,9 +76,9 @@ export const scrollAwayFromHero = () => {
     .add('start')
     .add('charsStart', '+=.1')
     .staggerFromTo(scrollWordsChars, 1, { y: 0 }, { y: -29, ease: Sine.easeInOut, force3D: true }, 0.017)
-    .staggerFromTo(scrollWordsChars, 0.8, { rotationX: 0, skewX: 0, x: 0 }, { rotationX: -60, x: -2, skewX: -7, ease: Sine.easeInOut, force3D: true }, 0.017, 'start')
+    .staggerFromTo(scrollWordsChars, 0.8, { rotationX: 0, skewX: 0, x: 0 }, { rotationX: -60, x: -2, skewX: -7, ease: Sine.easeInOut }, 0.017, 'start')
     .staggerFromTo(scrollWordsChars, 0.9, { opacity: 1 }, { opacity: 0 }, 0.015, 'charsStart')
-    .fromTo(staggerFadeScaleEls, 1.2, { autoAlpha: 1, scale: 1 }, { autoAlpha: 0, scale: 0.98, ease: Sine.easeInOut, force3D: true }, -0.055, 'start')
+    .fromTo(staggerFadeScaleEls, 1.2, { autoAlpha: 1 }, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true }, -0.055, 'start')
     .fromTo(staggerFadeEls, 1.2, { autoAlpha: 1 }, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true }, 'start')
     .fromTo(fadeEls, 1.2, { autoAlpha: 1 }, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true }, 'start');
 
@@ -112,7 +112,7 @@ export const overflowImages = () => {
     window.requestAnimationFrame(() => {
       for (let i = 0; i < scrollImages.length; i++) {
         const thisHeight = scrollImageWrappers[i].offsetHeight - 700;
-        const thisTop = scrollImageWrappers[i].getBoundingClientRect().top + 250;
+        const thisTop = scrollImageWrappers[i].getBoundingClientRect().top + 300;
         let percentThrough = ((((thisTop + thisHeight) / (globalObject.wh + thisHeight)) - 1) * -1).toFixed(2);
         if (percentThrough <= 0) {
           percentThrough = 0;

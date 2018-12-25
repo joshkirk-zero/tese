@@ -2,12 +2,19 @@ import { TimelineMax, Sine, TweenMax, Expo, Back } from 'gsap';
 import { SplitText } from '../thirdparty/SplitText';
 import { globalObject } from '../_functions';
 
-export const projectsTriggerHover = () => {
+export const projectsTriggerGestures = () => {
+  const projectsWrapper = document.querySelector('.projects-wrapper');
   const projectsTrigger = document.querySelector('.cta-trigger .trigger');
-  const squares = projectsTrigger.querySelectorAll('span');
+  const projectsTriggerBackground = document.querySelector('.cta-trigger .trigger .background');
+  const squares = projectsTrigger.querySelectorAll('span:nth-child(even)');
+  const fakeSquares = projectsTrigger.querySelectorAll('span:nth-child(odd)');
   const mouseEnterTL = new TimelineMax({ paused: true });
+  const switchTriggerTL = new TimelineMax({ paused: true });
+  let rotateTo = 0;
+  let count = 0;
+
   mouseEnterTL
-    .staggerTo(squares, 0.2, { scale: 1.15, backgroundColor: '#E8B9AB', ease: Sine.easeInOut, force3D: true }, 0.055);
+    .to(squares, 0.2, { backgroundColor: '#E8B9AB', ease: Sine.easeInOut, force3D: true });
 
   projectsTrigger.addEventListener('mouseenter', () => {
     mouseEnterTL.play();
@@ -16,6 +23,22 @@ export const projectsTriggerHover = () => {
   projectsTrigger.addEventListener('mouseleave', () => {
     mouseEnterTL.reverse();
   });
+
+  switchTriggerTL
+    .to(squares, 0.4, { scale: 0, ease: Sine.easeOut, force3D: true })
+    .fromTo(projectsTriggerBackground, 0.3, { scale: 0 }, { scale: 1, ease: Sine.easeOut, force3D: true }, 0.1);
+
+  projectsTrigger.addEventListener('click', () => {
+    rotateTo += 225;
+    TweenMax.to(projectsTrigger, 0.55, { rotation: rotateTo, ease: Sine.easeInOut });
+    if (count % 2 === 0) {
+      switchTriggerTL.play();
+    } else {
+      switchTriggerTL.reverse();
+    }
+    count++;
+  });
+
 };
 
 export const scrollPrompt = () => {
@@ -213,7 +236,6 @@ export const prepScrollBasedLoadins = () => {
   window.addEventListener('scroll', checkOffsets);
 };
 
-
 /**
 
  Global open/close project menu
@@ -258,22 +280,23 @@ export const openCloseProjectsMenu = () => {
     .set(projectsContainer, { className: '+=open' })
     .fromTo(switchOverlay, 0.35, { autoAlpha: 0 }, { autoAlpha: 1, ease: Sine.easeInOut, force3D: true })
     .fromTo('.projects-wrapper', 0.001, { pointerEvents: 'none', autoAlpha: 0 }, { pointerEvents: 'all', autoAlpha: 1 })
-    .add('wordsStart', '+=.05')
-    .add('wordsStartTwo', '+=.12')
+    .add('wordsStart')
+    .add('wordsStartTwo', '+=.13')
     .add('numsStart', '+=.05')
-    .add('numsStartTwo', '+=.25')
+    .add('numsWipersCollapse', '+=.055')
+    .add('numsStartTwo', '+=.23')
     // .add('numsCharsStart', '+=.2')
     .add('linesUpStart', '+=.2')
-    .fromTo(wordWiperBars, 1.15, { x: 0, scaleX: 0 }, { x: 40, scaleX: 1, ease: Expo.easeOut, force3D: true })
-    .fromTo(wordWipers, 0.9, { scaleX: 1 }, { scaleX: 0, ease: Expo.easeInOut, force3D: true }, 'wordsStart')
-    .staggerFromTo(lettersOne, 1.1, { x: 60 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.04, 'wordsStartTwo')
-    .staggerFromTo(lettersTwo, 1.1, { x: 60 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.04, 'wordsStartTwo')
+    .fromTo(wordWiperBars, 1.3, { x: 0, scaleX: 0 }, { x: 55, scaleX: 1, ease: Expo.easeOut, force3D: true })
+    .fromTo(wordWipers, 1, { scaleX: 1 }, { scaleX: 0, ease: Expo.easeInOut, force3D: true }, 'wordsStart')
+    .staggerFromTo(lettersOne, 1.05, { x: 55 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.04, 'wordsStartTwo')
+    .staggerFromTo(lettersTwo, 1.05, { x: 55 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.04, 'wordsStartTwo')
     .fromTo(numWiperBars, 1.3, { x: 0, scaleX: 0 }, { x: 60, scaleX: 1, ease: Expo.easeOut, force3D: true }, 'numsStart')
-    .fromTo(numWipers, 1.1, { scaleX: 1 }, { scaleX: 0, ease: Expo.easeInOut, force3D: true }, 'numsStart')
-    .staggerFromTo(numbersOne, 1.1, { x: 60 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.06, 'numsStartTwo')
-    .staggerFromTo(numbersTwo, 1.1, { x: 60 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.06, 'numsStartTwo')
-    .staggerFromTo(numbersThree, 1.1, { x: 60 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.06, 'numsStartTwo')
-    .staggerFromTo(numbersFour, 1.1, { x: 60 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.06, 'numsStartTwo')
+    .fromTo(numWipers, 1, { scaleX: 1 }, { scaleX: 0, ease: Expo.easeInOut, force3D: true }, 'numsWipersCollapse')
+    .staggerFromTo(numbersOne, 1, { x: 60 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.07, 'numsStartTwo')
+    .staggerFromTo(numbersTwo, 1, { x: 60 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.07, 'numsStartTwo')
+    .staggerFromTo(numbersThree, 1, { x: 60 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.07, 'numsStartTwo')
+    .staggerFromTo(numbersFour, 1, { x: 60 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.07, 'numsStartTwo')
     .staggerFromTo(innerLinesOne, 0.78, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.05, 'linesUpStart')
     .staggerFromTo(innerLinesTwo, 0.78, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.05, 'linesUpStart')
     .staggerFromTo(innerLinesThree, 0.78, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.05, 'linesUpStart')
