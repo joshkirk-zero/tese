@@ -60,6 +60,7 @@ export const wheelSkewText = () => {
 
 let checkHeroOffset;
 export const scrollAwayFromHero = () => {
+  console.log('adding tick');
   const measureEl = document.querySelector('.project-hero .measure-el');
   const measureElHeight = measureEl.offsetHeight;
   const scrollAwayTL = new TimelineMax({ paused: true });
@@ -94,9 +95,10 @@ export const scrollAwayFromHero = () => {
       scrollAwayTL.progress(percentageThrough);
     }
   };
-  TweenMax.ticker.addEventListener('tick', checkHeroOffset, false, false, 1);
+  TweenMax.ticker.addEventListener('tick', checkHeroOffset, false, false, 2);
 };
 export const removeScrollAwayFromHero = () => {
+  console.log('removing tick');
   TweenMax.ticker.removeEventListener('tick', checkHeroOffset);
 };
 let checkImageOffsets;
@@ -124,7 +126,7 @@ export const overflowImages = () => {
       TweenMax.set(scrollImages[i], { y: -yVal, force3D: true });
     }
   };
-  TweenMax.ticker.addEventListener('tick', checkImageOffsets, false, false, 2);
+  TweenMax.ticker.addEventListener('tick', checkImageOffsets, false, false, 3);
 };
 
 export const removeOverflowImages = () => {
