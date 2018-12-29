@@ -231,7 +231,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
 }
 .profile {
   width: 100%;
-  max-width: 365px;
+  max-width: 360px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -403,6 +403,12 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     }
   }
 }
+.availability {
+  font-size: 12px;
+  line-height: 1.67;
+  letter-spacing: 0.9px;
+  color: $brown;
+}
 .beacon {
   width: 10px;
   height: 10px;
@@ -412,19 +418,25 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   left: -17px;
   top: 4px;
 }
+.pin-width {
+  width: 483px;
+  display: flex;
+  justify-content: space-between;
+}
 .cta-trigger {
   height: 20px;
   position: absolute;
   right: 0;
   top: 24px;
-  width: 483px;
+  width: 45vw;
+  display: flex;
+  justify-content: space-between;
   .text {
     color: $brown;
     font-stretch: expanded;
     font-size: 12px;
     font-family: $gtAmerica;
     letter-spacing: 1px;
-    position: absolute;
     line-height: 1;
     cursor: pointer;
     padding-top: 5px;

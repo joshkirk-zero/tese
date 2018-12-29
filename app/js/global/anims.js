@@ -11,7 +11,7 @@ import { globalObject } from '../_functions';
 //     .staggerTo(squares, 0.2, { scale: 1.15, backgroundColor: '#E8B9AB', ease: Sine.easeInOut, force3D: true }, 0.055);
 // };
 
-export const pageEntrance = (namespace) => {
+export const pageEntrance = (namespace, firstLoad = false) => {
   switch (namespace) {
     case 'home':
       const homeEntranceTL = new TimelineMax({ paused: true });
@@ -35,15 +35,31 @@ export const pageEntrance = (namespace) => {
       homeEntranceTL
         .to('.global-mask', 0.001, { pointerEvents: 'none', autoAlpha: 0 })
         .add('start')
-        .add('startTwo', '+=.4')
-        .add('welcomeStart', '+=.25')
-        .add('bioStart', '+=.55')
+        .add('startTwo', '+=.4');
+      if (firstLoad) {
+        homeEntranceTL
+          .add('welcomeStart', '+=1.25')
+          .add('bioStart', '+=1.95');
+      } else {
+        homeEntranceTL
+          .add('welcomeStart', '+=.25')
+          .add('bioStart', '+=.55');
+      }
+      homeEntranceTL
         .fromTo(wiperBars, 2.18, { x: 0, scaleX: 0 }, { x: 90, scaleX: 1, ease: Expo.easeOut, force3D: true })
         .fromTo(wipers, 1.08, { scaleX: 1 }, { scaleX: 0, ease: Expo.easeInOut, force3D: true }, 'start')
         .staggerFromTo(lettersOne, 1.15, { x: 50 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'startTwo')
-        .staggerFromTo(lettersTwo, 1.15, { x: 50 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'startTwo')
-        .staggerFromTo(innerWelcomeLines, 0.76, { skewY: 0, yPercent: 101 }, { skewY: 0, yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045, 'welcomeStart')
-        .staggerFromTo(innerBioLines, 0.76, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045, 'bioStart')
+        .staggerFromTo(lettersTwo, 1.15, { x: 50 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'startTwo');
+      if (firstLoad) {
+        homeEntranceTL
+          .staggerFromTo(innerWelcomeLines, 1.1, { skewY: 0, yPercent: 101 }, { skewY: 0, yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.045, 'welcomeStart')
+          .staggerFromTo(innerBioLines, 0.78, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045, 'bioStart')
+      } else {
+        homeEntranceTL
+          .staggerFromTo(innerWelcomeLines, 0.76, { skewY: 0, yPercent: 101 }, { skewY: 0, yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045, 'welcomeStart')
+          .staggerFromTo(innerBioLines, 0.76, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045, 'bioStart');
+      }
+      homeEntranceTL
         .add('fadeAndScale', '-=.3')
         .fromTo(fadeEls, 1, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut }, 'fadeAndScale')
         .fromTo(beacon, 1, { scale: 0 }, { scale: 1.1, ease: Sine.easeIn }, 'fadeAndScale')

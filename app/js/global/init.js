@@ -11,7 +11,7 @@ export const onEnterCompleted = (from, to, location) => {
 
 export const firstLoad = () => {
   const namespace = document.querySelector('[data-router-view]').dataset.routerView;
-  Anim.pageEntrance(namespace);
+  Anim.pageEntrance(namespace, true);
   Anim.openCloseProjectsMenu();
   Anim.prepScrollBasedLoadins();
 };

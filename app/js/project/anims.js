@@ -58,7 +58,7 @@ export const wheelSkewText = () => {
   }
 };
 
-
+let checkHeroOffset;
 export const scrollAwayFromHero = () => {
   const measureEl = document.querySelector('.project-hero .measure-el');
   const measureElHeight = measureEl.offsetHeight;
@@ -83,7 +83,7 @@ export const scrollAwayFromHero = () => {
     .fromTo(staggerFadeEls, 1.2, { autoAlpha: 1 }, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true }, 'start')
     .fromTo(fadeEls, 1.2, { autoAlpha: 1 }, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true }, 'start');
 
-  const checkOffset = () => {
+  checkHeroOffset = () => {
     if (!globalObject.comingFromFooter) {
       let percentageThrough = (window.pageYOffset / measureElHeight).toFixed(3);
       if (percentageThrough <= 0) {
@@ -94,11 +94,12 @@ export const scrollAwayFromHero = () => {
       scrollAwayTL.progress(percentageThrough);
     }
   };
-
-  window.addEventListener('scroll', checkOffset);
+  TweenMax.ticker.addEventListener('tick', checkHeroOffset, false, false, 1);
 };
-
-
+export const removeScrollAwayFromHero = () => {
+  TweenMax.ticker.removeEventListener('tick', checkHeroOffset);
+};
+let checkImageOffsets;
 export const overflowImages = () => {
   const scrollImageWrappers = document.querySelectorAll('.image-scroll');
   const scrollImages = document.querySelectorAll('.image-scroll img');
@@ -109,22 +110,23 @@ export const overflowImages = () => {
     scrollDists.push(scrollImgDist);
   }
 
-  const checkOffsets = () => {
-    window.requestAnimationFrame(() => {
-      for (let i = 0; i < scrollImages.length; i++) {
-        const thisHeight = scrollImageWrappers[i].offsetHeight - 700;
-        const thisTop = scrollImageWrappers[i].getBoundingClientRect().top + 300;
-        let percentThrough = ((((thisTop + thisHeight) / (globalObject.wh + thisHeight)) - 1) * -1).toFixed(2);
-        if (percentThrough <= 0) {
-          percentThrough = 0;
-        } else if (percentThrough >= 1) {
-          percentThrough = 1;
-        }
-        const yVal = scrollDists[i] * percentThrough;
-        TweenMax.set(scrollImages[i], { y: -yVal, force3D: true });
+  checkImageOffsets = () => {
+    for (let i = 0; i < scrollImages.length; i++) {
+      const thisHeight = scrollImageWrappers[i].offsetHeight - 700;
+      const thisTop = scrollImageWrappers[i].getBoundingClientRect().top + 300;
+      let percentThrough = ((((thisTop + thisHeight) / (globalObject.wh + thisHeight)) - 1) * -1).toFixed(2);
+      if (percentThrough <= 0) {
+        percentThrough = 0;
+      } else if (percentThrough >= 1) {
+        percentThrough = 1;
       }
-    });
+      const yVal = scrollDists[i] * percentThrough;
+      TweenMax.set(scrollImages[i], { y: -yVal, force3D: true });
+    }
   };
+  TweenMax.ticker.addEventListener('tick', checkImageOffsets, false, false, 2);
+};
 
-  window.addEventListener('scroll', checkOffsets);
+export const removeOverflowImages = () => {
+  TweenMax.ticker.removeEventListener('tick', checkImageOffsets);
 };

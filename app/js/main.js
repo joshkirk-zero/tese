@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const comingSoonLink = projectsContainer.querySelector('a.coming-soon');
   const projectsBackdrop = document.querySelector('.switch-overlay');
   const trigger = document.querySelector('.cta-trigger .trigger');
-  console.log(comingSoonLink);
   comingSoonLink.addEventListener('click', (event) => {
     event.preventDefault();
     return false;
