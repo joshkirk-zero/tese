@@ -23,7 +23,7 @@ module.exports = {
   },
   entry: {
     'js/main': [
-      path.resolve(__dirname, './src/js/main.js'),
+      path.resolve(__dirname, './app/js/main.js'),
     ],
   },
   output: {
@@ -47,49 +47,16 @@ module.exports = {
       }
     }),
     new CopyWebpackPlugin([
-
-      // This plugin copies relevant directories to the build folder
-      // on change so the build folder always the latest of everything
-      // needed to work.
-
-      // MARKUP
-      {
-        from: './src/index.html',
-        to: './',
-        force: true
-      },
-      {
-        from: './src/dfs-fulfillment.html',
-        to: './',
-        force: true
-      },
-      {
-        from: './src/facebook-careers.html',
-        to: './',
-        force: true
-      },
-      {
-        from: './src/laquinta-hotels.html',
-        to: './',
-        force: true
-      },
-      {
-        from: './src/microsoft-teams.html',
-        to: './',
-        force: true
-      },
-
-
       // FONTS
       {
-        from: './src/fonts',
+        from: './app/fonts',
         to: './fonts',
         force: true
       },
 
       // IMAGES
       {
-        from: './src/images',
+        from: './app/images',
         to: './images',
         force: true
       }

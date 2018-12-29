@@ -1,0 +1,9 @@
+{
+  "name": "Matese Field's Folio",
+  "version": "1.0",
+  "require": {
+    "php": ">=7.1",
+    "prismic/php-sdk": "^5.0.1",
+    "slim/slim": "^3.10"
+  }
+}
