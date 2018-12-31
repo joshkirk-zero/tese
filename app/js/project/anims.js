@@ -60,12 +60,11 @@ export const wheelSkewText = () => {
 
 let checkHeroOffset;
 export const scrollAwayFromHero = () => {
-  console.log('adding tick');
   const measureEl = document.querySelector('.project-hero .measure-el');
   const measureElHeight = measureEl.offsetHeight;
   const scrollAwayTL = new TimelineMax({ paused: true });
 
-  const fadeEls = document.querySelectorAll('.cta-trigger .cta, .arrow, .title-meta');
+  const fadeEls = document.querySelectorAll('.cta-trigger .cta, .cta-trigger .availability, .arrow, .title-meta');
   const staggerFadeEls = document.querySelectorAll('.vert-left .meta');
   const staggerFadeScaleEls = document.querySelectorAll('.socials');
 
@@ -75,11 +74,11 @@ export const scrollAwayFromHero = () => {
 
   scrollAwayTL
     .add('start')
-    .add('charsStart', '+=.1')
-    .staggerFromTo(scrollWordsChars, 1, { y: 0 }, { y: -35, ease: Sine.easeInOut, force3D: true }, 0.02)
-    // .staggerFromTo(scrollWordsChars, 0.8, { rotationX: 0, skewX: 0, x: 0 }, { rotationX: -60, x: -2, skewX: -7, ease: Sine.easeInOut }, 0.017, 'start')
-    .staggerFromTo(scrollWordsChars, 0.9, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut }, 0.017, 'start')
-    .fromTo(scrollWords, 1, { rotationX: 0 }, { rotationX: 85, ease: Sine.easeInOut, force3D: true }, 'charsStart')
+    .add('charsStart', '+=.3')
+    .staggerFromTo(scrollWordsChars, 1, { y: 0, rotationX: 0, skewX: 0, scaleY: 1 }, { y: -34, rotationX: 90, skewX: -10, scaleY: 0.2, ease: Sine.easeInOut, force3D: true }, 0.016)
+    .staggerFromTo(scrollWordsChars, 1.2, { opacity: 1, x: 0 }, { opacity: 0, x: 5, ease: Sine.easeOut, force3D: true }, 'charsStart', 0.016)
+    .staggerFromTo(scrollWordsWraps, 1, { z: 22 }, { z: 0, ease: Sine.easeOut }, 0.02, 'start')
+    // .staggerFromTo(scrollWordsWraps, 1, { y: 0 }, { y: -10, ease: Sine.easeOut }, -0.02, 'start')
     .fromTo(staggerFadeScaleEls, 1.2, { autoAlpha: 1 }, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true }, -0.055, 'start')
     .fromTo(staggerFadeEls, 1.2, { autoAlpha: 1 }, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true }, 'start')
     .fromTo(fadeEls, 1.2, { autoAlpha: 1 }, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true }, 'start');
@@ -98,7 +97,6 @@ export const scrollAwayFromHero = () => {
   TweenMax.ticker.addEventListener('tick', checkHeroOffset, false, false, 2);
 };
 export const removeScrollAwayFromHero = () => {
-  console.log('removing tick');
   TweenMax.ticker.removeEventListener('tick', checkHeroOffset);
 };
 let checkImageOffsets;

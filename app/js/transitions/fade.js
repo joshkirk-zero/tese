@@ -5,7 +5,7 @@ import { TweenMax, Sine } from 'gsap';
 class Fade extends Highway.Transition {
   in(from, to, done) {
     from.remove();
-    TweenMax.fromTo('.global-mask', 0.001, { autoAlpha: 1 }, { force3D: true, pointerEvents: 'none', autoAlpha: 0, onComplete: () => { done(); } });
+    TweenMax.set('.global-mask', { pointerEvents: 'none', autoAlpha: 0, onComplete: () => { done(); } });
   }
 
   out(from, done) {

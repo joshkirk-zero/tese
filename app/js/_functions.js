@@ -76,7 +76,6 @@ export const getWheelDir = (target) => {
     // cross-browser wheel delta
     const wheelEvent = window.event || e; // old IE support
     const delta = Math.max(-1, Math.min(1, (e.wheelDelta || -wheelEvent.detail)));
-    console.log(delta);
     return false;
   };
 

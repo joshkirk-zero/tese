@@ -1,6 +1,7 @@
 import * as Anim from './anims';
 import Highway from '@dogstudio/highway';
 import imagesLoaded from 'imagesloaded';
+// import Smooth from './../global/smoothscroll.js';
 
 // Renderer
 class ProjectRenderer extends Highway.Renderer {
@@ -13,7 +14,7 @@ class ProjectRenderer extends Highway.Renderer {
     imagesLoaded('[data-router-view]:last-child', { background: true }, () => {
       Anim.scrollAwayFromHero();
       Anim.overflowImages();
-      console.log('view images loaded');
+      // thisSmooth = new Smooth({});
     });
   }
 

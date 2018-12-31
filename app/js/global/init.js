@@ -2,11 +2,11 @@ import * as Anim from './anims';
 import quicklink from "quicklink/dist/quicklink.mjs";
 
 export const onEnter = (to, location) => {
-  console.log(to.view.attributes[0].value);
-  Anim.pageEntrance(to.view.attributes[0].value);
+
 };
 
 export const onEnterCompleted = (from, to, location) => {
+  Anim.pageEntrance(to.view.attributes[0].value);
   Anim.prepScrollBasedLoadins();
 };
 

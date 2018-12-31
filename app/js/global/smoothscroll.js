@@ -2,7 +2,8 @@ import VirtualScroll from 'virtual-scroll';
 import throttle from 'lodash.throttle';
 import imagesLoaded from 'imagesloaded';
 // import config from '../config';
-import {TweenMax, Expo, Linear} from 'gsap';
+import { TweenMax, Expo, Linear } from 'gsap';
+import { globalObject } from '../_functions';
 
 export default class Smooth {
   constructor(options = {}) {
@@ -10,12 +11,12 @@ export default class Smooth {
 
     TweenMax.defaultEase = Linear.easeNone;
 
-    this.el = options.el || config.body;
+    this.el = document.querySelector('[data-smooth]');
 
     const {
       sections = this.el.querySelectorAll('[data-smooth-section]'),
       elems = this.el.querySelectorAll('[data-from]'),
-      threshold = !config.isDevice ? 200 : 20,
+      threshold = !globalObject.isMobile ? 200 : 20,
       ease = 0.125,
       preload = true,
       mouseMultiplier = 0.5,
@@ -196,7 +197,7 @@ export default class Smooth {
       //if (!el.dataset.animateMobile && config.isPhone) return
 
       const bounds = el.getBoundingClientRect();
-      const tl = new TimelineLite({ paused: true });
+      const tl = new TimelineMax({ paused: true });
       const from = JSON.parse(el.dataset.from);
       const to = JSON.parse(el.dataset.to);
 
@@ -215,36 +216,35 @@ export default class Smooth {
       });
     });
 
-    this.photoTl();
+    // this.photoTl();
   }
 
-  photoTl() {
-    //if (config.isPhone) return
-
-    const el = document.querySelector('[data-photos]');
-    const tl = new TimelineLite({ paused: true });
-    const trigger = el.querySelector('[data-trigger]');
-    const bounds = trigger ? trigger.getBoundingClientRect() : el.getBoundingClientRect();
-
-    tl
-      .to('[data-photo="1"]', 1, { yPercent: -110, rotation: -3, ease: Expo.easeOut }, 0)
-      .to('[data-photo="2"]', 1, { xPercent: -150, yPercent: -25, rotation: -5, ease: Expo.easeOut }, 0)
-      .to('[data-photo="3"]', 1, { xPercent: 150, rotation: 5, ease: Expo.easeOut }, 0)
-      .to('[data-photo="4"]', 1, { xPercent: -60, yPercent: 115, rotation: 2, ease: Expo.easeOut }, 0)
-      .to('[data-photo="5"]', 1, { xPercent: 50, yPercent: 125, rotation: -5, ease: Expo.easeOut }, 0);
-
-    this.elems.push({
-      el: el,
-      tl: tl,
-      top: bounds.top > this.data.height ? bounds.top : this.data.height,
-      bottom: bounds.bottom,
-      height: bounds.height,
-      duration: el.dataset.duration ? el.dataset.duration : 1,
-      progress: {
-        current: 0
-      }
-    });
-  }
+  // photoTl() {
+  //
+  //   const el = document.querySelector('[data-photos]');
+  //   const tl = new TimelineMax({ paused: true });
+  //   const trigger = el.querySelector('[data-trigger]');
+  //   const bounds = trigger ? trigger.getBoundingClientRect() : el.getBoundingClientRect();
+  //
+  //   tl
+  //     .to('[data-photo="1"]', 1, { yPercent: -110, rotation: -3, ease: Expo.easeOut }, 0)
+  //     .to('[data-photo="2"]', 1, { xPercent: -150, yPercent: -25, rotation: -5, ease: Expo.easeOut }, 0)
+  //     .to('[data-photo="3"]', 1, { xPercent: 150, rotation: 5, ease: Expo.easeOut }, 0)
+  //     .to('[data-photo="4"]', 1, { xPercent: -60, yPercent: 115, rotation: 2, ease: Expo.easeOut }, 0)
+  //     .to('[data-photo="5"]', 1, { xPercent: 50, yPercent: 125, rotation: -5, ease: Expo.easeOut }, 0);
+  //
+  //   this.elems.push({
+  //     el: el,
+  //     tl: tl,
+  //     top: bounds.top > this.data.height ? bounds.top : this.data.height,
+  //     bottom: bounds.bottom,
+  //     height: bounds.height,
+  //     duration: el.dataset.duration ? el.dataset.duration : 1,
+  //     progress: {
+  //       current: 0
+  //     }
+  //   });
+  // }
 
   getBounding() {
     const bounding = this.dom.el.getBoundingClientRect();

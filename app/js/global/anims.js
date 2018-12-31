@@ -80,7 +80,6 @@ export const pageEntrance = (namespace, firstLoad = false) => {
       const innerEntranceLines = new SplitText(entranceLines, { type: 'lines' }).lines;
       const projectFadeEls = document.querySelector('.global-els');
       if (!globalObject.comingFromFooter) {
-        console.log('not coming from footer');
         const wordWipers = document.querySelectorAll('[data-router-view]:last-child .project-hero .large-svg-title .wiper');
         const wordWiperBars = document.querySelectorAll('[data-router-view]:last-child .project-hero .large-svg-title .wiper span');
         const projectLettersOne = document.querySelectorAll('[data-router-view]:last-child .project-hero .large-svg-title .svg-wrapper:first-child path');
@@ -88,7 +87,7 @@ export const pageEntrance = (namespace, firstLoad = false) => {
 
         projectEntranceTL
           .to('.global-mask', 0.001, { pointerEvents: 'none', autoAlpha: 0 })
-          .add('start', '+=.67')
+          .add('start', '+=1.2')
           .add('wordsStart', '+=0')
           .add('lettersIn', '+=.3')
           .fromTo(wordWiperBars, 2, { x: 0, scaleX: 0 }, { x: 90, scaleX: 1, ease: Expo.easeOut, force3D: true })
