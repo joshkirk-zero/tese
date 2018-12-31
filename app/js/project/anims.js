@@ -75,9 +75,10 @@ export const scrollAwayFromHero = () => {
   scrollAwayTL
     .add('start')
     .add('charsStart', '+=.3')
-    .staggerFromTo(scrollWordsChars, 1, { y: 0, rotationX: 0, skewX: 0, scaleY: 1 }, { y: -34, rotationX: 90, skewX: -10, scaleY: 0.2, ease: Sine.easeInOut, force3D: true }, 0.016)
-    .staggerFromTo(scrollWordsChars, 1.2, { opacity: 1, x: 0 }, { opacity: 0, x: 5, ease: Sine.easeOut, force3D: true }, 'charsStart', 0.016)
-    .staggerFromTo(scrollWordsWraps, 1, { z: 22 }, { z: 0, ease: Sine.easeOut }, 0.02, 'start')
+    .staggerFromTo(scrollWordsChars, 0.8, { rotationX: 0, skewX: 0, scaleY: 1 }, { rotationX: 85, skewX: -10, scaleY: 0, ease: Sine.easeInOut, force3D: true }, 0.017)
+    .fromTo(scrollWordsChars, 0.8, { y: 0 }, { y: -35, ease: Sine.easeInOut, force3D: true }, '.15')
+    .staggerFromTo(scrollWordsChars, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeOut, force3D: true }, 'charsStart', 0.016)
+    .staggerFromTo(scrollWordsWraps, 1, { z: 20 }, { z: 0, ease: Sine.easeOut }, 0.02, 'start')
     // .staggerFromTo(scrollWordsWraps, 1, { y: 0 }, { y: -10, ease: Sine.easeOut }, -0.02, 'start')
     .fromTo(staggerFadeScaleEls, 1.2, { autoAlpha: 1 }, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true }, -0.055, 'start')
     .fromTo(staggerFadeEls, 1.2, { autoAlpha: 1 }, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true }, 'start')
