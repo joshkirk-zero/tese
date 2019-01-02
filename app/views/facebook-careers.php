@@ -26,7 +26,7 @@ $document = $WPGLOBAL['document'];
               <div>Project Type<span class="pipe">|</span><span><?= RichText::asText($document->data->project_type) ?></span></div>
               <div>Company<span class="pipe">|</span><span><?= RichText::asText($document->data->company) ?></span></div>
               <div>Year<span class="pipe">|</span><span><?= RichText::asText($document->data->year) ?></span></div>
-              <div><a href="<?= RichText::asText($document->data->project_url) ?>" target="_blank"><?= RichText::asText($document->data->project_url) ?></a></div>
+              <div><a href="https://<?= RichText::asText($document->data->project_url) ?>" target="_blank"><?= RichText::asText($document->data->project_url) ?></a></div>
             </div>
           </div>
           <div class="measure-el"><span></span></div>
@@ -52,7 +52,7 @@ $document = $WPGLOBAL['document'];
 
         </section>
         <section class="project-footer container scroll-enter" data-offset=".4" data-mobile-offset="1" data-entrance="project-footer" data-smooth-section>
-          <a href="<?php echo $SITE_URL; ?>/microsoft-teams" class="large-svg-title" data-transition="nextProject">
+          <a href="/microsoft-teams" class="large-svg-title" data-transition="nextProject">
             <span class="eyebrow">Next Project</span>
             <span class="idx">02</span>
               <?php include __DIR__ . '/../includes/svgs/title-microsoft.php'; ?>

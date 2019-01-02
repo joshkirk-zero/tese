@@ -15,9 +15,9 @@ $document = $WPGLOBAL['document'];
         <?php include __DIR__ . '/../includes/global-els.php'; ?>
     </div>
     <div data-router-wrapper>
-        <div data-router-view="project" class="honorable-mentions">
+        <div data-router-view="project" class="honorable-mentions" data-smooth>
             <div class="project-wrapper">
-                <section class="project-hero container">
+                <section class="project-hero container" data-smooth-section>
                     <div class="title-meta">
                         <span class="idx">04</span>
                         <?php include __DIR__ . '/../includes/svgs/title-honorable.php'; ?>
@@ -26,12 +26,12 @@ $document = $WPGLOBAL['document'];
                             <div>Project Type<span class="pipe">|</span><span><?= RichText::asText($document->data->project_type) ?></span></div>
                             <div>Company<span class="pipe">|</span><span><?= RichText::asText($document->data->company) ?></span></div>
                             <div>Year<span class="pipe">|</span><span><?= RichText::asText($document->data->year) ?></span></div>
-                            <?php if ($document->data->project_url): ?><div><a href="<?= RichText::asText($document->data->project_url) ?>" target="_blank"><?= RichText::asText($document->data->project_url) ?></a></div><?php endif; ?>
+                            <?php if ($document->data->project_url): ?><div><a href="https://<?= RichText::asText($document->data->project_url) ?>" target="_blank"><?= RichText::asText($document->data->project_url) ?></a></div><?php endif; ?>
                         </div>
                     </div>
                     <div class="measure-el"><span></span></div>
                 </section>
-                <section class="project-body">
+                <section class="project-body" data-smooth-section>
                     <div class="intro container scroll-enter" data-offset=".7" data-mobile-offset="1" data-entrance="project-intro">
                         <div>
                             <span class="eyebrow">About</span>
@@ -52,8 +52,8 @@ $document = $WPGLOBAL['document'];
 
 
                 </section>
-                <section class="project-footer container scroll-enter" data-offset=".4" data-mobile-offset="1" data-entrance="project-footer">
-                    <a href="<?php echo $SITE_URL; ?>/facebook-careers" class="large-svg-title" data-transition="nextProject">
+                <section class="project-footer container scroll-enter" data-offset=".4" data-mobile-offset="1" data-entrance="project-footer" data-smooth-section>
+                    <a href="/facebook-careers" class="large-svg-title" data-transition="nextProject">
                         <span class="eyebrow">Next Project</span>
                         <span class="idx">01</span>
                         <?php include __DIR__ . '/../includes/svgs/title-facebook.php'; ?>

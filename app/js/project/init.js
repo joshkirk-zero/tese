@@ -1,10 +1,12 @@
 import * as Anim from './anims';
 import Highway from '@dogstudio/highway';
 import imagesLoaded from 'imagesloaded';
-// import Smooth from './../global/smoothscroll.js';
+import Smooth from '../global/smoothscroll';
 
 // Renderer
+let thisSmooth;
 class ProjectRenderer extends Highway.Renderer {
+
   onEnter() {
 
   }
@@ -12,9 +14,7 @@ class ProjectRenderer extends Highway.Renderer {
   onEnterCompleted() {
     // Anim.wheelSkewText();
     imagesLoaded('[data-router-view]:last-child', { background: true }, () => {
-      Anim.scrollAwayFromHero();
-      Anim.overflowImages();
-      // thisSmooth = new Smooth({});
+      thisSmooth = new Smooth({});
     });
   }
 
@@ -23,8 +23,7 @@ class ProjectRenderer extends Highway.Renderer {
   }
 
   onLeaveCompleted() {
-    Anim.removeOverflowImages();
-    Anim.removeScrollAwayFromHero();
+    thisSmooth.destroy();
   }
 }
 

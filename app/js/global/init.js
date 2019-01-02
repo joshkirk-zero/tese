@@ -1,5 +1,5 @@
 import * as Anim from './anims';
-import quicklink from "quicklink/dist/quicklink.mjs";
+// import quicklink from "quicklink/dist/quicklink.mjs";
 
 export const onEnter = (to, location) => {
 

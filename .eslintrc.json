@@ -48,6 +48,7 @@
     "max-len": ["warn", { "code": 200, "tabWidth": 2, "ignoreUrls": true }],
     "new-parens": "warn",
     "no-alert": "off",
+    "no-param-reassign": "off",
     "no-bitwise": "off",
     "no-case-declarations": "off",
     "no-console": ["warn", { "allow": ["warn", "error"] }],

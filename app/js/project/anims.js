@@ -95,10 +95,10 @@ export const scrollAwayFromHero = () => {
       scrollAwayTL.progress(percentageThrough);
     }
   };
-  TweenMax.ticker.addEventListener('tick', checkHeroOffset, false, false, 2);
+  // TweenMax.ticker.addEventListener('tick', checkHeroOffset, false, false, 2);
 };
 export const removeScrollAwayFromHero = () => {
-  TweenMax.ticker.removeEventListener('tick', checkHeroOffset);
+  // TweenMax.ticker.removeEventListener('tick', checkHeroOffset);
 };
 let checkImageOffsets;
 export const overflowImages = () => {

@@ -38,9 +38,10 @@ export const globalObject = {
   header: '',
   readyToSwitch: false,
   comingFromFooter: false,
-  openCloseMenu: ''
-};
+  openCloseMenu: '',
+  isMobile: (navigator.maxTouchPoints || 'ontouchstart' in document.documentElement)
 
+};
 
 /**
 
