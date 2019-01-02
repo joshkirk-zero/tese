@@ -4,7 +4,7 @@
         <?php include __DIR__ . '/../includes/svgs/recent-projects.php'; ?>
     </div>
     <div class="projects">
-        <a href="<?php echo $SITE_URL; ?>/facebook-careers" class="project-link">
+        <a href="/facebook-careers" class="project-link">
             <div class="svg-wrapper">
                 <span class="wiper"><span></span></span>
                 <span class="svg-wrapper-inner">
@@ -16,7 +16,7 @@
                 <p>2018 | UI Design</p>
             </div>
         </a>
-        <a href="<?php echo $SITE_URL; ?>/microsoft-teams" class="project-link">
+        <a href="/microsoft-teams" class="project-link">
             <div class="svg-wrapper">
                 <span class="wiper"><span></span></span>
                 <span class="svg-wrapper-inner">
@@ -40,7 +40,7 @@
                 <p>Coming Soon</p>
             </div>
         </a>
-        <a href="<?php echo $SITE_URL; ?>/honorable-mentions" class="project-link">
+        <a href="/honorable-mentions" class="project-link">
             <div class="svg-wrapper">
                 <span class="wiper"><span></span></span>
                 <span class="svg-wrapper-inner">
@@ -56,7 +56,7 @@
 </div>
 <div class="global-mask"></div>
 <div class="vert-left">
-    <a href="<?php echo $SITE_URL; ?>/" class="logo">
+    <a href="/" class="logo">
         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
              viewBox="0 0 9.3 62.4" style="enable-background:new 0 0 9.3 62.4;" xml:space="preserve">
                     <style type="text/css">

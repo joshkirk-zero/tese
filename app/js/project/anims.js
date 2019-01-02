@@ -75,8 +75,8 @@ export const scrollAwayFromHero = () => {
   scrollAwayTL
     .add('start')
     .add('charsStart', '+=.3')
-    .staggerFromTo(scrollWordsChars, 0.8, { rotationX: 0, skewX: 0, scaleY: 1 }, { rotationX: 85, skewX: -10, scaleY: 0, ease: Sine.easeInOut, force3D: true }, 0.017)
-    .fromTo(scrollWordsChars, 0.8, { y: 0 }, { y: -35, ease: Sine.easeInOut, force3D: true }, '.15')
+    .staggerFromTo(scrollWordsChars, 0.8, { rotationX: 0, skewX: 0, scaleY: 1 }, { rotationX: 65, skewX: -10, scaleY: 0, ease: Sine.easeInOut, force3D: true }, 0.017)
+    .fromTo(scrollWordsChars, 0.8, { y: 0 }, { y: -35, ease: Sine.easeInOut, force3D: true }, 0)
     .staggerFromTo(scrollWordsChars, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeOut, force3D: true }, 'charsStart', 0.016)
     .staggerFromTo(scrollWordsWraps, 1, { z: 20 }, { z: 0, ease: Sine.easeOut }, 0.02, 'start')
     // .staggerFromTo(scrollWordsWraps, 1, { y: 0 }, { y: -10, ease: Sine.easeOut }, -0.02, 'start')

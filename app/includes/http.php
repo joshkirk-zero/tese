@@ -2,7 +2,7 @@
 
 function views_dir()
 {
-    return __DIR__.'/../views/';
+    return __DIR__.'/../views';
 }
 
 function render($app, $page, $data = array())
