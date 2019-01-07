@@ -183,7 +183,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
 /* Global selector styles
 
 **********************************************/
-.home, .all-projects, .project-hero {
+.home, .all-projects, .project-hero, .not-found {
   height: 100vh;
   position: relative;
   //overflow: hidden;
@@ -558,7 +558,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     transform-origin: 0 50%;
   }
 }
-.home {
+.home, .not-found {
   .you-can {
     height: 100%;
     display: inline-block;
@@ -605,6 +605,35 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     }
   }
 
+}
+.not-found {
+  .you-can {
+    > span {
+      float: left;
+      clear: left;
+      &:first-child {
+        .svg-wrapper {
+          width: 100%;
+        }
+        .wiper {
+          width: 100%;
+          left: 0;
+          height: 99.5%;
+        }
+
+      }
+      &:last-child {
+        .svg-wrapper {
+          width: 100%;
+        }
+        .wiper {
+          width: 100%;
+          left: 0;
+          height: 99.5%;
+        }
+      }
+    }
+  }
 }
 .large-svg-title {
   height: 100%;
@@ -957,6 +986,15 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     top: 50%;
     transform: translateY(-50%);
   }
+}
+
+.los-detalles {
+  height: 450px;
+  width: 100%;
+  position: absolute;
+  background-color: #1b2218;
+  bottom: 0;
+  transform: translate3d(0, 100%, 0);
 }
 
 //// replace screen group

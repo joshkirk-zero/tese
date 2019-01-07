@@ -8,11 +8,12 @@ let thisSmooth;
 class ProjectRenderer extends Highway.Renderer {
 
   onEnter() {
-
+    
   }
 
   onEnterCompleted() {
     // Anim.wheelSkewText();
+
     imagesLoaded('[data-router-view]:last-child', { background: true }, () => {
       thisSmooth = new Smooth({});
     });

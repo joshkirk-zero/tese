@@ -101,6 +101,66 @@ export const pageEntrance = (namespace, firstLoad = false) => {
       }
 
       break;
+    
+    case '404':
+      const notFoundEntranceTL = new TimelineMax({ paused: true });
+
+      const splitNotFoundByLines = document.querySelector('.bio');
+      const splitNotFoundLines = new SplitText(splitNotFoundByLines, { type: 'lines' }).lines;
+      const notFoundParaLines = new SplitText(splitNotFoundLines, { type: 'lines' }).lines;
+
+      const notFoundWelcomeByLines = document.querySelectorAll('.welcome');
+      const notFoundWelcomeLines = new SplitText(notFoundWelcomeByLines, { type: 'lines' }).lines;
+      const innerNotFoundParaLines = new SplitText(notFoundWelcomeLines, { type: 'lines' }).lines;
+
+      const notFoundWipers = document.querySelectorAll('.you-can .wiper');
+      const notFoundWiperBars = document.querySelectorAll('.you-can .wiper span');
+      const notFoundLettersOne = document.querySelectorAll('.you-can .line-1 .svg-wrapper-inner path');
+      const notFoundLettersTwo = document.querySelectorAll('.you-can .line-2 .svg-wrapper-inner path');
+
+      const notFoundBeacon = document.querySelector('.beacon');
+      const notFoundFadeEls = document.querySelector('.global-els');
+
+      notFoundEntranceTL
+        .to('.global-mask', 0.001, { pointerEvents: 'none', autoAlpha: 0 })
+        .add('start')
+        .add('startTwo', '+=.4');
+      if (firstLoad) {
+        notFoundEntranceTL
+          .add('welcomeStart', '+=1.25')
+          .add('bioStart', '+=1.95');
+      } else {
+        notFoundEntranceTL
+          .add('welcomeStart', '+=.25')
+          .add('bioStart', '+=.55');
+      }
+      notFoundEntranceTL
+        .fromTo(notFoundWiperBars, 2.18, { x: 0, scaleX: 0 }, { x: 90, scaleX: 1, ease: Expo.easeOut, force3D: true })
+        .fromTo(notFoundWipers, 1.08, { scaleX: 1 }, { scaleX: 0, ease: Expo.easeInOut, force3D: true }, 'start')
+        .staggerFromTo(notFoundLettersOne, 1.15, { x: 50 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'startTwo')
+        .staggerFromTo(notFoundLettersTwo, 1.15, { x: 50 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'startTwo');
+      if (firstLoad) {
+        notFoundEntranceTL
+          .staggerFromTo(innerNotFoundParaLines, 1.1, { skewY: 0, yPercent: 101 }, { skewY: 0, yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.045, 'welcomeStart')
+          .staggerFromTo(notFoundParaLines, 0.78, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045, 'bioStart')
+      } else {
+        notFoundEntranceTL
+          .staggerFromTo(innerNotFoundParaLines, 0.76, { skewY: 0, yPercent: 101 }, { skewY: 0, yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045, 'welcomeStart')
+          .staggerFromTo(notFoundParaLines, 0.76, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045, 'bioStart');
+      }
+      notFoundEntranceTL
+        .add('fadeAndScale', '-=.3')
+        .fromTo(notFoundFadeEls, 1, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut }, 'fadeAndScale')
+        .fromTo(notFoundBeacon, 1, { scale: 0 }, { scale: 1.1, ease: Sine.easeIn }, 'fadeAndScale')
+        .to(notFoundBeacon, 0.5, { scale: 0.82, ease: Sine.easeOut })
+        .to(notFoundBeacon, 0.85, { scale: 1, ease: Sine.easeInOut });
+
+
+      TweenMax.delayedCall(0.5, () => {
+        notFoundEntranceTL.play();
+      });
+    break;
+    
     default:
 
       break;

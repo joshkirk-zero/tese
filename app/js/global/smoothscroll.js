@@ -21,7 +21,7 @@ export default class Smooth {
       preload = true,
       mouseMultiplier = 0.3,
       touchMultiplier = 2.5,
-      firefoxMultiplier = 200,
+      firefoxMultiplier = 15,
       preventTouch = true,
       passive = true
     } = options;
@@ -92,10 +92,73 @@ export default class Smooth {
       .fromTo(scrollWordsChars, 0.8, { y: 0 }, { y: -35, ease: Sine.easeInOut, force3D: true }, 0)
       .staggerFromTo(scrollWordsChars, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeOut, force3D: true }, 'charsStart', 0.016)
       .staggerFromTo(scrollWordsWraps, 1, { z: 20 }, { z: 0, ease: Sine.easeOut }, 0.02, 'start')
-      // .staggerFromTo(scrollWordsWraps, 1, { y: 0 }, { y: -10, ease: Sine.easeOut }, -0.02, 'start')
       .fromTo(staggerFadeScaleEls, 1.2, { autoAlpha: 1 }, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true }, -0.055, 'start')
       .fromTo(staggerFadeEls, 1.2, { autoAlpha: 1 }, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true }, 'start')
       .fromTo(fadeEls, 1.2, { autoAlpha: 1 }, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true }, 'start');
+
+    this.thisPagesTLs = [];
+
+    this.theseSections = document.querySelectorAll('.scroll-enter:not(.already-played)');
+    this.offsetVal = 0;
+    this.allAnimsIn = false;
+
+    for (let i = 0; i < this.theseSections.length; i++) {
+      const entranceType = this.theseSections[i].dataset.entrance;
+      switch (entranceType) {
+        case 'project-intro':
+          const projectIntroTL = new TimelineMax({ paused: true });
+          const projectIntroSection = this.theseSections[i];
+          const splitEyebrowByLines = projectIntroSection.querySelector('.eyebrow');
+          const splitIntroByLines = projectIntroSection.querySelector('p');
+          const splitIntroLines = new SplitText(splitIntroByLines, { type: 'lines' }).lines;
+          const innerIntroLines = new SplitText(splitIntroLines, { type: 'lines' }).lines;
+          const splitEyebrowLines = new SplitText(splitEyebrowByLines, { type: 'lines' }).lines;
+          const innerEyebrowLine = new SplitText(splitEyebrowLines, { type: 'lines' }).lines;
+  
+          projectIntroTL
+            .fromTo(innerEyebrowLine, 1, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true })
+            .add('introIn', '-=.3')
+            .staggerFromTo(innerIntroLines, 0.78, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.06, 'introIn');
+  
+          this.thisPagesTLs.push(projectIntroTL);
+          break;
+        
+        case 'project-footer':
+          const projectFooterTL = new TimelineMax({ paused: true });
+          const projectFooterSection = this.theseSections[i];
+          const splitFooterEyebrowsByLines = projectFooterSection.querySelectorAll('.eyebrow, .idx');
+          const splitFooterEyebrowLines = new SplitText(splitFooterEyebrowsByLines, { type: 'lines' }).lines;
+          const innerFooterEyebrowLines = new SplitText(splitFooterEyebrowLines, { type: 'lines' }).lines;
+          const wordWipers = document.querySelectorAll('.project-footer .large-svg-title .wiper');
+          const wordWiperBars = document.querySelectorAll('.project-footer .large-svg-title .wiper span');
+          const projectLettersOne = document.querySelectorAll('.project-footer .large-svg-title .svg-wrapper:nth-last-child(2) path');
+          const projectLettersTwo = document.querySelectorAll('.project-footer .large-svg-title .svg-wrapper:last-child path');
+          projectFooterTL
+            .add('wordsStart')
+            .add('lettersIn', '+=.3')
+            .fromTo(wordWiperBars, 2, { x: 0, scaleX: 0 }, { x: 90, scaleX: 1, ease: Expo.easeOut, force3D: false })
+            .fromTo(wordWipers, 1.1, { scaleX: 1 }, { scaleX: 0, ease: Expo.easeInOut, force3D: false }, 'wordsStart')
+            .staggerFromTo(projectLettersOne, 1.15, { x: 55 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'lettersIn')
+            .staggerFromTo(projectLettersTwo, 1.15, { x: 55 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'lettersIn')
+            .add('eyebrowsIn', '-=1.6')
+            .staggerFromTo(innerFooterEyebrowLines, 0.78, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.06, 'eyebrowsIn');
+          // document.querySelector('.project-footer').addEventListener('click', () => { projectFooterTL.progress(0).play(); });
+          this.thisPagesTLs.push(projectFooterTL);
+          break;
+  
+        default:
+  
+          break;
+      }
+    }
+    console.log(this.thisPagesTLs);
+    this.offsets = [];
+  
+    for (let i = 0; i < this.theseSections.length; i++) {
+      const thisOffset = globalObject.ww < 768 ? this.theseSections[i].dataset.mobileOffset : this.theseSections[i].dataset.offset;
+      this.offsets.push(parseFloat(thisOffset));
+    }
+
   }
 
   bindMethods() {
@@ -191,6 +254,24 @@ export default class Smooth {
       const yVal = this.scrollDists[i] * percentThrough;
       TweenMax.set(this.scrollImages[i], { y: -yVal, force3D: true });
     }
+    
+    if (this.allAnimsIn === false) {
+      for (let i = 0; i < this.theseSections.length; i++) {
+        const viewportOffset = this.theseSections[i].getBoundingClientRect().top;
+        console.log(viewportOffset);
+        if (viewportOffset < (globalObject.wh * this.offsets[i + this.offsetVal])) {
+          this.theseSections[i].classList.add('already-played');
+          console.log(this.thisPagesTLs[i + this.offsetVal]);
+          this.thisPagesTLs[i + this.offsetVal].play();
+  
+          this.theseSections = document.querySelectorAll('.scroll-enter:not(.already-played)');
+          this.offsetVal++;
+          if (this.theseSections.length === 0) {
+            this.allAnimsIn = true;
+          }
+        }
+      }
+    } 
   }
 
   intersectRatio(data, top, bottom) {

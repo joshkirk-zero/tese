@@ -21,8 +21,13 @@ function render($app, $page, $data = array())
     }
 }
 
-function not_found($app)
+function not_found($app, $page, $data = array())
 {
+    global $WPGLOBAL;
+
+    foreach ($data as $key => $value) {
+        $WPGLOBAL[$key] = $value;
+    }
     $file_path = views_dir().'/404.php';
     if (file_exists($file_path)) { // Avoid an infinite loop
         render($app, '404');

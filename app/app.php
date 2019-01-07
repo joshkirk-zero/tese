@@ -72,6 +72,8 @@ $app->get('/honorable-mentions', function ($request, $response, $args) use ($app
 });
 
 // 404 Page (Keep at the bottom of the routes)
-$app->get('/{id}', function ($request, $response) use ($app, $prismic) {
-    render($app, '404');
+$app->get('/{id}', function ($request, $response, $args) use ($app, $prismic) {
+    $api = $prismic->get_api();
+    $document = $api->getByUID('notfound', 'notfound');
+    render($app, '404', array('document' => $document));
 });
