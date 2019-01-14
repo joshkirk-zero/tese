@@ -39,6 +39,7 @@ export const globalObject = {
   readyToSwitch: false,
   comingFromFooter: false,
   openCloseMenu: '',
+  namespace: '',
   isMobile: (navigator.maxTouchPoints || 'ontouchstart' in document.documentElement)
 
 };

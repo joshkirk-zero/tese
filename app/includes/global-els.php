@@ -1,3 +1,4 @@
+<div data-smooth-section>
 <div class="switch-overlay"></div>
 <div class="projects-wrapper container">
     <div class="large-svg-title">
@@ -91,7 +92,7 @@
 
     <div class="pin-width">
         <div class="cta">
-            <div class="text"><p>Email<span class="pipe">|</span><span class="copy-email">mf@matesefields.com</span></p></div>
+            <div class="text"><p>Email<span class="pipe">|</span><a href="#" class="copy-email">mf@matesefields.com<span class="lines"><span></span><span></span></span></a></p></div>
         </div>
         <div class="trigger">
             <div class="background"></div>
@@ -103,13 +104,14 @@
     </div>
 </div>
 <div class="scroll-prompt">
-    <p><span class="home-prompt">Scroll down for projects</span><span class="menu-prompt">Scroll down for profile</span><span class="project-prompt">Scroll down</span></p>
+    <p><span class="home-prompt">Scroll down for projects</span><span class="menu-prompt">Scroll down for profile</span><span class="project-prompt">Scroll down please</span></p>
     <div class="arrow">
         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 71.9 95" style="enable-background:new 0 0 71.9 95;" xml:space="preserve"><path class="pink-fill" d="M39.7,93.4l30.6-30.6c2.1-2.1,2.1-5.5,0-7.5c-2.1-2.1-5.5-2.1-7.5,0L41.2,76.8l0-71.5c0-2.9-2.4-5.3-5.3-5.3
 	c-2.9,0-5.3,2.4-5.3,5.3v71.5L9.1,55.3c-2.1-2.1-5.5-2.1-7.5,0c-1,1-1.6,2.4-1.6,3.8c0,1.4,0.5,2.7,1.6,3.8l30.5,30.5
 	c1,1,2.4,1.6,3.8,1.6C37.3,95,38.7,94.4,39.7,93.4z"/></svg>
     </div>
 </div>
-<div class="los-detalles">
+</div>
+<div class="los-detalles" data-smooth-section>
     
 </div>

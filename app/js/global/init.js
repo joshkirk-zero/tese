@@ -1,5 +1,7 @@
 import * as Anim from './anims';
 import quicklink from "quicklink/dist/quicklink.mjs";
+import { globalObject } from '../_functions';
+import SmoothMenu from './smoothscroll_menu';
 
 export const onEnter = (to, location) => {
 
@@ -11,7 +13,9 @@ export const onEnterCompleted = (from, to, location) => {
 
 export const firstLoad = () => {
   const namespace = document.querySelector('[data-router-view]').dataset.routerView;
+  globalObject.namespace = namespace;
   quicklink({ el: document.querySelector('.projects-wrapper') });
   Anim.pageEntrance(namespace, true);
   Anim.openCloseProjectsMenu();
+  let profileReveal = new SmoothMenu({});
 };

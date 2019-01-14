@@ -15,7 +15,7 @@ define('PRISMIC_TOKEN', null);
 /*
  * Your site metadata
  */
-define('SITE_TITLE', 'Quickstart Prismic');
+define('SITE_TITLE', 'Matese Fields');
 define('SITE_DESCRIPTION', 'This is the PHP Quickstart project for Prismic');
 
 /*

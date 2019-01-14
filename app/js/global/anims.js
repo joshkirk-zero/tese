@@ -2,6 +2,7 @@ import { TimelineMax, Sine, TweenMax, Expo, Back } from 'gsap';
 import { SplitText } from '../thirdparty/SplitText';
 import { globalObject } from '../_functions';
 
+
 // export const scrollPrompt = () => {
 //   // const projectsTrigger = document.querySelector('.cta-trigger .trigger');
 //   // const squares = projectsTrigger.querySelectorAll('span');
@@ -10,6 +11,58 @@ import { globalObject } from '../_functions';
 //   mouseEnterTL
 //     .staggerTo(squares, 0.2, { scale: 1.15, backgroundColor: '#E8B9AB', ease: Sine.easeInOut, force3D: true }, 0.055);
 // };
+export const prepScrollPrompt = (context) => {
+  //   0: home    1: menu    2: project
+  const prompts = document.querySelectorAll('.scroll-prompt p span');
+  const homeLetters = prompts[0].querySelectorAll('div div');
+  const menuLetters = prompts[1].querySelectorAll('div div');
+  const projectLetters = prompts[2].querySelectorAll('div div');
+  const promptArrow = document.querySelector('.scroll-prompt .arrow');
+  
+  switch (context) {
+    case 'home':
+      TweenMax.set([homeLetters, menuLetters, projectLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
+      TweenMax.set(prompts, { display: 'none' });
+      TweenMax.set(prompts[0], { display: 'block' });
+
+      break;
+    case 'open-menu':
+      TweenMax.set([menuLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
+      TweenMax.set(prompts[1], { display: 'block' });
+      if (globalObject.namespace === 'home') {
+        TweenMax.fromTo(prompts[0], 0.3, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, onComplete: () => {
+          TweenMax.fromTo(prompts[1], 0.3, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut });
+        } });
+      } else if (globalObject.namespace === 'project') {
+        TweenMax.fromTo(prompts[2], 0.3, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, onComplete: () => {
+          TweenMax.fromTo(prompts[1], 0.3, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut });
+        } });
+      }
+      break;
+    case 'close-menu':
+      // TweenMax.set([homeLetters, menuLetters, projectLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
+      TweenMax.set(prompts[1], { display: 'block' });
+      TweenMax.fromTo(prompts[1], 0.3, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, onComplete: () => {
+        if (globalObject.namespace === 'home') {
+          TweenMax.fromTo(prompts[0], 0.3, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut });
+        } else if (globalObject.namespace === 'project') {
+          TweenMax.fromTo(prompts[2], 0.3, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut });
+        }
+      } });
+      
+      break;
+    case 'project':
+      TweenMax.set([homeLetters, menuLetters, projectLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
+      TweenMax.set(prompts, { display: 'none' });
+      TweenMax.set(prompts[2], { display: 'block' });
+    
+      break;
+    default:
+
+      break;
+  }
+}
+
 
 export const pageEntrance = (namespace, firstLoad = false) => {
   switch (namespace) {
@@ -321,6 +374,7 @@ export const openCloseProjectsMenu = () => {
     .to(trigger, 0.55, { rotation: 225, ease: Sine.easeOut }, 0);
 
   openMenuTL
+    .set('.global-els', { pointerEvents: 'all' })
     .set(projectsContainer, { className: '+=open' })
     .fromTo(switchOverlay, 0.35, { autoAlpha: 0 }, { autoAlpha: 1, ease: Sine.easeInOut, force3D: true })
     .fromTo('.projects-wrapper', 0.001, { pointerEvents: 'none', autoAlpha: 0 }, { pointerEvents: 'all', autoAlpha: 1 })
@@ -352,9 +406,11 @@ export const openCloseProjectsMenu = () => {
     if (count % 2 === 0) {
       openMenuTL.timeScale(1).play();
       squaresTL.timeScale(1).play();
+      prepScrollPrompt('open-menu');
     } else {
       openMenuTL.timeScale(1.2).reverse();
       squaresTL.timeScale(1.2).reverse();
+      prepScrollPrompt('close-menu');
     }
     count++;
   });

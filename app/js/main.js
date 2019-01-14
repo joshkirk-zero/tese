@@ -16,46 +16,50 @@ if ('scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'manual';
 }
 
+// Highway
+const projectsContainer = document.querySelector('.projects-wrapper');
+const trigger = document.querySelector('.cta-trigger .trigger');
+
+export const Core = new Highway.Core({
+  renderers: {
+    home: HomeRenderer,
+    project: ProjectRenderer
+  },
+  transitions: {
+    default: Fade,
+    contextual: {
+      nextProject: NextProject
+    }
+  }
+});
+
+Core.on('NAVIGATE_IN', (to, location) => { // to, location
+  Global.onEnter(to, location);
+  globalObject.namespace = to.view.dataset.routerView;
+});
+
+Core.on('NAVIGATE_END', (from, to, location) => { // to, from, location
+  Global.onEnterCompleted(from, to, location);
+  globalObject.comingFromFooter = false;
+  // Page View, fire GA here
+
+});
+
+Core.on('NAVIGATE_OUT', () => { // from, location
+  if (projectsContainer.classList.contains('open')) {
+    trigger.click();
+  }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
-  const projectsContainer = document.querySelector('.projects-wrapper');
   const projectLinks = projectsContainer.querySelectorAll('a:not(.coming-soon)');
   const comingSoonLink = projectsContainer.querySelector('a.coming-soon');
   const projectsBackdrop = document.querySelector('.switch-overlay');
-  const trigger = document.querySelector('.cta-trigger .trigger');
   comingSoonLink.addEventListener('click', (event) => {
     event.preventDefault();
     return false;
   });
-  // Highway
-  const H = new Highway.Core({
-    renderers: {
-      home: HomeRenderer,
-      project: ProjectRenderer
-    },
-    transitions: {
-      default: Fade,
-      contextual: {
-        nextProject: NextProject
-      }
-    }
-  });
-
-  H.on('NAVIGATE_IN', (to, location) => { // to, location
-    Global.onEnter(to, location);
-  });
-
-  H.on('NAVIGATE_END', (from, to, location) => { // to, from, location
-    Global.onEnterCompleted(from, to, location);
-    globalObject.comingFromFooter = false;
-    // Page View, fire GA here
-  });
-
-  H.on('NAVIGATE_OUT', () => { // from, location
-    if (projectsContainer.classList.contains('open')) {
-      trigger.click();
-    }
-  });
-
+  
   for (let i = 0; i < projectLinks.length; i++) {
     projectLinks[i].addEventListener('click', () => {
       TweenMax.delayedCall(0.4, () => {

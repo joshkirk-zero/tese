@@ -1,11 +1,11 @@
 import VirtualScroll from 'virtual-scroll';
 import throttle from 'lodash.throttle';
 // import config from '../config';
-import {TweenMax, Expo, Linear, TimelineMax, Sine} from 'gsap';
+import { TweenMax, Expo, Linear, TimelineMax, Sine } from 'gsap';
 import { globalObject } from '../_functions';
-import {SplitText} from "../thirdparty/SplitText";
+import { SplitText } from '../thirdparty/SplitText';
 
-export default class Smooth {
+export default class SmoothMenu {
   constructor(options = {}) {
     this.bindMethods();
 
@@ -81,7 +81,7 @@ export default class Smooth {
     const staggerFadeEls = document.querySelectorAll('.vert-left .meta');
     const staggerFadeScaleEls = document.querySelectorAll('.socials');
 
-    const scrollWords = document.querySelectorAll('.scroll-prompt p span:first-child');
+    const scrollWords = document.querySelectorAll('.scroll-prompt p span:last-child');
     const scrollWordsWraps = new SplitText(scrollWords, { type: 'words' }).words;
     const scrollWordsChars = new SplitText(scrollWordsWraps, { type: 'chars' }).chars;
 
@@ -151,7 +151,6 @@ export default class Smooth {
           break;
       }
     }
-    console.log(this.thisPagesTLs);
     this.offsets = [];
   
     for (let i = 0; i < this.theseSections.length; i++) {
@@ -258,10 +257,8 @@ export default class Smooth {
     if (this.allAnimsIn === false) {
       for (let i = 0; i < this.theseSections.length; i++) {
         const viewportOffset = this.theseSections[i].getBoundingClientRect().top;
-        console.log(viewportOffset);
         if (viewportOffset < (globalObject.wh * this.offsets[i + this.offsetVal])) {
           this.theseSections[i].classList.add('already-played');
-          console.log(this.thisPagesTLs[i + this.offsetVal]);
           this.thisPagesTLs[i + this.offsetVal].play();
   
           this.theseSections = document.querySelectorAll('.scroll-enter:not(.already-played)');
@@ -305,7 +302,6 @@ export default class Smooth {
 
   getCache() {
     this.getSections();
-    this.getElems();
   }
 
   getSections() {
@@ -323,64 +319,6 @@ export default class Smooth {
     });
   }
 
-  getElems() {
-    if (!this.dom.elems) return;
-
-    this.elems = [];
-
-    this.dom.elems.forEach(el => {
-      //if (!el.dataset.animateMobile && config.isPhone) return
-
-      const bounds = el.getBoundingClientRect();
-      const tl = new TimelineMax({ paused: true });
-      const from = JSON.parse(el.dataset.from);
-      const to = JSON.parse(el.dataset.to);
-
-      tl.fromTo(el, 1, from, to);
-
-      this.elems.push({
-        el: el,
-        tl: tl,
-        top: bounds.top > this.data.height ? bounds.top : this.data.height,
-        bottom: bounds.bottom,
-        height: bounds.height,
-        duration: el.dataset.duration ? el.dataset.duration : 1,
-        progress: {
-          current: 0
-        }
-      });
-    });
-
-    // this.photoTl();
-  }
-
-  // photoTl() {
-  //
-  //   const el = document.querySelector('[data-photos]');
-  //   const tl = new TimelineMax({ paused: true });
-  //   const trigger = el.querySelector('[data-trigger]');
-  //   const bounds = trigger ? trigger.getBoundingClientRect() : el.getBoundingClientRect();
-  //
-  //   tl
-  //     .to('[data-photo="1"]', 1, { yPercent: -110, rotation: -3, ease: Expo.easeOut }, 0)
-  //     .to('[data-photo="2"]', 1, { xPercent: -150, yPercent: -25, rotation: -5, ease: Expo.easeOut }, 0)
-  //     .to('[data-photo="3"]', 1, { xPercent: 150, rotation: 5, ease: Expo.easeOut }, 0)
-  //     .to('[data-photo="4"]', 1, { xPercent: -60, yPercent: 115, rotation: 2, ease: Expo.easeOut }, 0)
-  //     .to('[data-photo="5"]', 1, { xPercent: 50, yPercent: 125, rotation: -5, ease: Expo.easeOut }, 0);
-  //
-  //   this.elems.push({
-  //     el: el,
-  //     tl: tl,
-  //     top: bounds.top > this.data.height ? bounds.top : this.data.height,
-  //     bottom: bounds.bottom,
-  //     height: bounds.height,
-  //     duration: el.dataset.duration ? el.dataset.duration : 1,
-  //     progress: {
-  //       current: 0
-  //     }
-  //   });
-  // }
-
   getBounding() {
     const bounding = this.dom.el.getBoundingClientRect();
 
@@ -388,12 +326,6 @@ export default class Smooth {
     this.data.bounding = bounding;
     this.data.max = bounding.height - this.data.height;
   }
-
-  // preload() {
-  //   imagesLoaded(this.dom.el, (instance) => {
-  //     this.resize();
-  //   });
-  // }
 
   resize() {
     this.state.resizing = true;
