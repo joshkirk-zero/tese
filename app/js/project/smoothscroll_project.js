@@ -77,7 +77,7 @@ export default class SmoothProject {
     this.measureEl = document.querySelector('.project-hero .measure-el');
     this.measureElHeight = this.measureEl.offsetHeight;
 
-    const fadeEls = document.querySelectorAll('.cta-trigger .cta, .cta-trigger .availability, .arrow, .title-meta');
+    const fadeEls = document.querySelectorAll('.email-triggers .email, .email-triggers .availability, .arrow, .title-meta');
     const staggerFadeEls = document.querySelectorAll('.vert-left .meta');
     const staggerFadeScaleEls = document.querySelectorAll('.socials');
 

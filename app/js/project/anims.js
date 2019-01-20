@@ -64,7 +64,7 @@ export const scrollAwayFromHero = () => {
   const measureElHeight = measureEl.offsetHeight;
   const scrollAwayTL = new TimelineMax({ paused: true });
 
-  const fadeEls = document.querySelectorAll('.cta-trigger .cta, .cta-trigger .availability, .arrow, .title-meta');
+  const fadeEls = document.querySelectorAll('.email-triggers .email, .email-triggers .availability, .arrow, .title-meta');
   const staggerFadeEls = document.querySelectorAll('.vert-left .meta');
   const staggerFadeScaleEls = document.querySelectorAll('.socials');
 

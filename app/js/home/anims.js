@@ -11,7 +11,7 @@ export const scrollIntoProject = () => {
   // const measureElHeight = measureEl.offsetHeight;
   // const scrollAwayTL = new TimelineMax({ paused: true });
   //
-  // const fadeEls = document.querySelectorAll('.cta-trigger .cta, .arrow, .title-meta');
+  // const fadeEls = document.querySelectorAll('.email-triggers .email, .arrow, .title-meta');
   // const staggerFadeEls = document.querySelectorAll('.vert-left .meta');
   // const staggerFadeScaleEls = document.querySelectorAll('.socials a');
   //

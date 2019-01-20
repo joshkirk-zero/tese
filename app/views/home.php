@@ -11,7 +11,6 @@ $document = $WPGLOBAL['document'];
 </head>
 
 <body>
-<div id="container">
   <div class="global-els">
       <?php include __DIR__ . '/../includes/global-els.php';?>
   </div>
@@ -23,12 +22,12 @@ $document = $WPGLOBAL['document'];
           <div class="profile">
             <h3 class="welcome">Welcome</h3>
             <p class="bio"><?= RichText::asText($document->data->bio) ?></p>
+            <div class="availability"><span class="beacon"></span><p>Available for freelance</p></div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 <script src="../js/main-min.js"></script>
 </body>
 

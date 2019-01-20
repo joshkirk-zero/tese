@@ -18,7 +18,7 @@ if ('scrollRestoration' in window.history) {
 
 // Highway
 const projectsContainer = document.querySelector('.projects-wrapper');
-const trigger = document.querySelector('.cta-trigger .trigger');
+const trigger = document.querySelector('.projects-trigger');
 
 export const Core = new Highway.Core({
   renderers: {
@@ -53,12 +53,7 @@ Core.on('NAVIGATE_OUT', () => { // from, location
 
 document.addEventListener('DOMContentLoaded', () => {
   const projectLinks = projectsContainer.querySelectorAll('a:not(.coming-soon)');
-  const comingSoonLink = projectsContainer.querySelector('a.coming-soon');
   const projectsBackdrop = document.querySelector('.switch-overlay');
-  comingSoonLink.addEventListener('click', (event) => {
-    event.preventDefault();
-    return false;
-  });
   
   for (let i = 0; i < projectLinks.length; i++) {
     projectLinks[i].addEventListener('click', () => {

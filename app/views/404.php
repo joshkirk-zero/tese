@@ -11,7 +11,6 @@ $document = $WPGLOBAL['document'];
 </head>
 
 <body>
-<div id="container">
   <div class="global-els">
       <?php include __DIR__ . '/../includes/global-els.php';?>
   </div>
@@ -28,7 +27,6 @@ $document = $WPGLOBAL['document'];
       </div>
     </div>
   </div>
-</div>
 <script src="../js/main-min.js"></script>
 </body>
 

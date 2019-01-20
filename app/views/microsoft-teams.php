@@ -10,13 +10,11 @@ $document = $WPGLOBAL['document'];
 </head>
 
 <body>
-<div id="container">
   <div class="global-els">
       <?php include __DIR__ . '/../includes/global-els.php'; ?>
   </div>
   <div data-router-wrapper>
     <div data-router-view="project" class="microsoft-teams" data-smooth>
-      <div class="project-wrapper">
         <section class="project-hero container" data-smooth-section>
           <div class="title-meta">
             <span class="idx">02</span>
@@ -59,10 +57,8 @@ $document = $WPGLOBAL['document'];
               <?php include __DIR__ . '/../includes/svgs/title-sunday.php'; ?>
           </a>
         </section>
-      </div>
     </div>
   </div>
-</div>
 
 <script src="js/main-min.js"></script>
 

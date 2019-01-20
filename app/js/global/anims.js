@@ -1,67 +1,30 @@
-import { TimelineMax, Sine, TweenMax, Expo, Back } from 'gsap';
+import { TimelineMax, Sine, TweenMax, Expo } from 'gsap';
 import { SplitText } from '../thirdparty/SplitText';
 import { globalObject } from '../_functions';
 
-
-// export const scrollPrompt = () => {
-//   // const projectsTrigger = document.querySelector('.cta-trigger .trigger');
-//   // const squares = projectsTrigger.querySelectorAll('span');
-//   const mouseEnterTL = new TimelineMax({ paused: true });
-//
-//   mouseEnterTL
-//     .staggerTo(squares, 0.2, { scale: 1.15, backgroundColor: '#E8B9AB', ease: Sine.easeInOut, force3D: true }, 0.055);
-// };
 export const prepScrollPrompt = (context) => {
-  //   0: home    1: menu    2: project
+  //   0: home  1: project
   const prompts = document.querySelectorAll('.scroll-prompt p span');
   const homeLetters = prompts[0].querySelectorAll('div div');
-  const menuLetters = prompts[1].querySelectorAll('div div');
-  const projectLetters = prompts[2].querySelectorAll('div div');
+  const projectLetters = prompts[1].querySelectorAll('div div');
   const promptArrow = document.querySelector('.scroll-prompt .arrow');
   
   switch (context) {
     case 'home':
-      TweenMax.set([homeLetters, menuLetters, projectLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
+      TweenMax.set([homeLetters, projectLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
       TweenMax.set(prompts, { display: 'none' });
       TweenMax.set(prompts[0], { display: 'block' });
-
-      break;
-    case 'open-menu':
-      TweenMax.set([menuLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
-      TweenMax.set(prompts[1], { display: 'block' });
-      if (globalObject.namespace === 'home') {
-        TweenMax.fromTo(prompts[0], 0.3, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, onComplete: () => {
-          TweenMax.fromTo(prompts[1], 0.3, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut });
-        } });
-      } else if (globalObject.namespace === 'project') {
-        TweenMax.fromTo(prompts[2], 0.3, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, onComplete: () => {
-          TweenMax.fromTo(prompts[1], 0.3, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut });
-        } });
-      }
-      break;
-    case 'close-menu':
-      // TweenMax.set([homeLetters, menuLetters, projectLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
-      TweenMax.set(prompts[1], { display: 'block' });
-      TweenMax.fromTo(prompts[1], 0.3, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, onComplete: () => {
-        if (globalObject.namespace === 'home') {
-          TweenMax.fromTo(prompts[0], 0.3, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut });
-        } else if (globalObject.namespace === 'project') {
-          TweenMax.fromTo(prompts[2], 0.3, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut });
-        }
-      } });
-      
       break;
     case 'project':
-      TweenMax.set([homeLetters, menuLetters, projectLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
+      TweenMax.set([homeLetters, projectLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
       TweenMax.set(prompts, { display: 'none' });
-      TweenMax.set(prompts[2], { display: 'block' });
-    
+      TweenMax.set(prompts[1], { display: 'block' });
       break;
     default:
 
       break;
   }
-}
+};
 
 
 export const pageEntrance = (namespace, firstLoad = false) => {
@@ -212,7 +175,7 @@ export const pageEntrance = (namespace, firstLoad = false) => {
       TweenMax.delayedCall(0.5, () => {
         notFoundEntranceTL.play();
       });
-    break;
+      break;
     
     default:
 
@@ -332,17 +295,11 @@ export const prepScrollBasedLoadins = () => {
 
  -------------------------------------------------- * */
 export const openCloseProjectsMenu = () => {
-  const trigger = document.querySelector('.cta-trigger .trigger');
-  const projectsTriggerBackground = document.querySelector('.cta-trigger .trigger .background');
-  const squares = trigger.querySelectorAll('span:nth-child(even)');
-  const squareTl = squares[0];
-  const squareTr = squares[1];
-  const squareBr = squares[2];
-  const squareBl = squares[3];
+  const projectsTrigger = document.querySelector('.email-triggers .projects-trigger');
+  const profileTrigger = document.querySelector('.email-triggers .profile-trigger');
   const projectsContainer = document.querySelector('.projects-wrapper');
   const switchOverlay = document.querySelector('.switch-overlay');
   const openMenuTL = new TimelineMax({ paused: true });
-  const squaresTL = new TimelineMax({ paused: true });
   const wordWipers = document.querySelectorAll('.projects-wrapper .large-svg-title .wiper');
   const wordWiperBars = document.querySelectorAll('.projects-wrapper .large-svg-title .wiper span');
   const numWipers = document.querySelectorAll('.projects-wrapper .projects .wiper');
@@ -364,14 +321,6 @@ export const openCloseProjectsMenu = () => {
   const innerLinesFour = document.querySelectorAll('.projects-wrapper .projects a:nth-child(4) .text-wrapper div div');
 
   let count = 0;
-
-  squaresTL
-    .to(squareTl, 0.4, { transformOrigin: '100% 50%', scaleX: 0, ease: Sine.easeOut, force3D: true }, 0)
-    .to(squareTr, 0.4, { transformOrigin: '50% 100%', scaleY: 0, ease: Sine.easeOut, force3D: true }, 0)
-    .to(squareBr, 0.4, { transformOrigin: '50% 0', scaleY: 0, ease: Sine.easeOut, force3D: true }, 0)
-    .to(squareBl, 0.4, { transformOrigin: '0 50%', scaleX: 0, ease: Sine.easeOut, force3D: true }, 0)
-    .fromTo(projectsTriggerBackground, 0.35, { opacity: 0 }, { opacity: 1, ease: Sine.easeOut, force3D: true }, 0)
-    .to(trigger, 0.55, { rotation: 225, ease: Sine.easeOut }, 0);
 
   openMenuTL
     .set('.global-els', { pointerEvents: 'all' })
@@ -402,15 +351,11 @@ export const openCloseProjectsMenu = () => {
 
   globalObject.openCloseMenu = openMenuTL;
 
-  trigger.addEventListener('click', () => {
+  projectsTrigger.addEventListener('click', () => {
     if (count % 2 === 0) {
       openMenuTL.timeScale(1).play();
-      squaresTL.timeScale(1).play();
-      prepScrollPrompt('open-menu');
     } else {
       openMenuTL.timeScale(1.2).reverse();
-      squaresTL.timeScale(1.2).reverse();
-      prepScrollPrompt('close-menu');
     }
     count++;
   });
@@ -418,33 +363,7 @@ export const openCloseProjectsMenu = () => {
   document.addEventListener('keyup', (event) => {
     if ((event.key === 'Escape' || event.key === 'Esc') && count % 2 !== 0) {
       openMenuTL.timeScale(1).reverse();
-      squaresTL.timeScale(1).reverse();
       count++;
     }
   });
-
-  // let playingTimeout = false;
-  // const handleWheel = (event) => {
-  //   const e = window.event || event;
-  //   if (!playingTimeout) {
-  //     playingTimeout = true;
-  //     const delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
-  //
-  //     if (delta < 0) { // scrolling down
-  //       trigger.click();
-  //     } else { // scrolling up
-  //       trigger.click();
-  //     }
-  //     setTimeout(() => {
-  //       playingTimeout = false;
-  //     }, 1);
-  //   }
-  //   e.preventDefault();
-  // };
-  //
-  //
-  // // IE9+, Chrome, Safari, Opera
-  // target.addEventListener('mousewheel', handleWheel, false);
-  // // Firefox
-  // target.addEventListener('DOMMouseScroll', handleWheel, false);
 };

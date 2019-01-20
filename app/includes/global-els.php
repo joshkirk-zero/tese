@@ -1,4 +1,3 @@
-<div data-smooth-section>
 <div class="switch-overlay"></div>
 <div class="projects-wrapper container">
     <div class="large-svg-title">
@@ -9,8 +8,8 @@
             <div class="svg-wrapper">
                 <span class="wiper"><span></span></span>
                 <span class="svg-wrapper-inner">
-          <?php include __DIR__ . '/../includes/svgs/01.php'; ?>
-        </span>
+                    <?php include __DIR__ . '/../includes/svgs/01.php'; ?>
+                </span>
             </div>
             <div class="text-wrapper">
                 <h3 class="title">Facebook<br> Careers</h3>
@@ -21,8 +20,8 @@
             <div class="svg-wrapper">
                 <span class="wiper"><span></span></span>
                 <span class="svg-wrapper-inner">
-          <?php include __DIR__ . '/../includes/svgs/02.php'; ?>
-        </span>
+                    <?php include __DIR__ . '/../includes/svgs/02.php'; ?>
+                </span>
             </div>
             <div class="text-wrapper">
                 <h3 class="title">Microsoft<br> Teams</h3>
@@ -33,8 +32,8 @@
             <div class="svg-wrapper">
                 <span class="wiper"><span></span></span>
                 <span class="svg-wrapper-inner">
-          <?php include __DIR__ . '/../includes/svgs/04.php'; ?>
-        </span>
+                    <?php include __DIR__ . '/../includes/svgs/03.php'; ?>
+                </span>
             </div>
             <div class="text-wrapper">
                 <h3 class="title">Sunday<br> Funday</h3>
@@ -45,8 +44,8 @@
             <div class="svg-wrapper">
                 <span class="wiper"><span></span></span>
                 <span class="svg-wrapper-inner">
-          <?php include __DIR__ . '/../includes/svgs/03.php'; ?>
-        </span>
+                    <?php include __DIR__ . '/../includes/svgs/04.php'; ?>
+                </span>
             </div>
             <div class="text-wrapper">
                 <h3 class="title">Honorable<br> Mentions</h3>
@@ -60,14 +59,11 @@
     <a href="/" class="logo">
         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
              viewBox="0 0 9.3 62.4" style="enable-background:new 0 0 9.3 62.4;" xml:space="preserve">
-                    <style type="text/css">
-                        .logo-fill {fill:#E8B8AB;}
-                    </style>
             <g>
-                <path class="logo-fill " d="M9.3,4.5H7v55.7H2.4V4.5H0V0h9.3V4.5z"/>
-                <polygon class="logo-fill " points="7,60.1 2.4,60.1 4.6,62.4 	"/>
+                <path class="pink-fill" d="M9.3,4.5H7v55.7H2.4V4.5H0V0h9.3V4.5z"/>
+                <polygon class="pink-fill" points="7,60.1 2.4,60.1 4.6,62.4 	"/>
             </g>
-                </svg>
+        </svg>
     </a><div class="meta">
         <p><?php echo date("Y"); ?></p> <span class="pipe">|</span>  <p>Digital Designer</p> <span class="pipe">|</span> <p>Chicago, IL</p>
     </div>
@@ -87,31 +83,24 @@
     </div>
 </div>
 
-<div class="cta-trigger container-padding-r">
-    <div class="availability"><span class="beacon"></span><p>Available</p></div>
-
-    <div class="pin-width">
-        <div class="cta">
-            <div class="text"><p>Email<span class="pipe">|</span><a href="#" class="copy-email">mf@matesefields.com<span class="lines"><span></span><span></span></span></a></p></div>
-        </div>
-        <div class="trigger">
-            <div class="background"></div>
-            <div class="squares">
-                <span></span><span></span><span></span><span></span>
-                <span></span><span></span><span></span><span></span>
-            </div>
-        </div>
+<div class="email-triggers container-padding-r">
+    <div class="email">
+        <span class="label">Email<span class="pipe">|</span></span><a href="mailto:mf@matesefields.com" class="copy-email">mf@matesefields.com<span class="lines"><span></span><span></span></span></a>
+    </div>
+    <div class="triggers">
+        <span class="label">Links<span class="pipe">|</span></span>
+        <p class="projects-trigger">Projects<span class="lines"><span></span><span></span></span></p>
+        <p class="profile-trigger">Profile<span class="lines"><span></span><span></span></span></p>
     </div>
 </div>
 <div class="scroll-prompt">
-    <p><span class="home-prompt">Scroll down for projects</span><span class="menu-prompt">Scroll down for profile</span><span class="project-prompt">Scroll down please</span></p>
+    <p><span class="home-prompt">Scroll down for projects</span><span class="project-prompt">Scroll down please</span></p>
     <div class="arrow">
         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 71.9 95" style="enable-background:new 0 0 71.9 95;" xml:space="preserve"><path class="pink-fill" d="M39.7,93.4l30.6-30.6c2.1-2.1,2.1-5.5,0-7.5c-2.1-2.1-5.5-2.1-7.5,0L41.2,76.8l0-71.5c0-2.9-2.4-5.3-5.3-5.3
 	c-2.9,0-5.3,2.4-5.3,5.3v71.5L9.1,55.3c-2.1-2.1-5.5-2.1-7.5,0c-1,1-1.6,2.4-1.6,3.8c0,1.4,0.5,2.7,1.6,3.8l30.5,30.5
 	c1,1,2.4,1.6,3.8,1.6C37.3,95,38.7,94.4,39.7,93.4z"/></svg>
     </div>
 </div>
-</div>
-<div class="los-detalles" data-smooth-section>
+<div class="los-detalles">
     
 </div>

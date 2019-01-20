@@ -14,7 +14,7 @@ class NextProject extends Highway.Transition {
     const splitEntranceEls = document.querySelectorAll('.meta > div');
     const entranceLines = new SplitText(splitEntranceEls, { type: 'lines' }).lines;
     const innerEntranceLines = new SplitText(entranceLines, { type: 'lines' }).lines;
-    const projectFadeEls = document.querySelectorAll('.vert-left .meta, .scroll-prompt, .socials, .cta-trigger .cta, .cta-trigger .availability');
+    const projectFadeEls = document.querySelectorAll('.vert-left .meta, .scroll-prompt, .socials, .email-triggers .email, .email-triggers .availability');
     TweenMax.set(projectFadeEls, { clearProps: 'all' });
     nextProjectHeroTL
       .staggerFromTo(innerEntranceLines, 0.79, { skewY: 0, yPercent: 101 }, { skewY: 0, yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.05, 'start')
@@ -26,7 +26,7 @@ class NextProject extends Highway.Transition {
 
   out(from, done) {
     const eyebrow = document.querySelector('.project-footer .eyebrow');
-    // const projectFadeEls = document.querySelectorAll('.vert-left .meta, .socials, .cta-trigger .cta');
+    // const projectFadeEls = document.querySelectorAll('.vert-left .meta, .socials, .email-triggers .email');
     // TweenMax.set(projectFadeEls, { clearProps: 'all' });
     globalObject.comingFromFooter = true;
     // Animation
