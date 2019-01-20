@@ -16,4 +16,5 @@ export const firstLoad = () => {
   quicklink({ el: document.querySelector('.projects-wrapper') });
   Anim.pageEntrance(namespace, true);
   Anim.openCloseProjectsMenu();
+  Anim.prepProfileDrawer();
 };

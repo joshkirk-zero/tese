@@ -101,6 +101,36 @@
 	c1,1,2.4,1.6,3.8,1.6C37.3,95,38.7,94.4,39.7,93.4z"/></svg>
     </div>
 </div>
+<div class="close-mask"></div>
 <div class="los-detalles">
-    
+    <p class="secondary-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <div class="wrapper">
+        <div class="credits">
+            <div>
+                <span class="label"></span>
+                <a href="https://twitter.com/joshgkirk" target="_blank">Josh Kirk<span class="lines"><span></span><span></span></span></a>
+            </div>
+            <div>
+                <span class="label">Typefaces</span>
+                <a href="https://thedesignersfoundry.com/grandmaster" target="_blank">Grandmaster x Lucas Decroix<span class="lines"><span></span><span></span></span></a>
+                <a href="https://www.grillitype.com/typeface/gt-america" target="_blank">GT America x Grilli Type<span class="lines"><span></span><span></span></span></a>
+            </div>
+            <div>
+                <span class="label">Currently Listening to</span>
+                <p>Lorem Ipsum</p>
+            </div>
+        </div>
+        <div class="experience">
+            <div>
+                <span class="label">Education</span>
+                <p>Capital University, CO 2015<br> B.A in Marketing & Music</p>
+            </div>
+            <div>
+                <span class="label">Experience</span>
+                <p>Perficient Digital Labs<br> Freelance (collaborated with Dynamit, ZoCo Design, Franklin County)</p>
+            </div>
+            <a href="#" target="_blank">View Resume</a>
+        </div>
+    </div>
+
 </div>

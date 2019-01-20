@@ -113,6 +113,9 @@ ul {
     }
   }
 }
+[data-router-wrapper] {
+  // transform-origin: 50% 0%;
+}
 a:hover, p:hover {
   .lines {
     span {
@@ -137,7 +140,7 @@ a:hover, p:hover {
   height: 100%;
   z-index: 3;
   pointer-events: none;
-  .logo, .socials > a, .email-triggers a, .projects-trigger, .profile-trigger {
+  .logo, .socials > a, .email-triggers a, .projects-trigger, .profile-trigger, .close-mask, .los-detalles {
     pointer-events: all;
   }
   .vert-left, .email-triggers, .scroll-prompt {
@@ -474,7 +477,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   background-color: #87a878;
   position: absolute;
   left: -17px;
-  top: 4px;
+  top: 5px;
 }
 .pin-width {
   width: 483px;
@@ -946,8 +949,19 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   width: 100%;
   position: absolute;
   background-color: #1b2218;
-  bottom: 0;
-  transform: translate3d(0, 100%, 0);
+  bottom: -450px;
+  z-index: 9;
+}
+.close-mask {
+ position: fixed;   
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ opacity: 0;
+ cursor: pointer;
+ z-index: 8;
+ display: none;
 }
 
 //// replace screen group

@@ -26,6 +26,32 @@ export const prepScrollPrompt = (context) => {
   }
 };
 
+export const prepProfileDrawer = () => {
+  const profileTrigger = document.querySelector('.profile-trigger');
+  const profileTray = document.querySelector('.los-detalles');
+  const shiftThese = document.querySelectorAll('[data-router-wrapper]');
+  const shiftTheseGlobals = document.querySelectorAll('.vert-left, .email-triggers, .scroll-prompt');
+  const closeMask = document.querySelector('.close-mask');
+
+  // const openCloseProfile = new TimelineMax({paused: true});
+
+  profileTrigger.addEventListener('click', () => {
+    // openCloseProfile.timeScale(1).play();
+    TweenMax.set(closeMask, { display: 'block' });
+    TweenMax.to(shiftThese, 1.1, { scale: 1, opacity: 0.4, y: -70, ease: Expo.easeOut, force3D: true });
+    TweenMax.to(shiftTheseGlobals, 1.1, { scale: 1, opacity: 0.4, y: -15, ease: Expo.easeOut, force3D: true });
+    TweenMax.to(profileTray, 1.1, { yPercent: -100, ease: Expo.easeOut, force3D: true });
+  });
+  
+  closeMask.addEventListener('click', () => {
+    // openCloseProfile.timeScale(1.5).reverse();
+    TweenMax.set(closeMask, { display: 'none' });
+    TweenMax.to(shiftThese, 1.1, { scale: 1, opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });
+    TweenMax.to(shiftTheseGlobals, 1.1, { scale: 1, opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });
+    TweenMax.to(profileTray, 1.1, { yPercent: 0, ease: Expo.easeOut, force3D: true });
+  });
+
+};
 
 export const pageEntrance = (namespace, firstLoad = false) => {
   switch (namespace) {
@@ -46,7 +72,17 @@ export const pageEntrance = (namespace, firstLoad = false) => {
       const lettersTwo = document.querySelectorAll('.you-can .line-2 .svg-wrapper-inner path');
 
       const beacon = document.querySelector('.beacon');
-      const fadeEls = document.querySelector('.global-els');
+      const fadeEls = document.querySelector('.global-els, .availability');
+      const beaconTL = new TimelineMax({repeat: -1, paused: true});
+      beaconTL
+        .to(beacon, 1, { scale: 0.82, ease: Sine.easeOut })
+        .to(beacon, 1.85, { scale: 1, ease: Sine.easeInOut })
+      
+      const beaconPlay = () => {
+        TweenMax.fromTo(beacon, 1, { scale: 0 }, { scale: 1.1, ease: Sine.easeIn, onComplete: () => {
+          beaconTL.play();
+        } });
+      };
 
       homeEntranceTL
         .to('.global-mask', 0.001, { pointerEvents: 'none', autoAlpha: 0 })
@@ -78,9 +114,7 @@ export const pageEntrance = (namespace, firstLoad = false) => {
       homeEntranceTL
         .add('fadeAndScale', '-=.3')
         .fromTo(fadeEls, 1, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut }, 'fadeAndScale')
-        .fromTo(beacon, 1, { scale: 0 }, { scale: 1.1, ease: Sine.easeIn }, 'fadeAndScale')
-        .to(beacon, 0.5, { scale: 0.82, ease: Sine.easeOut })
-        .to(beacon, 0.85, { scale: 1, ease: Sine.easeInOut });
+        .add(beaconPlay, 'fadeAndScale');
 
 
       TweenMax.delayedCall(0.5, () => {

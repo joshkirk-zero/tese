@@ -22,6 +22,7 @@ $document = $WPGLOBAL['document'];
           <div class="profile">
             <h3 class="welcome"><?= RichText::asText($document->data->intro_line) ?></h3>
             <p class="bio"><?= RichText::asText($document->data->paragraph_text) ?></p>
+            <div class="availability"><span class="beacon"></span><p>Available for freelance</p></div>
           </div>
         </div>
       </div>
