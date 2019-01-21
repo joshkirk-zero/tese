@@ -32,23 +32,26 @@ export const prepProfileDrawer = () => {
   const shiftThese = document.querySelectorAll('[data-router-wrapper]');
   const shiftTheseGlobals = document.querySelectorAll('.vert-left, .email-triggers, .scroll-prompt');
   const closeMask = document.querySelector('.close-mask');
+  const logo = document.querySelector('.logo');
 
   // const openCloseProfile = new TimelineMax({paused: true});
 
   profileTrigger.addEventListener('click', () => {
     // openCloseProfile.timeScale(1).play();
     TweenMax.set(closeMask, { display: 'block' });
-    TweenMax.to(shiftThese, 1.1, { scale: 1, opacity: 0.4, y: -70, ease: Expo.easeOut, force3D: true });
-    TweenMax.to(shiftTheseGlobals, 1.1, { scale: 1, opacity: 0.4, y: -15, ease: Expo.easeOut, force3D: true });
-    TweenMax.to(profileTray, 1.1, { yPercent: -100, ease: Expo.easeOut, force3D: true });
+    TweenMax.to(shiftThese, 1, { scale: 1, opacity: 0.2, y: -60, ease: Expo.easeOut, force3D: true });
+    TweenMax.to(shiftTheseGlobals, 1.1, { scale: 1, opacity: 0.3, y: -21, ease: Expo.easeOut, force3D: true });
+    TweenMax.to(logo, 1.1, { y: 4, ease: Expo.easeOut, force3D: true });
+    TweenMax.to(profileTray, 1.05, { yPercent: -100, ease: Expo.easeOut, force3D: true });
   });
   
   closeMask.addEventListener('click', () => {
     // openCloseProfile.timeScale(1.5).reverse();
     TweenMax.set(closeMask, { display: 'none' });
-    TweenMax.to(shiftThese, 1.1, { scale: 1, opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });
+    TweenMax.to(shiftThese, 1, { scale: 1, opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });
     TweenMax.to(shiftTheseGlobals, 1.1, { scale: 1, opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });
-    TweenMax.to(profileTray, 1.1, { yPercent: 0, ease: Expo.easeOut, force3D: true });
+    TweenMax.to(logo, 1.1, { y: 0, ease: Expo.easeOut, force3D: true });
+    TweenMax.to(profileTray, 1, { yPercent: 0, ease: Expo.easeOut, force3D: true });
   });
 
 };
@@ -72,14 +75,15 @@ export const pageEntrance = (namespace, firstLoad = false) => {
       const lettersTwo = document.querySelectorAll('.you-can .line-2 .svg-wrapper-inner path');
 
       const beacon = document.querySelector('.beacon');
-      const fadeEls = document.querySelector('.global-els, .availability');
-      const beaconTL = new TimelineMax({repeat: -1, paused: true});
+      const fadeEls = document.querySelectorAll('.global-els, .availability');
+      const beaconTL = new TimelineMax({ repeat: -1, paused: true });
+
       beaconTL
-        .to(beacon, 1, { scale: 0.82, ease: Sine.easeOut })
-        .to(beacon, 1.85, { scale: 1, ease: Sine.easeInOut })
+        .fromTo(beacon, 1, { immediateRender: false, scale: 1 }, { scale: 0.7, ease: Sine.easeOut })
+        .to(beacon, 1.85, { scale: 1.1, ease: Sine.easeInOut });
       
       const beaconPlay = () => {
-        TweenMax.fromTo(beacon, 1, { scale: 0 }, { scale: 1.1, ease: Sine.easeIn, onComplete: () => {
+        TweenMax.fromTo(beacon, 0.8, { scale: 0 }, { scale: 1, ease: Sine.easeInOut, onComplete: () => {
           beaconTL.play();
         } });
       };
@@ -114,7 +118,8 @@ export const pageEntrance = (namespace, firstLoad = false) => {
       homeEntranceTL
         .add('fadeAndScale', '-=.3')
         .fromTo(fadeEls, 1, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut }, 'fadeAndScale')
-        .add(beaconPlay, 'fadeAndScale');
+        .fromTo('.availability p', 1.5, { x: 0 }, { x: 17, ease: Expo.easeOut }, '+=.3')
+        .add(beaconPlay, '-=1.3');
 
 
       TweenMax.delayedCall(0.5, () => {

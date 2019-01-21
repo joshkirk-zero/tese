@@ -107,7 +107,7 @@
     <div class="wrapper">
         <div class="credits">
             <div>
-                <span class="label"></span>
+                <span class="label">Development</span>
                 <a href="https://twitter.com/joshgkirk" target="_blank">Josh Kirk<span class="lines"><span></span><span></span></span></a>
             </div>
             <div>
@@ -129,7 +129,7 @@
                 <span class="label">Experience</span>
                 <p>Perficient Digital Labs<br> Freelance (collaborated with Dynamit, ZoCo Design, Franklin County)</p>
             </div>
-            <a href="#" target="_blank">View Resume</a>
+            <a href="#" target="_blank">View Resume<span class="lines"><span></span><span></span></span></a>
         </div>
     </div>
 
