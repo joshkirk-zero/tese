@@ -34,10 +34,23 @@ export const prepProfileDrawer = () => {
   const closeMask = document.querySelector('.close-mask');
   const logo = document.querySelector('.logo');
 
-  // const openCloseProfile = new TimelineMax({paused: true});
+  const openCloseProfile = new TimelineMax({paused: true});
+  const splitProfileBioByLines = document.querySelector('.secondary-bio');
+  const splitProfileBioLines = new SplitText(splitProfileBioByLines, { type: 'lines' }).lines;
+  const innerProfileBioLines = new SplitText(splitProfileBioLines, { type: 'lines' }).lines;
+  const splitLabelsByLines = document.querySelectorAll('.los-detalles .label');
+  const splitLabelLines = new SplitText(splitLabelsByLines, { type: 'lines' }).lines;
+  const innerLabelLines = new SplitText(splitLabelLines, { type: 'lines' }).lines;
+  const fadeLines = document.querySelectorAll('.los-detalles .wrapper > div p, .los-detalles .wrapper > div a');
+
+  openCloseProfile
+    // .staggerFromTo(innerProfileBioLines, 0.78, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045)
+    .staggerFromTo(innerProfileBioLines, 1, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.055)
+    .fromTo(innerLabelLines, 1.1, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0)
+    .fromTo(fadeLines, 1.3, { opacity: 0 }, { opacity: 1, ease: Sine.easeOut, force3D: true }, '-=.33');
 
   profileTrigger.addEventListener('click', () => {
-    // openCloseProfile.timeScale(1).play();
+    openCloseProfile.timeScale(1).play();
     TweenMax.set(closeMask, { display: 'block' });
     TweenMax.to(shiftThese, 1, { scale: 1, opacity: 0.2, y: -60, ease: Expo.easeOut, force3D: true });
     TweenMax.to(shiftTheseGlobals, 1.1, { scale: 1, opacity: 0.3, y: -21, ease: Expo.easeOut, force3D: true });
@@ -46,7 +59,7 @@ export const prepProfileDrawer = () => {
   });
   
   closeMask.addEventListener('click', () => {
-    // openCloseProfile.timeScale(1.5).reverse();
+    TweenMax.delayedCall(0.25, () => { openCloseProfile.progress(0).reverse(); });
     TweenMax.set(closeMask, { display: 'none' });
     TweenMax.to(shiftThese, 1, { scale: 1, opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });
     TweenMax.to(shiftTheseGlobals, 1.1, { scale: 1, opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });
@@ -83,7 +96,7 @@ export const pageEntrance = (namespace, firstLoad = false) => {
         .to(beacon, 1.85, { scale: 1.1, ease: Sine.easeInOut });
       
       const beaconPlay = () => {
-        TweenMax.fromTo(beacon, 0.8, { scale: 0 }, { scale: 1, ease: Sine.easeInOut, onComplete: () => {
+        TweenMax.fromTo(beacon, 1.1, { scale: 0 }, { scale: 1, ease: Expo.easeInOut, onComplete: () => {
           beaconTL.play();
         } });
       };
@@ -118,8 +131,8 @@ export const pageEntrance = (namespace, firstLoad = false) => {
       homeEntranceTL
         .add('fadeAndScale', '-=.3')
         .fromTo(fadeEls, 1, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut }, 'fadeAndScale')
-        .fromTo('.availability p', 1.5, { x: 0 }, { x: 17, ease: Expo.easeOut }, '+=.3')
-        .add(beaconPlay, '-=1.3');
+        .fromTo('.availability p', 1.55, { x: 0 }, { x: 17, ease: Expo.easeInOut }, '+=0')
+        .add(beaconPlay, '-=1.25');
 
 
       TweenMax.delayedCall(0.5, () => {
@@ -257,8 +270,8 @@ export const prepScrollBasedLoadins = () => {
 
         projectIntroTL
           .fromTo(innerEyebrowLine, 1, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true })
-          .add('introIn', '-=.3')
-          .staggerFromTo(innerIntroLines, 0.78, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.06, 'introIn');
+          .add('introIn', '-=.8')
+          .staggerFromTo(innerIntroLines, 0.75, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.05, 'introIn');
 
         thisPagesTLs.push(projectIntroTL);
         break;

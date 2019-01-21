@@ -517,10 +517,10 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     display: inline-block;
     &:after {
       content: '';
-      width: 106%;
-      height: calc(100% + 16px);
-      top: -8px;
-      left: -3%;
+      width: 114%;
+      height: calc(100% + 12px);
+      top: -2px;
+      left: -7%;
       position: absolute;
     }
   }
@@ -965,6 +965,47 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     letter-spacing: 1.3px;
     color: $brown;
     display: block;
+    > div {
+      overflow: hidden;
+    }
+  }
+  p, a {
+    font-size: 14px;
+    line-height: 1.57;
+    letter-spacing: 1px;
+    color: $ltBrown;
+    display: inline-block;
+    + p, + a {
+      margin-top: 21px;
+    }
+  }
+  a {
+    position: relative;
+    &:after {
+      content: '';
+      width: 114%;
+      height: calc(100% + 10px);
+      top: -2px;
+      left: -7%;
+      position: absolute;
+    }
+  }
+  .secondary-bio {
+    letter-spacing: normal;
+    color: $ltBrown;
+    width: 85%;
+    max-width: 363px;
+    margin-right: 119px;
+    > div {
+      overflow: hidden;
+    }
+  }
+  .experience {
+    max-width: 290px;
+  }
+  .credits {
+    margin-right: 110px;
+    max-width: 305px;
   }
   .wrapper {
     display: flex;
@@ -974,26 +1015,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
         margin-bottom: 0;
       }
     }
-    p, a {
-      font-size: 14px;
-      line-height: 1.57;
-      letter-spacing: 1px;
-      color: $ltBrown;
-      display: inline-block;
-      + p, + a {
-        margin-top: 21px;
-      }
-    }
   }
-}
-.secondary-bio {
-  font-size: 14px;
-  line-height: 1.57;
-  letter-spacing: normal;
-  color: $ltBrown;
-  width: 85%;
-  max-width: 363px;
-  margin-right: 119px;
 }
 .close-mask {
  position: fixed;   
@@ -1020,6 +1042,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     position: absolute;
     overflow: hidden;
     height: 725px;
+    &.pin-left {
+
+    }
     &:after {
       position: absolute;
       content: '';
@@ -1036,18 +1061,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       left: 0;
       width: 100%;
     }
-    &:first-child {
-      top: 0;
-      left: 0;
-    }
-    &:nth-child(2) {
-      top: 1100px;
-      right: 0;
-    }
-    &:nth-child(3) {
-      top: 2100px;
-      left: 0;
-    }
+    
   }
 }
 @media (max-width: 1440px) {

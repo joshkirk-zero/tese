@@ -37,15 +37,28 @@ $document = $WPGLOBAL['document'];
             </div>
           </div>
           <div class="screen-group">
-            <div class="image-scroll">
+            <div class="image-scroll pin-left">
               <img src="../images/projects/fb/work-fbc-1.jpg">
             </div>
-            <div class="image-scroll">
+            <div class="image-scroll pin-right">
               <img src="../images/projects/fb/work-fbc-2.jpg">
             </div>
-            <div class="image-scroll">
+            <img class="mobile-left" src="../images/projects/fb/work-fbc-3.jpg">
+            <img class="mobile-right" src="../images/projects/fb/work-fbc-4.jpg">
+            <img class="desktop-left" src="../images/projects/fb/work-fbc-5.jpg">
+            <div class="image-scroll pin-right">
               <img src="../images/projects/fb/work-fbc-6.jpg">
             </div>
+            <img class="desktop-left" src="../images/projects/fb/work-fbc-7.jpg">
+            <img class="desktop-right" src="../images/projects/fb/work-fbc-8.jpg">
+            <img class="mobile-left" src="../images/projects/fb/work-fbc-9.jpg">
+            <div class="image-scroll pin-right">
+              <img src="../images/projects/fb/work-fbc-10.jpg">
+            </div>
+            <div class="image-scroll pin-left">
+              <img src="../images/projects/fb/work-fbc-11.jpg">
+            </div>
+            <img class="desktop-right" src="../images/projects/fb/work-fbc-12.jpg">
           </div>
 
         </section>
