@@ -831,13 +831,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
 }
 .project-body {
   img {
-    height: auto;
-    width: 100%;
-    margin-bottom: 54px;
     display: block;
     position: relative;
     z-index: 2;
-    transition: transform 1s ease-out;
   }
   .intro {
     position: relative;
@@ -1028,22 +1024,68 @@ h1, h2, h3, h4, h5, h6, p, a, li {
  z-index: 8;
  display: none;
 }
-
-//// replace screen group
-.screen-group {
+.project-images {
   margin-bottom: 278px;
   position: relative;
-  height: 3000px;
-  &:last-child {
-    margin-bottom: 115px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 115px;
+  .image-wrap {
+    &.desktop-left {
+      flex: 0 1 50vw;
+      width: 50vw;
+      align-self: flex-start;
+      img {
+        width: 41vw;
+      }
+    }
+    &.desktop-right {
+      flex: 0 1 50vw;
+      width: 50vw;
+      align-self: flex-end;
+      img {
+        width: 41vw;
+      }
+    }
+    &.mobile-left {
+      flex: 0 1 50%;
+      width: 50%;
+      align-self: flex-start;
+      img {
+        width: 240px;
+      }
+    }
+    &.mobile-right {
+      flex: 0 1 50%;
+      width: 50%;
+      align-self: flex-end;
+      overflow: hidden;
+      img {
+        width: 240px;
+        float: right;
+      }
+    }
+  }
+  .image-wrap {
+
   }
   .image-scroll {
-    width: 41%;
-    position: absolute;
+    position: relative;
     overflow: hidden;
-    height: 725px;
-    &.pin-left {
-
+    max-height: 725px;
+    &.desktop-left {
+      flex: 0 1 41vw;
+      width: 41vw;
+      align-self: flex-start;
+    }
+    &.desktop-right {
+      flex: 0 1 41vw;
+      width: 41vw;
+      align-self: flex-end;
     }
     &:after {
       position: absolute;
@@ -1056,10 +1098,10 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       //background-color: red;
     }
     img {
-      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
+      transition: transform 1s ease-out;
     }
     
   }

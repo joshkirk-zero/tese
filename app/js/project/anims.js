@@ -5,8 +5,8 @@ import { SplitText } from '../thirdparty/SplitText';
 export const wheelSkewText = () => {
   const target = document.querySelector('.project-wrapper');
   const cornerTexts = document.querySelectorAll('.corner-text');
-  const screenGroupStarts = document.querySelectorAll('.screen-group');
-  const screenGroupStops = document.querySelectorAll('.screen-group .stop');
+  const screenGroupStarts = document.querySelectorAll('.project-images');
+  const screenGroupStops = document.querySelectorAll('.project-images .stop');
 
   let isFirefox = false;
   if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {

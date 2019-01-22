@@ -30,35 +30,49 @@ $document = $WPGLOBAL['document'];
           <div class="measure-el"><span></span></div>
         </section>
         <section class="project-body" data-smooth-section>
-          <div class="intro container scroll-enter" data-offset=".5" data-mobile-offset="1" data-entrance="project-intro">
+          <div class="intro container scroll-enter" data-offset=".75" data-mobile-offset="1" data-entrance="project-intro">
             <div>
               <span class="eyebrow">About</span>
               <p><?= RichText::asText($document->data->project_summary) ?></p>
             </div>
           </div>
-          <div class="screen-group">
-            <div class="image-scroll pin-left">
+          <div class="project-images">
+            <div class="image-scroll desktop-left">
               <img src="../images/projects/fb/work-fbc-1.jpg">
             </div>
-            <div class="image-scroll pin-right">
+            <div class="image-scroll desktop-right" style="margin-top: 21vw">
               <img src="../images/projects/fb/work-fbc-2.jpg">
             </div>
-            <img class="mobile-left" src="../images/projects/fb/work-fbc-3.jpg">
-            <img class="mobile-right" src="../images/projects/fb/work-fbc-4.jpg">
-            <img class="desktop-left" src="../images/projects/fb/work-fbc-5.jpg">
-            <div class="image-scroll pin-right">
+            <div class="image-wrap mobile-left" style="margin-top: -3vw; padding-left: 22vw">
+              <img src="../images/projects/fb/work-fbc-3.png">
+            </div>
+            <div class="image-wrap mobile-right" style="margin-top: 14vw; padding-right: 25vw;">
+              <img src="../images/projects/fb/work-fbc-4.png">
+            </div>
+            <div class="image-wrap desktop-left" style="margin-top: 7vw; padding-left: 9vw;">
+              <img src="../images/projects/fb/work-fbc-5.jpg">
+            </div>
+            <div class="image-scroll desktop-right" style="margin-top: 35vw;">
               <img src="../images/projects/fb/work-fbc-6.jpg">
             </div>
-            <img class="desktop-left" src="../images/projects/fb/work-fbc-7.jpg">
-            <img class="desktop-right" src="../images/projects/fb/work-fbc-8.jpg">
-            <img class="mobile-left" src="../images/projects/fb/work-fbc-9.jpg">
-            <div class="image-scroll pin-right">
+            <div class="image-wrap desktop-left" style="margin-top: -19vw;">
+              <img src="../images/projects/fb/work-fbc-7.jpg">
+            </div>
+            <div class="image-wrap desktop-right" style="margin-top: 17vw;">
+              <img src="../images/projects/fb/work-fbc-8.jpg">
+            </div>
+            <div class="image-wrap mobile-left" style="margin-top: -14vw; padding-left: 18vw;">
+              <img src="../images/projects/fb/work-fbc-9.png">
+            </div>
+            <div class="image-scroll desktop-right" style="margin-top: 23vw;">
               <img src="../images/projects/fb/work-fbc-10.jpg">
             </div>
-            <div class="image-scroll pin-left">
+            <div class="image-scroll desktop-left" style="margin-top: -25vw;">
               <img src="../images/projects/fb/work-fbc-11.jpg">
             </div>
-            <img class="desktop-right" src="../images/projects/fb/work-fbc-12.jpg">
+            <div class="image-wrap desktop-right" style="margin-top: 16vw;">
+              <img src="../images/projects/fb/work-fbc-12.jpg">
+            </div>
           </div>
 
         </section>

@@ -1,6 +1,6 @@
 import Highway from '@dogstudio/highway';
 import { globalObject, getViewport } from './_functions';
-import { TweenMax, Sine } from 'gsap';
+import { TweenMax } from 'gsap';
 // Renderers
 import HomeRenderer from './home/init';
 import ProjectRenderer from './project/init';

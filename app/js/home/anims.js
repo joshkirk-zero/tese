@@ -1,10 +1,6 @@
 import { TweenMax, TimelineMax, Sine } from 'gsap';
-// import { MorphSVGPlugin } from '../thirdparty/MorphSVGPlugin';
 import * as Func from '../_functions';
 
-export const morphHeaders = () => {
-
-};
 
 export const scrollIntoProject = () => {
   // const measureEl = document.querySelector('.measure-el');

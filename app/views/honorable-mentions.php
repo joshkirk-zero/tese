@@ -30,13 +30,13 @@ $document = $WPGLOBAL['document'];
                 <div class="measure-el"><span></span></div>
             </section>
             <section class="project-body" data-smooth-section>
-                <div class="intro container scroll-enter" data-offset=".7" data-mobile-offset="1" data-entrance="project-intro">
+                <div class="intro container scroll-enter" data-offset=".75" data-mobile-offset="1" data-entrance="project-intro">
                     <div>
                         <span class="eyebrow">About</span>
                         <p><?= RichText::asText($document->data->project_summary) ?></p>
                     </div>
                 </div>
-                <div class="screen-group">
+                <div class="project-images">
                     <div class="image-scroll">
                         <img src="../images/projects/fb/work-fbc-1.jpg">
                     </div>
