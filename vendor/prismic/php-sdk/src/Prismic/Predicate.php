@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 namespace Prismic;
 
@@ -10,5 +9,8 @@ namespace Prismic;
  */
 interface Predicate
 {
-    public function q() : string;
+    /**
+     * @return string
+     */
+    public function q();
 }

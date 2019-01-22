@@ -1,6 +1,6 @@
 [![alt text](https://travis-ci.org/prismicio/php-kit.png?branch=master "Travis build")](https://travis-ci.org/prismicio/php-kit)
 
-# PHP development kit for Prismic
+# PHP development kit for prismic.io
 
 ## Getting started
 
@@ -33,7 +33,7 @@ $api = Api::get('https://your-repo-name.prismic.io/api/v2');
 $doc = $api->getByUID('get-started');
 ```
 
-This kit supports PHP version >= 7.1.
+The kit is compatible and tested with PHP 5.4 and above.
 
 Because of a dependency on the event dispatcher, this library is compatible with Symfony version 2.8 and higher.
 For Symfony 2.7 projects, use version 2.0.3.
@@ -106,7 +106,7 @@ Some of the kit's tests check stuff that are built on top of APC and need APC to
 
 This software is licensed under the Apache 2 license, quoted below.
 
-Copyright 2018 Prismic (https://prismic.io).
+Copyright 2018 Prismic.io (https://prismic.io).
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this project except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
 

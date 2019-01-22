@@ -1,9 +1,6 @@
 <?php
-declare(strict_types=1);
 
 namespace Prismic;
-
-use stdClass;
 
 /**
  * Embodies a RESTful form. This is meant for internal use.
@@ -11,71 +8,48 @@ use stdClass;
 class Form
 {
     /**
-     * Form Name/Label
-     *
-     * @var string|null
+     * @var string the name if there's one
      */
-    private $name;
-
+    private $maybeName;
     /**
-     * Form Method
-     *
-     * @var string
+     * @var string the method to use
      */
     private $method;
-
     /**
-     * The rel if there's one
-     *
-     * @var string|null
+     * @var string the rel if there's one
      */
-    private $rel;
-
+    private $maybeRel;
     /**
-     * Encoding type
-     *
-     * @var string
+     * @var string the encoding type
      */
     private $enctype;
-
     /**
-     * Form Action/URL
-     *
-     * @var string
+     * @var string the action
      */
     private $action;
-
     /**
-     * The list of Prismic\FieldForm objects that can be used
-     *
-     * @var FieldForm[]
+     * @var array the list of Prismic\FieldForm objects that can be used
      */
     private $fields;
 
     /**
      * Constructs the Form object.
      *
-     * @param string $name      the name of the form
+     * @param string $maybeName the name if there's one
      * @param string $method    the method to use
-     * @param string $rel       the rel if there's one
+     * @param string $maybeRel  the rel if there's one
      * @param string $enctype   the encoding type
      * @param string $action    the action
      * @param array  $fields    the list of Prismic::FieldForm objects that can be used
      */
-    private function __construct(
-        ?string $name = null,
-        string  $method,
-        ?string $rel = null,
-        string  $enctype,
-        string  $action,
-        array   $fields
-    ) {
-        $this->name    = $name;
-        $this->method  = $method;
-        $this->rel     = $rel;
+    public function __construct($maybeName, $method, $maybeRel, $enctype, $action, $fields)
+    {
+        $this->maybeName = $maybeName;
+        $this->method = $method;
+        $this->maybeRel = $maybeRel;
         $this->enctype = $enctype;
-        $this->action  = $action;
-        $this->fields  = $fields;
+        $this->action = $action;
+        $this->fields = $fields;
     }
 
     /**
@@ -83,18 +57,18 @@ class Form
      *
      * @return array the array of arguments that will be passed
      */
-    public function defaultData() : array
+    public function defaultData()
     {
         /**
          * @var string    $key
          * @var FieldForm $field
          */
-        $dft = [];
+        $dft = array();
         foreach ($this->fields as $key => $field) {
             $default = $field->getDefaultValue();
             if (isset($default)) {
                 if ($field->isMultiple()) {
-                    $default = [$default];
+                    $default = array($default);
                 }
                 $dft[$key] = $default;
             }
@@ -104,96 +78,62 @@ class Form
     }
 
     /**
-     * Return a new instance from a JSON string
-     * @param string $json
-     * @return self
-     */
-    public static function withJsonString(string $json) : self
-    {
-        $data = \json_decode($json);
-        return self::withJsonObject($data);
-    }
-
-    /**
-     * Return a new instance from unserialized JSON
-     * @param stdClass $json
-     * @return self
-     */
-    public static function withJsonObject(stdClass $json) : self
-    {
-        $fields = [];
-        foreach ($json->fields as $name => $field) {
-            $default  = isset($field->default) ? $field->default : null;
-            $multiple = isset($field->multiple) ? $field->multiple : false;
-            $fields[$name] = new FieldForm($field->type, $multiple, $default);
-        }
-
-        return new self(
-            isset($json->name) ? $json->name : null,
-            $json->method,
-            isset($json->rel) ? $json->rel : null,
-            $json->enctype,
-            $json->action,
-            $fields
-        );
-    }
-
-    /**
      * Returns the name
+     *
+     * @return string the name
      */
-    public function getName() :? string
+    public function getName()
     {
-        return $this->name;
+        return $this->maybeName;
     }
 
     /**
      * Returns the method
+     *
+     * @return string the method
      */
-    public function getMethod() : string
+    public function getMethod()
     {
         return $this->method;
     }
 
     /**
      * Returns the rel
+     *
+     * @return string the rel
      */
-    public function getRel() :? string
+    public function getRel()
     {
-        return $this->rel;
+        return $this->maybeRel;
     }
 
     /**
      * Returns the enctype
+     *
+     * @return string the enctype
      */
-    public function getEnctype() : string
+    public function getEnctype()
     {
         return $this->enctype;
     }
 
     /**
      * Returns the action
+     *
+     * @return string the action
      */
-    public function getAction() : string
+    public function getAction()
     {
         return $this->action;
     }
 
     /**
      * Returns the fields
-     * @return FieldForm[]
+     *
+     * @return string the fields
      */
-    public function getFields() : array
+    public function getFields()
     {
         return $this->fields;
-    }
-
-    /**
-     * Return a single field by name
-     */
-    public function getField(string $name) :? FieldForm
-    {
-        return isset($this->fields[$name])
-               ? $this->fields[$name]
-               : null;
     }
 }

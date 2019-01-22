@@ -55,8 +55,6 @@ $document = $WPGLOBAL['document'];
             <div class="image-scroll desktop-right" style="margin-top: 35vw;">
               <img src="../images/projects/fb/work-fbc-6.jpg">
             </div>
-        </section>
-        <section class="project-body" data-smooth-section>
             <div class="image-wrap desktop-left" style="margin-top: -19vw;">
               <img src="../images/projects/fb/work-fbc-7.jpg">
             </div>
@@ -76,9 +74,8 @@ $document = $WPGLOBAL['document'];
               <img src="../images/projects/fb/work-fbc-12.jpg">
             </div>
           </div>
-        </section>
 
-        
+        </section>
         <section class="project-footer container scroll-enter" data-offset=".4" data-mobile-offset="1" data-entrance="project-footer" data-smooth-section>
           <a href="/microsoft-teams" class="large-svg-title" data-transition="nextProject">
             <span class="eyebrow">Next Project</span>

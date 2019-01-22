@@ -6,5 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'There4' => array($vendorDir . '/there4/slim-test-helpers/src'),
+    'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
     'Pimple' => array($vendorDir . '/pimple/pimple/src'),
+    '' => array($vendorDir . '/prismic/php-sdk/src'),
 );

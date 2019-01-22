@@ -1,14 +1,11 @@
 <?php
-declare(strict_types=1);
 
 namespace Prismic;
 
-use Prismic\Exception;
-use DateTimeImmutable;
-use stdClass;
+use DateTime;
 
 /**
- * Embodies a ref to be called on the Prismic repository. The ref is a Prismic
+ * Embodies a ref to be called on the prismic.io repository. The ref is a prismic.io
  * concept that represents a time on which you wish to query the repository, in the present (the
  * content that is live now, we call this ref the master ref) or in the future (the content that
  * is planned for a future content release).
@@ -20,32 +17,23 @@ use stdClass;
 class Ref
 {
     /**
-     * The ID of the ref
-     * @var string
+     * string the ID of the ref
      */
     private $id;
-
     /**
-     * The reference of the ref
-     * @var string
+     * string the reference of the ref
      */
     private $ref;
-
     /**
-     * The display label of the ref
-     * @var string
+     * string the display label of the ref
      */
     private $label;
-
     /**
-     * Is the ref the master ref?
-     * @var bool
+     * boolean is the ref the master ref?
      */
     private $isMasterRef;
-
     /**
-     * The date and time at which the ref is scheduled, if it is
-     * @var int|null
+     * string the date and time at which the ref is scheduled, if it is
      */
     private $maybeScheduledAt;
 
@@ -58,112 +46,119 @@ class Ref
      * @param bool   $isMasterRef      is the ref the master ref?
      * @param int    $maybeScheduledAt If scheduled, a javascript timestamp in milliseconds otherwise null
      */
-    private function __construct(
-        string $id,
-        string $ref,
-        string $label,
-        bool   $isMasterRef,
-        ?int   $maybeScheduledAt = null
-    ) {
-        $this->id               = $id;
-        $this->ref              = $ref;
-        $this->label            = $label;
-        $this->isMasterRef      = $isMasterRef;
+    public function __construct($id, $ref, $label, $isMasterRef, $maybeScheduledAt = null)
+    {
+        $this->id = $id;
+        $this->ref = $ref;
+        $this->label = $label;
+        $this->isMasterRef = $isMasterRef;
         $this->maybeScheduledAt = $maybeScheduledAt;
     }
 
     /**
      * Returns the ID of the ref
+    *
+    * @return string the ID of the ref
      */
-    public function getId() : string
+    public function getId()
     {
         return $this->id;
     }
 
     /**
      * Returns the reference of the ref
+    *
+    * @return string the ID of the ref
      */
-    public function getRef() : string
+    public function getRef()
     {
         return $this->ref;
     }
 
     /**
      * Returns the display label of the ref
+     *
+     * @return string the display label of the ref
      */
-    public function getLabel() : string
+    public function getLabel()
     {
         return $this->label;
     }
 
     /**
      * Checks if the ref is the master ref
+     *
+     * @return boolean true if it is the master ref, false otherwise
      */
-    public function isMasterRef() : bool
+    public function isMasterRef()
     {
         return $this->isMasterRef;
     }
 
     /**
      * Returns the time at which the ref is scheduled, if it is
-     * This is a 13 digit Javacript timestamp including miliseconds
+     *
+     * @return int|null Javacript timestamp for the scheduled release or null if not scheduled
      */
-    public function getScheduledAt() :? int
+    public function getScheduledAt()
     {
         return $this->maybeScheduledAt;
     }
 
     /**
      * Return the scheduled time as a unix timestamp
+     *
+     * @return int|null Unix timestamp for the scheduled release or null if not scheduled
      */
-    public function getScheduledAtTimestamp() :? int
+    public function getScheduledAtTimestamp()
     {
-        if (null === $this->maybeScheduledAt) {
+        if (null === $this->getScheduledAt()) {
             return null;
         }
-        return (int) \floor($this->maybeScheduledAt / 1000);
+        return (int) floor($this->getScheduledAt() / 1000);
     }
 
     /**
      * Return the DateTime of the scheduled release if any
+     *
+     * @return DateTime|null The release date or null
      */
-    public function getScheduledDate() :? DateTimeImmutable
+    public function getScheduledDate()
     {
-        if (null === $this->maybeScheduledAt) {
+        if (null === $this->getScheduledAt()) {
             return null;
         }
 
-        return DateTimeImmutable::createFromFormat(
-            'U',
-            (string) $this->getScheduledAtTimestamp()
-        );
+        $date = new DateTime;
+        $date->setTimestamp($this->getScheduledAtTimestamp());
+
+        return $date;
     }
 
     /**
-     * Returns the ref as a displayable information: the ref's ID
+     * Returns the ref as a displayable information: the ref's ID.
+     *
+     * @return string the ref's ID
      */
-    public function __toString() : string
+    public function __toString()
     {
-        return $this->ref;
+        return (string) $this->getRef();
     }
 
     /**
      * Parses a ref.
-     * @throws Exception\InvalidArgumentException if the JSON object has missing properties
+     *
+     * @param  $json the json bit retrieved from the API that represents a ref.
+     * @return Prismic::Ref the manipulable object for that ref.
      */
-    public static function parse(stdClass $json) : self
+    public static function parse($json)
     {
-        if (! isset($json->id, $json->ref, $json->label)) {
-            throw new Exception\InvalidArgumentException(
-                'The properties id, ref and label should exist in the JSON object for a Ref'
-            );
-        }
         return new Ref(
             $json->id,
             $json->ref,
             $json->label,
             isset($json->{'isMasterRef'}) ? $json->isMasterRef : false,
-            isset($json->{'scheduledAt'}) ? $json->scheduledAt : null
+            isset($json->{'scheduledAt'}) ? $json->scheduledAt : null    // @todo: convert value into \DateTime ?
         );
     }
 }

@@ -30,13 +30,6 @@
 		"oAP": "/build/.idea",
 		"oF": 0
 		},
-	"/app/app.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "/build/app.php",
-		"oF": 3
-		},
 	"/app/fonts": {
 		"ft": 65536,
 		"oA": 1,
@@ -61,20 +54,6 @@
 		"ft": 8192,
 		"oA": 0,
 		"oAP": "/build/includes/head.php",
-		"oF": 2
-		},
-	"/app/includes/http.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "/build/includes/http.php",
-		"oF": 2
-		},
-	"/app/includes/PrismicHelper.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "/build/includes/PrismicHelper.php",
 		"oF": 2
 		},
 	"/app/includes/svgs/01.php": {
@@ -119,32 +98,25 @@
 		"oAP": "/app/includes/svgs/title-404.php",
 		"oF": 0
 		},
-	"/app/includes/svgs/title-facebook.php": {
+	"/app/includes/svgs/title-facebook-careers.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 0,
-		"oAP": "/build/includes/svgs/title-facebook.php",
+		"oAP": "/build/includes/svgs/title-facebook-careers.php",
 		"oF": 2
 		},
-	"/app/includes/svgs/title-honorable.php": {
+	"/app/includes/svgs/title-honorable-mentions.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 0,
-		"oAP": "/build/includes/svgs/title-honorable.php",
+		"oAP": "/build/includes/svgs/title-honorable-mentions.php",
 		"oF": 2
 		},
-	"/app/includes/svgs/title-microsoft.php": {
+	"/app/includes/svgs/title-microsoft-teams.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 0,
-		"oAP": "/build/includes/svgs/title-microsoft.php",
-		"oF": 2
-		},
-	"/app/includes/svgs/title-sunday.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "/build/includes/svgs/title-sunday.php",
+		"oAP": "/build/includes/svgs/title-microsoft-teams.php",
 		"oF": 2
 		},
 	"/app/includes/svgs/you-can.php": {
@@ -154,25 +126,11 @@
 		"oAP": "/build/includes/svgs/you-can.php",
 		"oF": 2
 		},
-	"/app/index.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "/build/index.php",
-		"oF": 3
-		},
 	"/app/js": {
 		"ft": 65536,
 		"oA": 1,
 		"oAP": "/build/app/js",
 		"oF": 0
-		},
-	"/app/LinkResolver.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "/build/LinkResolver.php",
-		"oF": 3
 		},
 	"/app/styles/styles.scss": {
 		"aP": 1,
@@ -236,11 +194,32 @@
 		"oAP": "/build/views/microsoft-teams.php",
 		"oF": 2
 		},
+	"/app/views/page.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "/build/views/page.php",
+		"oF": 2
+		},
+	"/app/views/site-meta.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "/build/includes/site-meta.php",
+		"oF": 2
+		},
 	"/app/views/sunday-funday.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 0,
 		"oAP": "/build/views/sunday-funday.php",
+		"oF": 2
+		},
+	"/app/views/type--work.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "/build/views/type--work.php",
 		"oF": 2
 		},
 	"/build": {

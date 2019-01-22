@@ -1,9 +1,12 @@
 {
-  "name": "Matese Field's Folio",
-  "version": "1.0",
+  "name": "matesefields",
+  "version": "0.0.1",
   "require": {
-    "php": ">=7.1",
-    "prismic/php-sdk": "^5.0.1",
-    "slim/slim": "^3.10"
+      "slim/slim": "3.*",
+      "prismic/php-sdk": "4.0.0-beta"
+  },
+  "require-dev": {
+      "there4/slim-test-helpers": "dev-master",
+      "phpunit/phpunit": "4.*"
   }
 }
