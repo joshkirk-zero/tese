@@ -17,9 +17,6 @@ if ('scrollRestoration' in window.history) {
 }
 
 // Highway
-const projectsContainer = document.querySelector('.projects-wrapper');
-const trigger = document.querySelector('.projects-trigger');
-
 export const Core = new Highway.Core({
   renderers: {
     home: HomeRenderer,
@@ -46,24 +43,10 @@ Core.on('NAVIGATE_END', (from, to, location) => { // to, from, location
 });
 
 Core.on('NAVIGATE_OUT', () => { // from, location
-  if (projectsContainer.classList.contains('open')) {
-    trigger.click();
-  }
+  
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  const projectLinks = projectsContainer.querySelectorAll('a:not(.coming-soon)');
-  const projectsBackdrop = document.querySelector('.switch-overlay');
-  
-  for (let i = 0; i < projectLinks.length; i++) {
-    projectLinks[i].addEventListener('click', () => {
-      TweenMax.delayedCall(0.4, () => {
-        TweenMax.set([projectsContainer, projectsBackdrop], { opacity: 0 });
-        globalObject.openCloseMenu.progress(0);
-      });
-    });
-  }
-
   Global.firstLoad();
 });
 

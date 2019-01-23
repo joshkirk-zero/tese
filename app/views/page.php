@@ -2,7 +2,7 @@
 use Prismic\Dom\RichText;
 
 $document = $WPGLOBAL['document'];
-print_r(json_encode($document, JSON_PRETTY_PRINT));
+// print_r(json_encode($document, JSON_PRETTY_PRINT));
 ?>
 
 <div data-router-view="project" class="<?php echo $document->uid; ?>" data-smooth>

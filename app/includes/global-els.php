@@ -108,12 +108,12 @@
         <div class="credits">
             <div>
                 <span class="label">Development</span>
-                <a href="https://twitter.com/joshgkirk" target="_blank">Josh Kirk<span class="lines"><span></span><span></span></span></a>
+                <a href="https://twitter.com/joshgkirk" target="_blank"><span class="clip">Josh Kirk</span><span class="lines"><span></span><span></span></span></a>
             </div>
             <div>
                 <span class="label">Typefaces</span>
-                <a href="https://thedesignersfoundry.com/grandmaster" target="_blank">Grandmaster x Lucas Decroix<span class="lines"><span></span><span></span></span></a>
-                <a href="https://www.grillitype.com/typeface/gt-america" target="_blank">GT America x Grilli Type<span class="lines"><span></span><span></span></span></a>
+                <a href="https://thedesignersfoundry.com/grandmaster" target="_blank"><span class="clip">Grandmaster x Lucas Decroix</span><span class="lines"><span></span><span></span></span></a>
+                <a href="https://www.grillitype.com/typeface/gt-america" target="_blank"><span class="clip">GT America x Grilli Type</span><span class="lines"><span></span><span></span></span></a>
             </div>
             <div>
                 <span class="label">Currently Listening to</span>
@@ -129,7 +129,7 @@
                 <span class="label">Experience</span>
                 <p>Perficient Digital Labs<br> Freelance (collaborated with Dynamit, ZoCo Design, Franklin County)</p>
             </div>
-            <a href="#" target="_blank">View Resume<span class="lines"><span></span><span></span></span></a>
+            <a href="#" target="_blank"><span class="clip">View Resume</span><span class="lines"><span></span><span></span></span></a>
         </div>
     </div>
 

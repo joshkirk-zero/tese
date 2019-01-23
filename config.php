@@ -47,8 +47,8 @@ define("SALT", "u4WKCFRmqwR0MmviOs0VslA2K9R2k3nk");
 /*
  * Shopify
  */
-define("SHOPIFY_DOMAIN", "nobody-studios-sandbox.myshopify.com");
-define("SHOPIFY_API_KEY", "c75dd9cbd9dfb45c8a79b07655bcf176");
-define("SHOPIFY_PASSWORD", "8ee916c7c0e8f37fbbbb42581f091f2b");
-define("SHOPIFY_ACCESS_TOKEN", "3e88c09cbbc6a0ccbb05e15661bbce99");
-define("SHOPIFY_WEBHOOK_SECRET", "8b630619a7507f825c6115ba5750680527b961c9f961392ad6190ddef4cdeb3e");
+// define("SHOPIFY_DOMAIN", "nobody-studios-sandbox.myshopify.com");
+// define("SHOPIFY_API_KEY", "c75dd9cbd9dfb45c8a79b07655bcf176");
+// define("SHOPIFY_PASSWORD", "8ee916c7c0e8f37fbbbb42581f091f2b");
+// define("SHOPIFY_ACCESS_TOKEN", "3e88c09cbbc6a0ccbb05e15661bbce99");
+// define("SHOPIFY_WEBHOOK_SECRET", "8b630619a7507f825c6115ba5750680527b961c9f961392ad6190ddef4cdeb3e");

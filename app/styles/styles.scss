@@ -143,7 +143,10 @@ a:hover, p:hover {
   .logo, .socials > a, .email-triggers a, .projects-trigger, .profile-trigger, .close-mask, .los-detalles {
     pointer-events: all;
   }
-  .vert-left, .email-triggers, .scroll-prompt {
+  .vert-left, .email-triggers {
+    z-index: 5;
+  }
+  .scroll-prompt {
     z-index: 3;
   }
 }
@@ -998,10 +1001,30 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   }
   .experience {
     max-width: 290px;
+    p, a {
+      > div {
+        overflow: hidden;
+      }
+      .clip {
+        > div {
+          overflow: hidden;
+        }
+      }
+    }
   }
   .credits {
     margin-right: 110px;
     max-width: 305px;
+    p, a {
+      > div {
+        overflow: hidden;
+      }
+      .clip {
+        > div {
+          overflow: hidden;
+        }
+      }
+    }
   }
   .wrapper {
     display: flex;

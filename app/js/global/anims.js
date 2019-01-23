@@ -41,13 +41,22 @@ export const prepProfileDrawer = () => {
   const splitLabelsByLines = document.querySelectorAll('.los-detalles .label');
   const splitLabelLines = new SplitText(splitLabelsByLines, { type: 'lines' }).lines;
   const innerLabelLines = new SplitText(splitLabelLines, { type: 'lines' }).lines;
-  const fadeLines = document.querySelectorAll('.los-detalles .wrapper > div p, .los-detalles .wrapper > div a');
+  // const fadeLines = document.querySelectorAll('.los-detalles .wrapper > div p, .los-detalles .wrapper > div a');
+  const splitCopyByLines = document.querySelectorAll('.credits p, .credits a .clip, .experience a .clip');
+  const splitCopyUnderlines = document.querySelectorAll('.credits .lines, .experience .lines');
+  const splitCopyLines = new SplitText(splitCopyByLines, { type: 'lines' }).lines;
+  const innerCopyLines = new SplitText(splitCopyLines, { type: 'lines' }).lines;
+  
+  const splitStaggerCopyByLines = document.querySelectorAll('.experience p');
+  const splitStaggerCopyLines = new SplitText(splitStaggerCopyByLines, { type: 'lines' }).lines;
+  const innerCopyStaggerLines = new SplitText(splitStaggerCopyLines, { type: 'lines' }).lines;
 
   openCloseProfile
-    // .staggerFromTo(innerProfileBioLines, 0.78, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045)
-    .staggerFromTo(innerProfileBioLines, 1, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.055)
-    .fromTo(innerLabelLines, 1.1, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0)
-    .fromTo(fadeLines, 1.3, { opacity: 0 }, { opacity: 1, ease: Sine.easeOut, force3D: true }, '-=.33');
+    .staggerFromTo(innerProfileBioLines, 0.9, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045)
+    .fromTo(innerLabelLines, 1.05, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0)
+    .fromTo(innerCopyLines, 1.05, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.165)
+    .fromTo(splitCopyUnderlines, 0.8, { opacity: 0 }, { opacity: 1, ease: Sine.easeOut, force3D: true }, '-=.3')
+    .staggerFromTo(innerCopyStaggerLines, 1.05, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.025, 0.15);
 
   profileTrigger.addEventListener('click', () => {
     openCloseProfile.timeScale(1).play();
@@ -88,7 +97,7 @@ export const pageEntrance = (namespace, firstLoad = false) => {
       const lettersTwo = document.querySelectorAll('.you-can .line-2 .svg-wrapper-inner path');
 
       const beacon = document.querySelector('.beacon');
-      const fadeEls = document.querySelectorAll('.global-els, .availability');
+      const fadeEls = document.querySelectorAll('.availability');
       const beaconTL = new TimelineMax({ repeat: -1, paused: true });
 
       beaconTL
@@ -141,13 +150,12 @@ export const pageEntrance = (namespace, firstLoad = false) => {
       break;
 
     case 'project':
-      const projectEntranceTL = new TimelineMax({ paused: true });
-      const bigPipe = document.querySelector('[data-router-view]:last-child .big-pipe');
-      const splitEntranceEls = document.querySelectorAll('[data-router-view]:last-child .meta > div, .title-meta .idx');
-      const entranceLines = new SplitText(splitEntranceEls, { type: 'lines' }).lines;
-      const innerEntranceLines = new SplitText(entranceLines, { type: 'lines' }).lines;
-      const projectFadeEls = document.querySelector('.global-els');
       if (!globalObject.comingFromFooter) {
+        const projectEntranceTL = new TimelineMax({ paused: true });
+        const bigPipe = document.querySelector('[data-router-view]:last-child .big-pipe');
+        const splitEntranceEls = document.querySelectorAll('[data-router-view]:last-child .meta > div, .title-meta .idx');
+        const entranceLines = new SplitText(splitEntranceEls, { type: 'lines' }).lines;
+        const innerEntranceLines = new SplitText(entranceLines, { type: 'lines' }).lines;
         const wordWipers = document.querySelectorAll('[data-router-view]:last-child .project-hero .large-svg-title .wiper');
         const wordWiperBars = document.querySelectorAll('[data-router-view]:last-child .project-hero .large-svg-title .wiper span');
         const projectLettersOne = document.querySelectorAll('[data-router-view]:last-child .project-hero .large-svg-title .svg-wrapper:first-child path');
@@ -163,8 +171,7 @@ export const pageEntrance = (namespace, firstLoad = false) => {
           .staggerFromTo(projectLettersOne, 1.15, { x: 55 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'lettersIn')
           .staggerFromTo(projectLettersTwo, 1.15, { x: 55 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'lettersIn')
           .staggerFromTo(innerEntranceLines, 0.79, { skewY: 0, yPercent: 101 }, { skewY: 0, yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.05, 'start')
-          .fromTo(bigPipe, 0.6, { transformOrigin: '50% 0', scaleY: 0 }, { scaleY: 1, ease: Sine.easeInOut }, 'start')
-          .fromTo(projectFadeEls, 1, { autoAlpha: 0 }, { autoAlpha: 1, ease: Sine.easeInOut }, '-=.5');
+          .fromTo(bigPipe, 0.6, { transformOrigin: '50% 0', scaleY: 0 }, { scaleY: 1, ease: Sine.easeInOut }, 'start');
         projectEntranceTL.play();
       }
 
@@ -372,7 +379,7 @@ export const openCloseProjectsMenu = () => {
   const innerLinesThree = document.querySelectorAll('.projects-wrapper .projects a:nth-child(3) .text-wrapper div div');
   const innerLinesFour = document.querySelectorAll('.projects-wrapper .projects a:nth-child(4) .text-wrapper div div');
 
-  let count = 0;
+  const fadeEls = document.querySelectorAll('.vert-left .meta, .scroll-prompt, .socials, .email-triggers .email');
 
   openMenuTL
     .set('.global-els', { pointerEvents: 'all' })
@@ -402,20 +409,24 @@ export const openCloseProjectsMenu = () => {
     .staggerFromTo(innerLinesFour, 0.78, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.05, 'linesUpStart');
 
   globalObject.openCloseMenu = openMenuTL;
-
+  let currentOpacity;
   projectsTrigger.addEventListener('click', () => {
-    if (count % 2 === 0) {
+    console.log('clicked');
+    if (globalObject.openCloseCount % 2 === 0) {
+      currentOpacity = window.getComputedStyle(document.querySelector('.vert-left .meta')).getPropertyValue('opacity');
       openMenuTL.timeScale(1).play();
+      TweenMax.to(fadeEls, 0.5, { opacity: 1, ease: Sine.easeInOut, force3D: true, onComplete: () => { TweenMax.set(fadeEls, { clearProps: 'opacity' }) } });
     } else {
       openMenuTL.timeScale(1.2).reverse();
+      TweenMax.to(fadeEls, 0.8, { opacity: currentOpacity, ease: Sine.easeInOut, force3D: true });
     }
-    count++;
+    globalObject.openCloseCount++;
   });
 
   document.addEventListener('keyup', (event) => {
-    if ((event.key === 'Escape' || event.key === 'Esc') && count % 2 !== 0) {
+    if ((event.key === 'Escape' || event.key === 'Esc') && globalObject.openCloseCount % 2 !== 0) {
       openMenuTL.timeScale(1).reverse();
-      count++;
+      globalObject.openCloseCount++;
     }
   });
 };
