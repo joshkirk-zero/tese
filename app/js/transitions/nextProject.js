@@ -6,7 +6,7 @@ import { prepScrollPrompt } from '../global/anims';
 
 
 class NextProject extends Highway.Transition {
-  in(from, to, done) {
+  in({ from, to, trigger, done }) {
     window.scrollTo(0, 0);
     TweenMax.set(to.querySelectorAll('.project-hero .wiper'), { display: 'none' });
     from.remove();
@@ -26,7 +26,7 @@ class NextProject extends Highway.Transition {
     // TweenMax.to(fadeEls, 0.8, { autoAlpha: 1, ease: Sine.easeInOut });
   }
 
-  out(from, done) {
+  out({ from, trigger, done }) {
     const eyebrow = document.querySelector('.project-footer .eyebrow');
     // const projectFadeEls = document.querySelectorAll('.vert-left .meta, .socials, .email-triggers .email');
     // TweenMax.set(projectFadeEls, { clearProps: 'all' });

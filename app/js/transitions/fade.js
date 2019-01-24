@@ -18,7 +18,7 @@ class Fade extends Highway.Transition {
     const projectsBackdrop = document.querySelector('.switch-overlay');
     const projectsContainer = document.querySelector('.projects-wrapper');
     const projectsOpen = document.querySelector('.projects-wrapper.open');
-    console.log(from, trigger, done);
+    
     TweenMax.fromTo('.global-mask', 0.4, { autoAlpha: 0 }, { ease: Sine.easeInOut, force3D: true, pointerEvents: 'all', autoAlpha: 1,
       onComplete: () => {
         if (projectsOpen) {
