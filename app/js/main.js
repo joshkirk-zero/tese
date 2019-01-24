@@ -1,6 +1,7 @@
 import Highway from '@dogstudio/highway';
 import { globalObject, getViewport } from './_functions';
 import { TweenMax } from 'gsap';
+
 // Renderers
 import HomeRenderer from './home/init';
 import ProjectRenderer from './project/init';
@@ -38,12 +39,17 @@ Core.on('NAVIGATE_IN', (to, location) => { // to, location
 Core.on('NAVIGATE_END', (from, to, location) => { // to, from, location
   Global.onEnterCompleted(from, to, location);
   globalObject.comingFromFooter = false;
-  // Page View, fire GA here
+  // console.log(to, location);
 
 });
 
-Core.on('NAVIGATE_OUT', () => { // from, location
-  
+Core.on('NAVIGATE_OUT', (from, location) => { // from, location
+  // if (location.href === location.origin + '/') {
+  //   const leftSideFade = document.querySelector('.vert-left');
+  //   TweenMax.to(leftSideFade, 0.5, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true });
+    
+  // }
+  // console.log(location.origin + '/', location.href);
 });
 
 document.addEventListener('DOMContentLoaded', () => {

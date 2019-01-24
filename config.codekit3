@@ -159,13 +159,6 @@
 		"oAP": "\/build\/views\/404.php",
 		"oF": 2
 		},
-	"\/app\/views\/facebook-careers.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/build\/views\/facebook-careers.php",
-		"oF": 2
-		},
 	"\/app\/views\/footer.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -187,20 +180,6 @@
 		"oAP": "\/build\/views\/home.php",
 		"oF": 2
 		},
-	"\/app\/views\/honorable-mentions.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/build\/views\/honorable-mentions.php",
-		"oF": 2
-		},
-	"\/app\/views\/microsoft-teams.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/build\/views\/microsoft-teams.php",
-		"oF": 2
-		},
 	"\/app\/views\/page.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -213,20 +192,6 @@
 		"ft": 8192,
 		"oA": 0,
 		"oAP": "\/build\/views\/site-meta.php",
-		"oF": 2
-		},
-	"\/app\/views\/sunday-funday.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/build\/views\/sunday-funday.php",
-		"oF": 2
-		},
-	"\/app\/views\/type--work.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/build\/views\/type--work.php",
 		"oF": 2
 		},
 	"\/build": {

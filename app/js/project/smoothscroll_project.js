@@ -11,7 +11,7 @@ export default class SmoothProject {
 
     TweenMax.defaultEase = Linear.easeNone;
 
-    this.el = document.querySelector('[data-smooth]');
+    this.el = document.querySelector('[data-smooth]:last-child');
 
     const {
       sections = this.el.querySelectorAll('[data-smooth-section]'),

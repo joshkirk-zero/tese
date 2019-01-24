@@ -1,10 +1,17 @@
+<?php
+use Prismic\Dom\RichText;
+
+$nav = getByUID("global-content", "global_content");
+// print_r($nav);
+// print_r(json_encode($document, JSON_PRETTY_PRINT));
+?>
 <div class="switch-overlay"></div>
 <div class="projects-wrapper container">
     <div class="large-svg-title">
         <?php include __DIR__ . '/../includes/svgs/recent-projects.php'; ?>
     </div>
     <div class="projects">
-        <a href="/facebook-careers" class="project-link">
+        <a href="/facebook-careers/" class="project-link">
             <div class="svg-wrapper">
                 <span class="wiper"><span></span></span>
                 <span class="svg-wrapper-inner">
@@ -16,7 +23,7 @@
                 <p>2018 | UI Design</p>
             </div>
         </a>
-        <a href="/microsoft-teams" class="project-link">
+        <a href="/microsoft-teams/" class="project-link">
             <div class="svg-wrapper">
                 <span class="wiper"><span></span></span>
                 <span class="svg-wrapper-inner">
@@ -28,7 +35,7 @@
                 <p>2017 | UI Design</p>
             </div>
         </a>
-        <a class="project-link coming-soon">
+        <div class="project-link coming-soon">
             <div class="svg-wrapper">
                 <span class="wiper"><span></span></span>
                 <span class="svg-wrapper-inner">
@@ -36,11 +43,11 @@
                 </span>
             </div>
             <div class="text-wrapper">
-                <h3 class="title">Sunday<br> Funday</h3>
+                <h3 class="title">Facebook<br> Life Blog</h3>
                 <p>Coming Soon</p>
             </div>
-        </a>
-        <a href="/honorable-mentions" class="project-link">
+        </div>
+        <a href="/honorable-mentions/" class="project-link">
             <div class="svg-wrapper">
                 <span class="wiper"><span></span></span>
                 <span class="svg-wrapper-inner">
@@ -83,7 +90,7 @@
     </div>
 </div>
 
-<div class="email-triggers container-padding-r">
+<div class="email-triggers">
     <div class="email">
         <span class="label">Email<span class="pipe">|</span></span><a href="mailto:mf@matesefields.com" class="copy-email">mf@matesefields.com<span class="lines"><span></span><span></span></span></a>
     </div>
@@ -94,7 +101,7 @@
     </div>
 </div>
 <div class="scroll-prompt">
-    <p><span class="home-prompt">Scroll down for projects</span><span class="project-prompt">Scroll down please</span></p>
+    <p><span class="home-prompt"><?= RichText::asText($nav->data->home_scroll_prompt) ?></span><span class="project-prompt"><?= RichText::asText($nav->data->project_scroll_prompt) ?></span></p>
     <div class="arrow">
         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 71.9 95" style="enable-background:new 0 0 71.9 95;" xml:space="preserve"><path class="pink-fill" d="M39.7,93.4l30.6-30.6c2.1-2.1,2.1-5.5,0-7.5c-2.1-2.1-5.5-2.1-7.5,0L41.2,76.8l0-71.5c0-2.9-2.4-5.3-5.3-5.3
 	c-2.9,0-5.3,2.4-5.3,5.3v71.5L9.1,55.3c-2.1-2.1-5.5-2.1-7.5,0c-1,1-1.6,2.4-1.6,3.8c0,1.4,0.5,2.7,1.6,3.8l30.5,30.5
@@ -103,7 +110,7 @@
 </div>
 <div class="close-mask"></div>
 <div class="los-detalles">
-    <p class="secondary-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <p class="secondary-bio"><?= RichText::asText($nav->data->profile_copy) ?></p>
     <div class="wrapper">
         <div class="credits">
             <div>
@@ -117,7 +124,7 @@
             </div>
             <div>
                 <span class="label">Currently Listening to</span>
-                <p>Lorem Ipsum</p>
+                <p><?= RichText::asText($nav->data->currently_listening_to) ?></p>
             </div>
         </div>
         <div class="experience">

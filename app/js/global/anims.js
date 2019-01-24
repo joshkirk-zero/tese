@@ -41,7 +41,6 @@ export const prepProfileDrawer = () => {
   const splitLabelsByLines = document.querySelectorAll('.los-detalles .label');
   const splitLabelLines = new SplitText(splitLabelsByLines, { type: 'lines' }).lines;
   const innerLabelLines = new SplitText(splitLabelLines, { type: 'lines' }).lines;
-  // const fadeLines = document.querySelectorAll('.los-detalles .wrapper > div p, .los-detalles .wrapper > div a');
   const splitCopyByLines = document.querySelectorAll('.credits p, .credits a .clip, .experience a .clip');
   const splitCopyUnderlines = document.querySelectorAll('.credits .lines, .experience .lines');
   const splitCopyLines = new SplitText(splitCopyByLines, { type: 'lines' }).lines;
@@ -53,10 +52,10 @@ export const prepProfileDrawer = () => {
 
   openCloseProfile
     .staggerFromTo(innerProfileBioLines, 0.9, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045)
-    .fromTo(innerLabelLines, 1.05, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0)
-    .fromTo(innerCopyLines, 1.05, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.165)
-    .fromTo(splitCopyUnderlines, 0.8, { opacity: 0 }, { opacity: 1, ease: Sine.easeOut, force3D: true }, '-=.3')
-    .staggerFromTo(innerCopyStaggerLines, 1.05, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.025, 0.15);
+    .fromTo(innerLabelLines, 1.05, { yPercent: 87 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0)
+    .fromTo(innerCopyLines, 0.95, { yPercent: 92 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.165)
+    .fromTo(splitCopyUnderlines, 0.52, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut, force3D: true }, '-=.39')
+    .staggerFromTo(innerCopyStaggerLines, 0.95, { yPercent: 92 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.025, 0.15);
 
   profileTrigger.addEventListener('click', () => {
     openCloseProfile.timeScale(1).play();
@@ -64,7 +63,7 @@ export const prepProfileDrawer = () => {
     TweenMax.to(shiftThese, 1, { scale: 1, opacity: 0.2, y: -60, ease: Expo.easeOut, force3D: true });
     TweenMax.to(shiftTheseGlobals, 1.1, { scale: 1, opacity: 0.3, y: -21, ease: Expo.easeOut, force3D: true });
     TweenMax.to(logo, 1.1, { y: 4, ease: Expo.easeOut, force3D: true });
-    TweenMax.to(profileTray, 1.05, { yPercent: -100, ease: Expo.easeOut, force3D: true });
+    TweenMax.to(profileTray, 1.1, { yPercent: -100, ease: Expo.easeOut, force3D: true });
   });
   
   closeMask.addEventListener('click', () => {
@@ -97,7 +96,8 @@ export const pageEntrance = (namespace, firstLoad = false) => {
       const lettersTwo = document.querySelectorAll('.you-can .line-2 .svg-wrapper-inner path');
 
       const beacon = document.querySelector('.beacon');
-      const fadeEls = document.querySelectorAll('.availability');
+      const availability = document.querySelector('.availability');
+      const globalEls = document.querySelectorAll('.vert-left, .email-triggers, .scroll-prompt');
       const beaconTL = new TimelineMax({ repeat: -1, paused: true });
 
       beaconTL
@@ -124,27 +124,30 @@ export const pageEntrance = (namespace, firstLoad = false) => {
           .add('bioStart', '+=.55');
       }
       homeEntranceTL
-        .fromTo(wiperBars, 2.18, { x: 0, scaleX: 0 }, { x: 90, scaleX: 1, ease: Expo.easeOut, force3D: true })
-        .fromTo(wipers, 1.08, { scaleX: 1 }, { scaleX: 0, ease: Expo.easeInOut, force3D: true }, 'start')
+        .fromTo(wiperBars, 2.1, { x: 0, scaleX: 0 }, { x: 90, scaleX: 1, ease: Expo.easeOut, force3D: true })
+        .fromTo(wipers, 1, { scaleX: 1 }, { scaleX: 0, ease: Expo.easeInOut, force3D: true }, 'start')
         .staggerFromTo(lettersOne, 1.15, { x: 50 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'startTwo')
         .staggerFromTo(lettersTwo, 1.15, { x: 50 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'startTwo');
       if (firstLoad) {
         homeEntranceTL
+          .fromTo(globalEls, 1.3, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut }, 'bioStart')
           .staggerFromTo(innerWelcomeLines, 1.1, { skewY: 0, yPercent: 101 }, { skewY: 0, yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.045, 'welcomeStart')
           .staggerFromTo(innerBioLines, 0.78, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045, 'bioStart')
       } else {
+        const leftSideFade = document.querySelector('.vert-left');
         homeEntranceTL
+          .to(leftSideFade, 0.5, { autoAlpha: 1, ease: Sine.easeInOut, force3D: true }, 0.4)
           .staggerFromTo(innerWelcomeLines, 0.76, { skewY: 0, yPercent: 101 }, { skewY: 0, yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045, 'welcomeStart')
           .staggerFromTo(innerBioLines, 0.76, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045, 'bioStart');
       }
       homeEntranceTL
         .add('fadeAndScale', '-=.3')
-        .fromTo(fadeEls, 1, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut }, 'fadeAndScale')
+        .fromTo(availability, 1, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut }, 'fadeAndScale')
         .fromTo('.availability p', 1.55, { x: 0 }, { x: 17, ease: Expo.easeInOut }, '+=0')
         .add(beaconPlay, '-=1.25');
 
 
-      TweenMax.delayedCall(0.5, () => {
+      TweenMax.delayedCall(0.7, () => {
         homeEntranceTL.play();
       });
       break;
@@ -160,19 +163,26 @@ export const pageEntrance = (namespace, firstLoad = false) => {
         const wordWiperBars = document.querySelectorAll('[data-router-view]:last-child .project-hero .large-svg-title .wiper span');
         const projectLettersOne = document.querySelectorAll('[data-router-view]:last-child .project-hero .large-svg-title .svg-wrapper:first-child path');
         const projectLettersTwo = document.querySelectorAll('[data-router-view]:last-child .project-hero .large-svg-title .svg-wrapper:last-child path');
-
+        const globalEls = document.querySelectorAll('.vert-left, .email-triggers, .scroll-prompt');
         projectEntranceTL
           .to('.global-mask', 0.001, { pointerEvents: 'none', autoAlpha: 0 })
-          .add('start', '+=1.2')
-          .add('wordsStart', '+=0')
+          .add('scaleDownStart')
           .add('lettersIn', '+=.3')
-          .fromTo(wordWiperBars, 2, { x: 0, scaleX: 0 }, { x: 90, scaleX: 1, ease: Expo.easeOut, force3D: true })
-          .fromTo(wordWipers, 1.1, { scaleX: 1 }, { scaleX: 0, ease: Expo.easeInOut, force3D: true }, 'wordsStart')
+          .add('startProjectMeta', '+=.78')
+          .add('startPipe', '+=1')
+          .fromTo(wordWiperBars, 2, { x: -8, scaleX: 0 }, { x: 90, scaleX: 1, ease: Expo.easeOut, force3D: true })
+          .fromTo(wordWipers, 1, { scaleX: 1 }, { scaleX: 0, ease: Expo.easeInOut, force3D: true }, 'scaleDownStart')
           .staggerFromTo(projectLettersOne, 1.15, { x: 55 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'lettersIn')
           .staggerFromTo(projectLettersTwo, 1.15, { x: 55 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'lettersIn')
-          .staggerFromTo(innerEntranceLines, 0.79, { skewY: 0, yPercent: 101 }, { skewY: 0, yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.05, 'start')
-          .fromTo(bigPipe, 0.6, { transformOrigin: '50% 0', scaleY: 0 }, { scaleY: 1, ease: Sine.easeInOut }, 'start');
-        projectEntranceTL.play();
+          .staggerFromTo(innerEntranceLines, 0.75, { skewY: 0, yPercent: 101 }, { skewY: 0, yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.04, 'startProjectMeta')
+          .fromTo(bigPipe, 0.57, { transformOrigin: '50% 0', scaleY: 0 }, { scaleY: 1, ease: Sine.easeInOut }, 'startPipe');
+        if (firstLoad) {
+          projectEntranceTL.fromTo(globalEls, 1.3, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut }, 'startPipe'); 
+        }
+        
+        TweenMax.delayedCall(0.2, () => {
+          projectEntranceTL.play();
+        });
       }
 
       break;
@@ -293,11 +303,12 @@ export const prepScrollBasedLoadins = () => {
         const wordWiperBars = document.querySelectorAll('.project-footer .large-svg-title .wiper span');
         const projectLettersOne = document.querySelectorAll('.project-footer .large-svg-title .svg-wrapper:nth-last-child(2) path');
         const projectLettersTwo = document.querySelectorAll('.project-footer .large-svg-title .svg-wrapper:last-child path');
+
         projectFooterTL
           .add('wordsStart')
-          .add('lettersIn', '+=.3')
-          .fromTo(wordWiperBars, 2, { x: 0, scaleX: 0 }, { x: 90, scaleX: 1, ease: Expo.easeOut, force3D: false })
-          .fromTo(wordWipers, 1.1, { scaleX: 1 }, { scaleX: 0, ease: Expo.easeInOut, force3D: false }, 'wordsStart')
+          .add('lettersIn', '+=.32')
+          .fromTo(wordWiperBars, 2, { x: -5, scaleX: 0 }, { x: 90, scaleX: 1, ease: Expo.easeOut, force3D: false })
+          .fromTo(wordWipers, 1, { scaleX: 1 }, { scaleX: 0, ease: Expo.easeInOut, force3D: false }, 'wordsStart')
           .staggerFromTo(projectLettersOne, 1.15, { x: 55 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'lettersIn')
           .staggerFromTo(projectLettersTwo, 1.15, { x: 55 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'lettersIn')
           .add('eyebrowsIn', '-=1.6')
@@ -355,7 +366,6 @@ export const prepScrollBasedLoadins = () => {
  -------------------------------------------------- * */
 export const openCloseProjectsMenu = () => {
   const projectsTrigger = document.querySelector('.email-triggers .projects-trigger');
-  const profileTrigger = document.querySelector('.email-triggers .profile-trigger');
   const projectsContainer = document.querySelector('.projects-wrapper');
   const switchOverlay = document.querySelector('.switch-overlay');
   const openMenuTL = new TimelineMax({ paused: true });
@@ -374,12 +384,13 @@ export const openCloseProjectsMenu = () => {
   const splitLines = new SplitText(splitByLines, { type: 'lines' }).lines;
   const innerLines = new SplitText(splitLines, { type: 'lines' }).lines;
 
-  const innerLinesOne = document.querySelectorAll('.projects-wrapper .projects a:first-child .text-wrapper div div');
-  const innerLinesTwo = document.querySelectorAll('.projects-wrapper .projects a:nth-child(2) .text-wrapper div div');
-  const innerLinesThree = document.querySelectorAll('.projects-wrapper .projects a:nth-child(3) .text-wrapper div div');
-  const innerLinesFour = document.querySelectorAll('.projects-wrapper .projects a:nth-child(4) .text-wrapper div div');
+  const innerLinesOne = document.querySelectorAll('.projects-wrapper .project-link:first-child .text-wrapper div div');
+  const innerLinesTwo = document.querySelectorAll('.projects-wrapper .project-link:nth-child(2) .text-wrapper div div');
+  const innerLinesThree = document.querySelectorAll('.projects-wrapper .project-link:nth-child(3) .text-wrapper div div');
+  const innerLinesFour = document.querySelectorAll('.projects-wrapper .project-link:nth-child(4) .text-wrapper div div');
 
   const fadeEls = document.querySelectorAll('.vert-left .meta, .scroll-prompt, .socials, .email-triggers .email');
+  const scrollPrompt = document.querySelector('.scroll-prompt');
 
   openMenuTL
     .set('.global-els', { pointerEvents: 'all' })
@@ -411,14 +422,15 @@ export const openCloseProjectsMenu = () => {
   globalObject.openCloseMenu = openMenuTL;
   let currentOpacity;
   projectsTrigger.addEventListener('click', () => {
-    console.log('clicked');
     if (globalObject.openCloseCount % 2 === 0) {
       currentOpacity = window.getComputedStyle(document.querySelector('.vert-left .meta')).getPropertyValue('opacity');
       openMenuTL.timeScale(1).play();
       TweenMax.to(fadeEls, 0.5, { opacity: 1, ease: Sine.easeInOut, force3D: true, onComplete: () => { TweenMax.set(fadeEls, { clearProps: 'opacity' }) } });
+      TweenMax.to(scrollPrompt, 0.5, { opacity: 0, ease: Sine.easeInOut, force3D: true });
     } else {
       openMenuTL.timeScale(1.2).reverse();
       TweenMax.to(fadeEls, 0.8, { opacity: currentOpacity, ease: Sine.easeInOut, force3D: true });
+      TweenMax.to(scrollPrompt, 0.8, { opacity: 1, ease: Sine.easeInOut, force3D: true });
     }
     globalObject.openCloseCount++;
   });
