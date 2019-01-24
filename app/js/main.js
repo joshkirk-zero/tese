@@ -31,19 +31,19 @@ export const Core = new Highway.Core({
   }
 });
 
-Core.on('NAVIGATE_IN', (to, location) => { // to, location
-  Global.onEnter(to, location);
+Core.on('NAVIGATE_IN', ({ to, trigger, location }) => { // to, location
+  Global.onEnter(to, location.href);
   globalObject.namespace = to.view.dataset.routerView;
 });
 
-Core.on('NAVIGATE_END', (from, to, location) => { // to, from, location
+Core.on('NAVIGATE_END', ({ to, from, trigger, location }) => { // to, from, trigger, location
   Global.onEnterCompleted(from, to, location);
   globalObject.comingFromFooter = false;
   // console.log(to, location);
 
 });
 
-Core.on('NAVIGATE_OUT', (from, location) => { // from, location
+Core.on('NAVIGATE_OUT', ({ from, trigger, location }) => { // from, location
   // if (location.href === location.origin + '/') {
   //   const leftSideFade = document.querySelector('.vert-left');
   //   TweenMax.to(leftSideFade, 0.5, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true });

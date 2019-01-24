@@ -5,7 +5,7 @@ import { prepScrollPrompt } from '../global/anims';
 
 // Fade
 class Fade extends Highway.Transition {
-  in(from, to, done) {
+  in({ from, to, trigger, done }) {
     from.remove();
     window.scrollTo(0, 0);
     prepScrollPrompt(to.dataset.routerView);
@@ -14,11 +14,11 @@ class Fade extends Highway.Transition {
     TweenMax.to(projectFadeEls, 0.5, { opacity: 1, ease: Sine.easeInOut, force3D: true });
   }
 
-  out(from, done) {
-    
+  out({ from, trigger, done }) {
     const projectsBackdrop = document.querySelector('.switch-overlay');
     const projectsContainer = document.querySelector('.projects-wrapper');
     const projectsOpen = document.querySelector('.projects-wrapper.open');
+    console.log(from, trigger, done);
     TweenMax.fromTo('.global-mask', 0.4, { autoAlpha: 0 }, { ease: Sine.easeInOut, force3D: true, pointerEvents: 'all', autoAlpha: 1,
       onComplete: () => {
         if (projectsOpen) {

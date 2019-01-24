@@ -14,7 +14,7 @@ export const firstLoad = () => {
   const namespace = document.querySelector('[data-router-view]').dataset.routerView;
   globalObject.namespace = namespace;
   Anim.prepScrollPrompt(namespace);
-  quicklink({ el: document.querySelector('.projects-wrapper') });
+  // quicklink({ el: document.querySelector('.projects-wrapper') });
   Anim.pageEntrance(namespace, true);
   Anim.openCloseProjectsMenu();
   Anim.prepProfileDrawer();
