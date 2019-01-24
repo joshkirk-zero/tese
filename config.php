@@ -13,6 +13,15 @@ define('PRISMIC_URL', 'https://tese.cdn.prismic.io/api/v2');
 define('PRISMIC_TOKEN', null);
 
 /*
+ * Webhook Secret
+ *  - Generate a 32-bit string for this
+ *	- go here: https://randomkeygen.com/
+ *  - scroll down to "CodeIgniter Encryption Keys", select one
+ *  - make sure to add secret to the webhook on prismic
+ */
+define("PRISMIC_WEBHOOK_SECRET", "z43WHM9w7wRaV3LwaPDxKhF0Djb0llvI");
+
+/*
  * Your site metadata
  */
 define('SITE_TITLE', 'Matese Fields');
