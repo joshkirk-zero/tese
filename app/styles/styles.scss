@@ -1064,7 +1064,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   align-items: flex-end;
   margin-bottom: 115px;
   .image-wrap {
-    &.desktop-left {
+    &.desktop_left {
       flex: 0 1 50vw;
       width: 50vw;
       align-self: flex-start;
@@ -1072,15 +1072,16 @@ h1, h2, h3, h4, h5, h6, p, a, li {
         width: 41vw;
       }
     }
-    &.desktop-right {
+    &.desktop_right {
       flex: 0 1 50vw;
       width: 50vw;
       align-self: flex-end;
       img {
         width: 41vw;
+        float: right;
       }
     }
-    &.mobile-left {
+    &.mobile_left {
       flex: 0 1 50%;
       width: 50%;
       align-self: flex-start;
@@ -1088,7 +1089,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
         width: 240px;
       }
     }
-    &.mobile-right {
+    &.mobile_right {
       flex: 0 1 50%;
       width: 50%;
       align-self: flex-end;
@@ -1106,12 +1107,12 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     position: relative;
     overflow: hidden;
     max-height: 725px;
-    &.desktop-left {
+    &.desktop_left {
       flex: 0 1 41vw;
       width: 41vw;
       align-self: flex-start;
     }
-    &.desktop-right {
+    &.desktop_right {
       flex: 0 1 41vw;
       width: 41vw;
       align-self: flex-end;
