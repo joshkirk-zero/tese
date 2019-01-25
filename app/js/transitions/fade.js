@@ -27,9 +27,7 @@ class Fade extends Highway.Transition {
           globalObject.openCloseMenu.progress(0).reverse();
           globalObject.openCloseCount++;
         }
-        TweenMax.delayedCall(0.05, () => {
-          done();
-        });
+        done();
       } });
   }
 }

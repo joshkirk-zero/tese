@@ -61,7 +61,7 @@ export const prepProfileDrawer = () => {
     openCloseProfile.timeScale(1).play();
     TweenMax.set(closeMask, { display: 'block' });
     TweenMax.to(shiftThese, 1, { scale: 1, opacity: 0.2, y: -60, ease: Expo.easeOut, force3D: true });
-    TweenMax.to(shiftTheseGlobals, 1.1, { scale: 1, opacity: 0.3, y: -21, ease: Expo.easeOut, force3D: true });
+    TweenMax.to(shiftTheseGlobals, 1.1, { opacity: 0.3, y: -21, ease: Expo.easeOut, force3D: true });
     TweenMax.to(logo, 1.1, { y: 4, ease: Expo.easeOut, force3D: true });
     TweenMax.to(profileTray, 1.1, { yPercent: -100, ease: Expo.easeOut, force3D: true });
   });
@@ -70,7 +70,7 @@ export const prepProfileDrawer = () => {
     TweenMax.delayedCall(0.25, () => { openCloseProfile.progress(0).reverse(); });
     TweenMax.set(closeMask, { display: 'none' });
     TweenMax.to(shiftThese, 1, { scale: 1, opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });
-    TweenMax.to(shiftTheseGlobals, 1.1, { scale: 1, opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });
+    TweenMax.to(shiftTheseGlobals, 1.1, { opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });
     TweenMax.to(logo, 1.1, { y: 0, ease: Expo.easeOut, force3D: true });
     TweenMax.to(profileTray, 1, { yPercent: 0, ease: Expo.easeOut, force3D: true });
   });
@@ -90,6 +90,8 @@ export const pageEntrance = (namespace, firstLoad = false) => {
       const splitWelcomeLines = new SplitText(splitWelcomeByLines, { type: 'lines' }).lines;
       const innerWelcomeLines = new SplitText(splitWelcomeLines, { type: 'lines' }).lines;
 
+      const vertLeft = document.querySelector('.vert-left');
+      const youCan = document.querySelector('.you-can');
       const wipers = document.querySelectorAll('.you-can .wiper');
       const wiperBars = document.querySelectorAll('.you-can .wiper span');
       const lettersOne = document.querySelectorAll('.you-can .line-1 .svg-wrapper-inner path');
@@ -113,7 +115,9 @@ export const pageEntrance = (namespace, firstLoad = false) => {
       homeEntranceTL
         .to('.global-mask', 0.001, { pointerEvents: 'none', autoAlpha: 0 })
         .add('start')
-        .add('startTwo', '+=.4');
+        .add('returnVert', '+=.85')
+        .add('startTwo', '+=.6')
+        .add('startThree', '+=1');
       if (firstLoad) {
         homeEntranceTL
           .add('welcomeStart', '+=1.25')
@@ -124,19 +128,20 @@ export const pageEntrance = (namespace, firstLoad = false) => {
           .add('bioStart', '+=.55');
       }
       homeEntranceTL
-        .fromTo(wiperBars, 2.1, { x: 0, scaleX: 0 }, { x: 90, scaleX: 1, ease: Expo.easeOut, force3D: true })
-        .fromTo(wipers, 1, { scaleX: 1 }, { scaleX: 0, ease: Expo.easeInOut, force3D: true }, 'start')
-        .staggerFromTo(lettersOne, 1.15, { x: 50 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'startTwo')
-        .staggerFromTo(lettersTwo, 1.15, { x: 50 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'startTwo');
+        .fromTo(wiperBars, 2.1, { x: 0, scaleX: 0 }, { x: 90, scaleX: 1, ease: Expo.easeOut, force3D: true }, 'startTwo')
+        .fromTo(wipers, 1, { scaleX: 1 }, { scaleX: 0, ease: Expo.easeInOut, force3D: true }, 'startTwo')
+        .staggerFromTo(lettersOne, 1.15, { x: 50 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'startThree')
+        .staggerFromTo(lettersTwo, 1.15, { x: 50 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'startThree');
       if (firstLoad) {
         homeEntranceTL
           .fromTo(globalEls, 1.3, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut }, 'bioStart')
           .staggerFromTo(innerWelcomeLines, 1.1, { skewY: 0, yPercent: 101 }, { skewY: 0, yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.045, 'welcomeStart')
-          .staggerFromTo(innerBioLines, 0.78, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045, 'bioStart')
+          .staggerFromTo(innerBioLines, 0.78, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045, 'bioStart');
       } else {
-        const leftSideFade = document.querySelector('.vert-left');
         homeEntranceTL
-          .to(leftSideFade, 0.5, { autoAlpha: 1, ease: Sine.easeInOut, force3D: true }, 0.4)
+          .fromTo(youCan, 2.1, { x: 20 }, { x: 0, ease: Expo.easeOut, force3D: true }, 'startTwo')
+          .fromTo(vertLeft, 0.35, { x: 0, opacity: 1, scale: 1 }, { x: -25, opacity: 0.3, scale: 1, ease: Sine.easeOut, force3D: true }, 'start')
+          .to(vertLeft, 0.5, { x: 0, opacity: 1, scale: 1, ease: Sine.easeOut, force3D: true }, 'returnVert')
           .staggerFromTo(innerWelcomeLines, 0.76, { skewY: 0, yPercent: 101 }, { skewY: 0, yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045, 'welcomeStart')
           .staggerFromTo(innerBioLines, 0.76, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045, 'bioStart');
       }

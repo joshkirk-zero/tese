@@ -379,6 +379,17 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   left: 40px;
   width: 25px;
   position: relative;
+  transform-origin: center;
+  // &:after {
+  //   background: #1f271b;
+  //   width: 80px;
+  //   height: 100vh;
+  //   position: fixed;
+  //   left: -51px;
+  //   top: 0;
+  //   z-index: -1;
+  //   content: "";
+  // }
   .logo {
     top: 0;
     margin: 0 auto;
@@ -579,7 +590,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     padding: 6px 1px;
     .wiper {
       span {
-        left: -90px;
+        left: -80px;
         width: 25%;
       }
     }
