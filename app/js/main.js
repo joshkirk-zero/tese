@@ -31,7 +31,7 @@ export const Core = new Highway.Core({
   }
 });
 
-Core.on('NAVIGATE_IN', ({ to, trigger, location }) => { // to, location
+Core.on('NAVIGATE_IN', ({ to, trigger, location }) => { // to, trigger, location
   Global.onEnter(to, location.href);
   globalObject.namespace = to.view.dataset.routerView;
 });
@@ -43,7 +43,7 @@ Core.on('NAVIGATE_END', ({ to, from, trigger, location }) => { // to, from, trig
 
 });
 
-Core.on('NAVIGATE_OUT', ({ from, trigger, location }) => { // from, location
+Core.on('NAVIGATE_OUT', ({ from, trigger, location }) => { // from, trigger, location
   // if (location.href === location.origin + '/') {
   //   const leftSideFade = document.querySelector('.vert-left');
   //   TweenMax.to(leftSideFade, 0.5, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true });
