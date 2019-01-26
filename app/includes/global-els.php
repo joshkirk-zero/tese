@@ -6,59 +6,62 @@ $nav = getByUID("global-content", "global_content");
 // print_r(json_encode($document, JSON_PRETTY_PRINT));
 ?>
 <div class="switch-overlay"></div>
-<div class="projects-wrapper container">
-    <div class="large-svg-title">
-        <?php include __DIR__ . '/../includes/svgs/recent-projects.php'; ?>
-    </div>
-    <div class="projects">
-        <a href="/facebook-careers/" class="project-link">
-            <div class="svg-wrapper">
-                <span class="wiper"><span></span></span>
-                <span class="svg-wrapper-inner">
-                    <?php include __DIR__ . '/../includes/svgs/01.php'; ?>
-                </span>
-            </div>
-            <div class="text-wrapper">
-                <h3 class="title">Facebook<br> Careers</h3>
-                <p>2018 | UI Design</p>
-            </div>
-        </a>
-        <a href="/microsoft-teams/" class="project-link">
-            <div class="svg-wrapper">
-                <span class="wiper"><span></span></span>
-                <span class="svg-wrapper-inner">
-                    <?php include __DIR__ . '/../includes/svgs/02.php'; ?>
-                </span>
-            </div>
-            <div class="text-wrapper">
-                <h3 class="title">Microsoft<br> Teams</h3>
-                <p>2017 | UI Design</p>
-            </div>
-        </a>
-        <div class="project-link coming-soon">
-            <div class="svg-wrapper">
-                <span class="wiper"><span></span></span>
-                <span class="svg-wrapper-inner">
-                    <?php include __DIR__ . '/../includes/svgs/03.php'; ?>
-                </span>
-            </div>
-            <div class="text-wrapper">
-                <h3 class="title">Facebook<br> Life Blog</h3>
-                <p>Coming Soon</p>
-            </div>
+<div class="reverse-overlay"></div>
+<div class="vert-holder">
+    <div class="projects-wrapper container">
+        <div class="large-svg-title">
+            <?php include __DIR__ . '/../includes/svgs/recent-projects.php'; ?>
         </div>
-        <a href="/honorable-mentions/" class="project-link">
-            <div class="svg-wrapper">
-                <span class="wiper"><span></span></span>
-                <span class="svg-wrapper-inner">
-                    <?php include __DIR__ . '/../includes/svgs/04.php'; ?>
-                </span>
+        <div class="projects">
+            <a href="/facebook-careers/" class="project-link">
+                <div class="svg-wrapper">
+                    <span class="wiper"><span></span></span>
+                    <span class="svg-wrapper-inner">
+                        <?php include __DIR__ . '/../includes/svgs/01.php'; ?>
+                    </span>
+                </div>
+                <div class="text-wrapper">
+                    <h3 class="title">Facebook<br> Careers</h3>
+                    <p>2018 | UI Design</p>
+                </div>
+            </a>
+            <a href="/microsoft-teams/" class="project-link">
+                <div class="svg-wrapper">
+                    <span class="wiper"><span></span></span>
+                    <span class="svg-wrapper-inner">
+                        <?php include __DIR__ . '/../includes/svgs/02.php'; ?>
+                    </span>
+                </div>
+                <div class="text-wrapper">
+                    <h3 class="title">Microsoft<br> Teams</h3>
+                    <p>2017 | UI Design</p>
+                </div>
+            </a>
+            <div class="project-link coming-soon">
+                <div class="svg-wrapper">
+                    <span class="wiper"><span></span></span>
+                    <span class="svg-wrapper-inner">
+                        <?php include __DIR__ . '/../includes/svgs/03.php'; ?>
+                    </span>
+                </div>
+                <div class="text-wrapper">
+                    <h3 class="title">Facebook<br> Life Blog</h3>
+                    <p>Coming Soon</p>
+                </div>
             </div>
-            <div class="text-wrapper">
-                <h3 class="title">Honorable<br> Mentions</h3>
-                <p>Miscellaneous<br> Design</p>
-            </div>
-        </a>
+            <a href="/honorable-mentions/" class="project-link">
+                <div class="svg-wrapper">
+                    <span class="wiper"><span></span></span>
+                    <span class="svg-wrapper-inner">
+                        <?php include __DIR__ . '/../includes/svgs/04.php'; ?>
+                    </span>
+                </div>
+                <div class="text-wrapper">
+                    <h3 class="title">Honorable<br> Mentions</h3>
+                    <p>Miscellaneous<br> Design</p>
+                </div>
+            </a>
+        </div>
     </div>
 </div>
 <div class="global-mask"></div>

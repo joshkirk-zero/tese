@@ -258,6 +258,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   @media (min-width: 1500px) {
     padding-left: 14vw;
   }
+  .shift {
+    height: 100%;
+  }
   .large-svg-title {
     .wiper {
       span {
@@ -554,7 +557,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
 /* Specific selector styles
 
 **********************************************/
-.switch-overlay {
+.switch-overlay, .reverse-overlay {
   position: absolute;
   left: 0;
   top: 0;
@@ -564,6 +567,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+}
+.reverse-overlay {
+  z-index: 3;
 }
 .wiper {
   position: absolute;
@@ -718,16 +724,27 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     z-index: 2;
   }
 }
+.vert-holder {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
 .projects-wrapper {
   pointer-events: all;
   position: absolute;
   z-index: 2;
   padding: 0 110px 0 200px;
+  transform: none;
+  top: auto;
   .large-svg-title {
     .wiper {
+      height: calc(100% - 6px);
       span {
-        width: 24%;
-        left: -55px;
+        width: 25%;
+        left: -70px;
       }
     }
     .svg-wrapper {
@@ -740,8 +757,8 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     float: right;
     .wiper {
       span {
-        width: 52%;
-        left: -60px;
+        width: 60%;
+        left: -70px;
       }
     }
     //a:first-child {
@@ -788,6 +805,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
           width: auto;
         }
       }
+      .wiper {
+        right: 0;
+      }
       .text-wrapper {
         display: inline-block;
         vertical-align: middle;
@@ -808,6 +828,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
         .svg-wrapper {
           margin-right: 18px;
         }
+      }
+      &:last-child {
+        margin-left: -3px;
       }
     }
   }
@@ -858,8 +881,8 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   }
   .intro {
     position: relative;
-    padding-top: 127px;
-    height: 100vh;
+    padding-top: 150px;
+    padding-bottom: 340px;
     > div {
       padding: 0 122px;
     }
@@ -1055,13 +1078,13 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   }
 }
 .close-mask {
- position: fixed;   
+ position: fixed;
  top: 0;
  left: 0;
  width: 100%;
  height: 100%;
  opacity: 0;
- cursor: pointer;
+ cursor: s-resize;
  z-index: 8;
  display: none;
 }

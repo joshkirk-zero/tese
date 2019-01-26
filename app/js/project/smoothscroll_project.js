@@ -78,6 +78,8 @@ export default class SmoothProject {
     this.measureElHeight = this.measureEl.offsetHeight;
 
     const fadeEls = document.querySelectorAll('.email-triggers .email, .email-triggers .availability, .arrow, .title-meta');
+    const largeTitle = document.querySelectorAll('.project-hero .large-svg-title, .project-hero .idx');
+    const largeMeta = document.querySelector('.project-hero .meta');
     const staggerFadeEls = document.querySelectorAll('.vert-left .meta');
     const staggerFadeScaleEls = document.querySelectorAll('.socials');
 
@@ -94,7 +96,9 @@ export default class SmoothProject {
       .staggerFromTo(scrollWordsWraps, 1, { z: 20 }, { z: 0, ease: Sine.easeOut }, 0.02, 'start')
       .fromTo(staggerFadeScaleEls, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, force3D: true }, -0.055, 'start')
       .fromTo(staggerFadeEls, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, force3D: true }, 'start')
-      .fromTo(fadeEls, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, force3D: true }, 'start');
+      .fromTo(fadeEls, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, force3D: true }, 'start')
+      .fromTo(largeTitle, 1.1, { y: 0 }, { y: -120, ease: Sine.easeInOut, force3D: true }, 'start')
+      .fromTo(largeMeta, 1, { y: 0 }, { y: -60, ease: Sine.easeInOut, force3D: true }, 'start');
 
     this.thisPagesTLs = [];
 

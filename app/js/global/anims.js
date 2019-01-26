@@ -29,12 +29,11 @@ export const prepScrollPrompt = (context) => {
 export const prepProfileDrawer = () => {
   const profileTrigger = document.querySelector('.profile-trigger');
   const profileTray = document.querySelector('.los-detalles');
-  const shiftThese = document.querySelectorAll('[data-router-wrapper]');
   const shiftTheseGlobals = document.querySelectorAll('.vert-left, .email-triggers, .scroll-prompt');
   const closeMask = document.querySelector('.close-mask');
   const logo = document.querySelector('.logo');
 
-  const openCloseProfile = new TimelineMax({paused: true});
+  const openCloseProfile = new TimelineMax({ paused: true });
   const splitProfileBioByLines = document.querySelector('.secondary-bio');
   const splitProfileBioLines = new SplitText(splitProfileBioByLines, { type: 'lines' }).lines;
   const innerProfileBioLines = new SplitText(splitProfileBioLines, { type: 'lines' }).lines;
@@ -50,6 +49,8 @@ export const prepProfileDrawer = () => {
   const splitStaggerCopyLines = new SplitText(splitStaggerCopyByLines, { type: 'lines' }).lines;
   const innerCopyStaggerLines = new SplitText(splitStaggerCopyLines, { type: 'lines' }).lines;
 
+  const projectsMenu = document.querySelector('.projects-wrapper');
+
   openCloseProfile
     .staggerFromTo(innerProfileBioLines, 0.9, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045)
     .fromTo(innerLabelLines, 1.05, { yPercent: 87 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0)
@@ -59,8 +60,12 @@ export const prepProfileDrawer = () => {
 
   profileTrigger.addEventListener('click', () => {
     openCloseProfile.timeScale(1).play();
+    if (projectsMenu.classList.contains('open')) {
+      TweenMax.to(projectsMenu, 1, { scale: 1, opacity: 0.2, y: -60, ease: Expo.easeOut, force3D: true });  
+    } else {
+      TweenMax.to('.shift', 1, { scale: 1, opacity: 0.2, y: -60, ease: Expo.easeOut, force3D: true });
+    }
     TweenMax.set(closeMask, { display: 'block' });
-    TweenMax.to(shiftThese, 1, { scale: 1, opacity: 0.2, y: -60, ease: Expo.easeOut, force3D: true });
     TweenMax.to(shiftTheseGlobals, 1.1, { opacity: 0.3, y: -21, ease: Expo.easeOut, force3D: true });
     TweenMax.to(logo, 1.1, { y: 4, ease: Expo.easeOut, force3D: true });
     TweenMax.to(profileTray, 1.1, { yPercent: -100, ease: Expo.easeOut, force3D: true });
@@ -68,8 +73,12 @@ export const prepProfileDrawer = () => {
   
   closeMask.addEventListener('click', () => {
     TweenMax.delayedCall(0.25, () => { openCloseProfile.progress(0).reverse(); });
+    if (projectsMenu.classList.contains('open')) {
+      TweenMax.to(projectsMenu, 1, { opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });  
+    } else {
+      TweenMax.to('.shift', 1, { scale: 1, opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });
+    }
     TweenMax.set(closeMask, { display: 'none' });
-    TweenMax.to(shiftThese, 1, { scale: 1, opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });
     TweenMax.to(shiftTheseGlobals, 1.1, { opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });
     TweenMax.to(logo, 1.1, { y: 0, ease: Expo.easeOut, force3D: true });
     TweenMax.to(profileTray, 1, { yPercent: 0, ease: Expo.easeOut, force3D: true });
@@ -292,7 +301,7 @@ export const prepScrollBasedLoadins = () => {
 
         projectIntroTL
           .fromTo(innerEyebrowLine, 1, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true })
-          .add('introIn', '-=.8')
+          .add('introIn', '-=1')
           .staggerFromTo(innerIntroLines, 0.75, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.05, 'introIn');
 
         thisPagesTLs.push(projectIntroTL);
@@ -372,16 +381,17 @@ export const prepScrollBasedLoadins = () => {
 export const openCloseProjectsMenu = () => {
   const projectsTrigger = document.querySelector('.email-triggers .projects-trigger');
   const projectsContainer = document.querySelector('.projects-wrapper');
+  const projectsContainerWrapper = document.querySelector('.vert-holder');
   const switchOverlay = document.querySelector('.switch-overlay');
   const openMenuTL = new TimelineMax({ paused: true });
   const wordWipers = document.querySelectorAll('.projects-wrapper .large-svg-title .wiper');
   const wordWiperBars = document.querySelectorAll('.projects-wrapper .large-svg-title .wiper span');
   const numWipers = document.querySelectorAll('.projects-wrapper .projects .wiper');
   const numWiperBars = document.querySelectorAll('.projects-wrapper .projects .wiper span');
-  const numbersOne = document.querySelectorAll('.projects-wrapper .projects a:first-child path');
-  const numbersTwo = document.querySelectorAll('.projects-wrapper .projects a:nth-child(2) path');
-  const numbersThree = document.querySelectorAll('.projects-wrapper .projects a:nth-child(3) path');
-  const numbersFour = document.querySelectorAll('.projects-wrapper .projects a:nth-child(4) path');
+  const numbersOne = document.querySelectorAll('.projects-wrapper .project-link:first-child path');
+  const numbersTwo = document.querySelectorAll('.projects-wrapper .project-link:nth-child(2) path');
+  const numbersThree = document.querySelectorAll('.projects-wrapper .project-link:nth-child(3) path');
+  const numbersFour = document.querySelectorAll('.projects-wrapper .project-link:nth-child(4) path');
   const lettersOne = document.querySelectorAll('.projects-wrapper .large-svg-title .svg-wrapper:first-child path');
   const lettersTwo = document.querySelectorAll('.projects-wrapper .large-svg-title .svg-wrapper:last-child path');
 
@@ -401,40 +411,44 @@ export const openCloseProjectsMenu = () => {
     .set('.global-els', { pointerEvents: 'all' })
     .set(projectsContainer, { className: '+=open' })
     .fromTo(switchOverlay, 0.35, { autoAlpha: 0 }, { autoAlpha: 1, ease: Sine.easeInOut, force3D: true })
-    .fromTo('.projects-wrapper', 0.001, { pointerEvents: 'none', autoAlpha: 0 }, { pointerEvents: 'all', autoAlpha: 1 })
+    .fromTo(projectsContainer, 0.001, { pointerEvents: 'none', autoAlpha: 0 }, { pointerEvents: 'all', autoAlpha: 1 })
     .add('wordsStart')
-    .add('wordsStartTwo', '+=.13')
+    .add('lettersIn', '+=.25')
     .add('numsStart', '+=.05')
     .add('numsWipersCollapse', '+=.055')
-    .add('numsStartTwo', '+=.23')
+    .add('numsStartTwo', '+=.26')
     // .add('numsCharsStart', '+=.2')
-    .add('linesUpStart', '+=.2')
-    .fromTo(wordWiperBars, 1.3, { x: 0, scaleX: 0 }, { x: 55, scaleX: 1, ease: Expo.easeOut, force3D: true })
-    .fromTo(wordWipers, 1, { scaleX: 1 }, { scaleX: 0, ease: Expo.easeInOut, force3D: true }, 'wordsStart')
-    .staggerFromTo(lettersOne, 1.05, { x: 55 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.04, 'wordsStartTwo')
-    .staggerFromTo(lettersTwo, 1.05, { x: 55 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.04, 'wordsStartTwo')
-    .fromTo(numWiperBars, 1.3, { x: 0, scaleX: 0 }, { x: 60, scaleX: 1, ease: Expo.easeOut, force3D: true }, 'numsStart')
-    .fromTo(numWipers, 1, { scaleX: 1 }, { scaleX: 0, ease: Expo.easeInOut, force3D: true }, 'numsWipersCollapse')
-    .staggerFromTo(numbersOne, 1, { x: 60 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.07, 'numsStartTwo')
-    .staggerFromTo(numbersTwo, 1, { x: 60 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.07, 'numsStartTwo')
-    .staggerFromTo(numbersThree, 1, { x: 60 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.07, 'numsStartTwo')
-    .staggerFromTo(numbersFour, 1, { x: 60 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.07, 'numsStartTwo')
-    .staggerFromTo(innerLinesOne, 0.78, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.05, 'linesUpStart')
-    .staggerFromTo(innerLinesTwo, 0.78, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.05, 'linesUpStart')
-    .staggerFromTo(innerLinesThree, 0.78, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.05, 'linesUpStart')
-    .staggerFromTo(innerLinesFour, 0.78, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.05, 'linesUpStart');
+    .add('linesUpStart', '+=.35')
+    .fromTo(wordWiperBars, 2.05, { x: -15, scaleX: 0 }, { x: 90, scaleX: 1, ease: Expo.easeOut, force3D: true })
+    .fromTo(wordWipers, 0.95, { scaleX: 1 }, { scaleX: 0, ease: Expo.easeInOut, force3D: true }, 'wordsStart')
+    .staggerFromTo(lettersOne, 1.12, { x: 50 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.03, 'lettersIn')
+    .staggerFromTo(lettersTwo, 1.12, { x: 50 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.03, 'lettersIn')
+    .fromTo(numWiperBars, 1.6, { x: -5, scaleX: 0 }, { x: 60, scaleX: 1, ease: Expo.easeOut, force3D: true }, 'numsStart')
+    .fromTo(numWipers, 0.9, { scaleX: 1 }, { scaleX: 0, ease: Expo.easeInOut, force3D: true }, 'numsWipersCollapse')
+    .staggerFromTo(numbersOne, 1.2, { x: 70 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.06, 'numsStartTwo')
+    .staggerFromTo(numbersTwo, 1.2, { x: 70 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.06, 'numsStartTwo')
+    .staggerFromTo(numbersThree, 1.2, { x: 70 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.06, 'numsStartTwo')
+    .staggerFromTo(numbersFour, 1.2, { x: 70 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.06, 'numsStartTwo')
+    // .fromTo(innerCopyLines, 0.95, { yPercent: 92 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.165)
+    .staggerFromTo(innerLinesOne, 0.8, { yPercent: 92 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.016, 'linesUpStart')
+    .staggerFromTo(innerLinesTwo, 0.8, { yPercent: 92 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.016, 'linesUpStart')
+    .staggerFromTo(innerLinesThree, 0.8, { yPercent: 92 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.016, 'linesUpStart')
+    .staggerFromTo(innerLinesFour, 0.8, { yPercent: 92 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.016, 'linesUpStart');
 
   globalObject.openCloseMenu = openMenuTL;
   let currentOpacity;
   projectsTrigger.addEventListener('click', () => {
     if (globalObject.openCloseCount % 2 === 0) {
       currentOpacity = window.getComputedStyle(document.querySelector('.vert-left .meta')).getPropertyValue('opacity');
+      console.log(currentOpacity);
       openMenuTL.timeScale(1).play();
-      TweenMax.to(fadeEls, 0.5, { opacity: 1, ease: Sine.easeInOut, force3D: true, onComplete: () => { TweenMax.set(fadeEls, { clearProps: 'opacity' }) } });
+      TweenMax.to(fadeEls, 0.5, { opacity: 1, ease: Sine.easeInOut, force3D: true, onComplete: () => { TweenMax.set(fadeEls, { clearProps: 'opacity' }); } });
       TweenMax.to(scrollPrompt, 0.5, { opacity: 0, ease: Sine.easeInOut, force3D: true });
+      // TweenMax.to(projectsContainerWrapper, 0.2, { autoAlpha: 1, ease: Expo.easeOut, force3D: true });
     } else {
-      openMenuTL.timeScale(1.2).reverse();
-      TweenMax.to(fadeEls, 0.8, { opacity: currentOpacity, ease: Sine.easeInOut, force3D: true });
+      openMenuTL.timeScale(1.3).reverse();
+      // TweenMax.to(projectsContainerWrapper, 1.3, { autoAlpha: 0, ease: Expo.easeInOut, force3D: true });
+      TweenMax.to(fadeEls, 0.5, { opacity: currentOpacity, ease: Sine.easeInOut, force3D: true });
       TweenMax.to(scrollPrompt, 0.8, { opacity: 1, ease: Sine.easeInOut, force3D: true });
     }
     globalObject.openCloseCount++;
@@ -442,7 +456,7 @@ export const openCloseProjectsMenu = () => {
 
   document.addEventListener('keyup', (event) => {
     if ((event.key === 'Escape' || event.key === 'Esc') && globalObject.openCloseCount % 2 !== 0) {
-      openMenuTL.timeScale(1).reverse();
+      openMenuTL.timeScale(1.3).reverse();
       globalObject.openCloseCount++;
     }
   });

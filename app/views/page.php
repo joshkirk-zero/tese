@@ -7,21 +7,23 @@ $document = $WPGLOBAL['document'];
 ?>
 <div data-router-view="project" class="<?php echo $document->uid; ?>" data-smooth>
     <section class="project-hero container" data-smooth-section>
-        <div class="title-meta">
-        <span class="idx">0<?php echo $document->data->project_index; ?></span>
-            <?php include __DIR__ . '/../includes/svgs/title-'.$document->uid.'.php'; ?>
-        <div class="meta">
-            <span class="big-pipe"></span>
-            <div>Project Type<span class="pipe">|</span><span><?= RichText::asText($document->data->project_type) ?></span></div>
-            <div>Company<span class="pipe">|</span><span><?= RichText::asText($document->data->company) ?></span></div>
-            <div>Year<span class="pipe">|</span><span><?= RichText::asText($document->data->year) ?></span></div>
-            <?php if ($document->data->project_url):?><div><a href="https://<?= RichText::asText($document->data->project_url) ?>" target="_blank"><?= RichText::asText($document->data->project_url) ?></a></div><?php endif; ?>
-        </div>
+        <div class="shift">
+            <div class="title-meta">
+                <span class="idx">0<?php echo $document->data->project_index; ?></span>
+                <?php include __DIR__ . '/../includes/svgs/title-'.$document->uid.'.php'; ?>
+                <div class="meta">
+                    <span class="big-pipe"></span>
+                    <div>Project Type<span class="pipe">|</span><span><?= RichText::asText($document->data->project_type) ?></span></div>
+                    <div>Company<span class="pipe">|</span><span><?= RichText::asText($document->data->company) ?></span></div>
+                    <div>Year<span class="pipe">|</span><span><?= RichText::asText($document->data->year) ?></span></div>
+                    <?php if ($document->data->project_url):?><div><a href="https://<?= RichText::asText($document->data->project_url) ?>" target="_blank"><?= RichText::asText($document->data->project_url) ?></a></div><?php endif; ?>
+                </div>
+            </div>
         </div>
         <div class="measure-el"><span></span></div>
     </section>
     <section class="project-body" data-smooth-section>
-        <div class="intro container scroll-enter" data-offset=".92" data-mobile-offset="1" data-entrance="project-intro">
+        <div class="intro container scroll-enter" data-offset=".88" data-mobile-offset="1" data-entrance="project-intro">
         <div>
             <span class="eyebrow">About</span>
             <p><?= RichText::asText($document->data->project_summary) ?></p>

@@ -6,7 +6,7 @@ $document = $WPGLOBAL['document'];
 <div data-router-wrapper>
   <div data-router-view="home">
     <div class="container home">
-      <div class="profile-wrapper">
+      <div class="profile-wrapper shift">
         <?php include __DIR__ . '/../includes/svgs/you-can.php';?>
         <div class="profile">
           <h3 class="welcome">Welcome</h3>
