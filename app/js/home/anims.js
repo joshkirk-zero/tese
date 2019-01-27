@@ -1,4 +1,4 @@
-import { TweenMax, TimelineMax, Sine } from 'gsap';
+import { TweenLite, TimelineMax, Sine } from 'gsap';
 import * as Func from '../_functions';
 
 

@@ -1,7 +1,7 @@
 import VirtualScroll from 'virtual-scroll';
 import throttle from 'lodash.throttle';
 // import config from '../config';
-import { TweenMax, Expo, Linear, TimelineMax, Sine } from 'gsap';
+import { TweenLite, Expo, Linear, TimelineMax, Sine } from 'gsap';
 import { globalObject } from '../_functions';
 import { SplitText } from '../thirdparty/SplitText';
 
@@ -9,7 +9,7 @@ export default class SmoothProject {
   constructor(options = {}) {
     this.bindMethods();
 
-    TweenMax.defaultEase = Linear.easeNone;
+    TweenLite.defaultEase = Linear.easeNone;
 
     this.el = document.querySelector('[data-smooth]:last-child');
 
@@ -255,7 +255,7 @@ export default class SmoothProject {
         percentThrough = 1;
       }
       const yVal = this.scrollDists[i] * percentThrough;
-      TweenMax.set(this.scrollImages[i], { y: -yVal, force3D: true });
+      TweenLite.set(this.scrollImages[i], { y: -yVal, force3D: true });
     }
     
     if (this.allAnimsIn === false) {

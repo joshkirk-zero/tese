@@ -1,4 +1,4 @@
-import { TimelineMax, Sine, TweenMax, Expo } from 'gsap';
+import { TimelineMax, Sine, TweenLite, Expo } from 'gsap';
 import { SplitText } from '../thirdparty/SplitText';
 import { globalObject } from '../_functions';
 
@@ -11,14 +11,14 @@ export const prepScrollPrompt = (context) => {
   
   switch (context) {
     case 'home':
-      TweenMax.set([homeLetters, projectLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
-      TweenMax.set(prompts, { display: 'none' });
-      TweenMax.set(prompts[0], { display: 'block' });
+      TweenLite.set([homeLetters, projectLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
+      TweenLite.set(prompts, { display: 'none' });
+      TweenLite.set(prompts[0], { display: 'block' });
       break;
     case 'project':
-      TweenMax.set([homeLetters, projectLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
-      TweenMax.set(prompts, { display: 'none' });
-      TweenMax.set(prompts[1], { display: 'block' });
+      TweenLite.set([homeLetters, projectLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
+      TweenLite.set(prompts, { display: 'none' });
+      TweenLite.set(prompts[1], { display: 'block' });
       break;
     default:
 
@@ -69,26 +69,26 @@ export const prepProfileDrawer = () => {
   profileTrigger.addEventListener('click', () => {
     openCloseProfile.timeScale(1).play();
     if (projectsMenu.classList.contains('open')) {
-      TweenMax.to(projectsMenu, 1, { scale: 1, opacity: 0.2, y: -60, ease: Expo.easeOut, force3D: true });  
+      TweenLite.to(projectsMenu, 1, { scale: 1, opacity: 0.2, y: -60, ease: Expo.easeOut, force3D: true });  
     } else {
-      TweenMax.to('.shift', 1, { scale: 1, opacity: 0.2, y: -60, ease: Expo.easeOut, force3D: true });
+      TweenLite.to('.shift', 1, { scale: 1, opacity: 0.2, y: -60, ease: Expo.easeOut, force3D: true });
     }
-    TweenMax.set(closeMask, { display: 'block' });
-    TweenMax.to(shiftTheseGlobals, 1.1, { opacity: 0.3, y: -21, ease: Expo.easeOut, force3D: true });
-    TweenMax.to(logo, 1.1, { y: 4, ease: Expo.easeOut, force3D: true });
-    TweenMax.to(profileTray, 1.1, { yPercent: -100, ease: Expo.easeOut, force3D: true });
+    TweenLite.set(closeMask, { display: 'block' });
+    TweenLite.to(shiftTheseGlobals, 1.1, { opacity: 0.3, y: -21, ease: Expo.easeOut, force3D: true });
+    TweenLite.to(logo, 1.1, { y: 4, ease: Expo.easeOut, force3D: true });
+    TweenLite.to(profileTray, 1.1, { yPercent: -100, ease: Expo.easeOut, force3D: true });
   });
   const closeFunc = () => {
-    TweenMax.delayedCall(0.25, () => { openCloseProfile.progress(0).reverse(); });
+    TweenLite.delayedCall(0.25, () => { openCloseProfile.progress(0).reverse(); });
     if (projectsMenu.classList.contains('open')) {
-      TweenMax.to(projectsMenu, 1, { opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });  
+      TweenLite.to(projectsMenu, 1, { opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });  
     } else {
-      TweenMax.to('.shift', 1, { scale: 1, opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });
+      TweenLite.to('.shift', 1, { scale: 1, opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });
     }
-    TweenMax.set(closeMask, { display: 'none' });
-    TweenMax.to(shiftTheseGlobals, 1.1, { opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });
-    TweenMax.to(logo, 1.1, { y: 0, ease: Expo.easeOut, force3D: true });
-    TweenMax.to(profileTray, 1, { yPercent: 0, ease: Expo.easeOut, force3D: true });
+    TweenLite.set(closeMask, { display: 'none' });
+    TweenLite.to(shiftTheseGlobals, 1.1, { opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });
+    TweenLite.to(logo, 1.1, { y: 0, ease: Expo.easeOut, force3D: true });
+    TweenLite.to(profileTray, 1, { yPercent: 0, ease: Expo.easeOut, force3D: true });
   };
   closeMask.addEventListener('click', closeFunc);
   closeTrigger.addEventListener('click', closeFunc);
@@ -124,7 +124,7 @@ export const pageEntrance = (namespace, firstLoad = false) => {
         .to(beacon, 1.85, { scale: 1.1, ease: Sine.easeInOut });
       
       const beaconPlay = () => {
-        TweenMax.fromTo(beacon, 1.1, { scale: 0 }, { scale: 1, ease: Expo.easeInOut, onComplete: () => {
+        TweenLite.fromTo(beacon, 1.1, { scale: 0 }, { scale: 1, ease: Expo.easeInOut, onComplete: () => {
           beaconTL.play();
         } });
       };
@@ -169,7 +169,7 @@ export const pageEntrance = (namespace, firstLoad = false) => {
         .add(beaconPlay, '-=1.25');
 
 
-      TweenMax.delayedCall(0.7, () => {
+      TweenLite.delayedCall(0.7, () => {
         homeEntranceTL.play();
       });
       break;
@@ -202,7 +202,7 @@ export const pageEntrance = (namespace, firstLoad = false) => {
           projectEntranceTL.fromTo(globalEls, 1.3, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut }, 'startPipe'); 
         }
         
-        TweenMax.delayedCall(0.2, () => {
+        TweenLite.delayedCall(0.2, () => {
           projectEntranceTL.play();
         });
       }
@@ -263,7 +263,7 @@ export const pageEntrance = (namespace, firstLoad = false) => {
         .to(notFoundBeacon, 0.85, { scale: 1, ease: Sine.easeInOut });
 
 
-      TweenMax.delayedCall(0.5, () => {
+      TweenLite.delayedCall(0.5, () => {
         notFoundEntranceTL.play();
       });
       break;
@@ -450,14 +450,14 @@ export const openCloseProjectsMenu = () => {
       currentOpacity = window.getComputedStyle(document.querySelector('.vert-left .meta')).getPropertyValue('opacity');
       console.log(currentOpacity);
       openMenuTL.timeScale(1).play();
-      TweenMax.to(fadeEls, 0.5, { opacity: 1, ease: Sine.easeInOut, force3D: true, onComplete: () => { TweenMax.set(fadeEls, { clearProps: 'opacity' }); } });
-      TweenMax.to(scrollPrompt, 0.5, { opacity: 0, ease: Sine.easeInOut, force3D: true });
-      // TweenMax.to(projectsContainerWrapper, 0.2, { autoAlpha: 1, ease: Expo.easeOut, force3D: true });
+      TweenLite.to(fadeEls, 0.5, { opacity: 1, ease: Sine.easeInOut, force3D: true, onComplete: () => { TweenLite.set(fadeEls, { clearProps: 'opacity' }); } });
+      TweenLite.to(scrollPrompt, 0.5, { opacity: 0, ease: Sine.easeInOut, force3D: true });
+      // TweenLite.to(projectsContainerWrapper, 0.2, { autoAlpha: 1, ease: Expo.easeOut, force3D: true });
     } else {
       openMenuTL.timeScale(1.3).reverse();
-      // TweenMax.to(projectsContainerWrapper, 1.3, { autoAlpha: 0, ease: Expo.easeInOut, force3D: true });
-      TweenMax.to(fadeEls, 0.5, { opacity: currentOpacity, ease: Sine.easeInOut, force3D: true });
-      TweenMax.to(scrollPrompt, 0.8, { opacity: 1, ease: Sine.easeInOut, force3D: true });
+      // TweenLite.to(projectsContainerWrapper, 1.3, { autoAlpha: 0, ease: Expo.easeInOut, force3D: true });
+      TweenLite.to(fadeEls, 0.5, { opacity: currentOpacity, ease: Sine.easeInOut, force3D: true });
+      TweenLite.to(scrollPrompt, 0.8, { opacity: 1, ease: Sine.easeInOut, force3D: true });
     }
     globalObject.openCloseCount++;
   });
