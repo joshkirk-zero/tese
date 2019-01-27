@@ -1,9 +1,9 @@
 import VirtualScroll from 'virtual-scroll';
 import throttle from 'lodash.throttle';
 // import config from '../config';
-import {TweenMax, Expo, Linear, TimelineMax, Sine} from 'gsap';
+import { TweenMax, Expo, Linear, TimelineMax, Sine } from 'gsap';
 import { globalObject } from '../_functions';
-import {SplitText} from "../thirdparty/SplitText";
+import { SplitText } from '../thirdparty/SplitText';
 
 export default class SmoothProject {
   constructor(options = {}) {

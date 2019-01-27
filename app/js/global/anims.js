@@ -31,6 +31,7 @@ export const prepProfileDrawer = () => {
   const profileTray = document.querySelector('.los-detalles');
   const shiftTheseGlobals = document.querySelectorAll('.vert-left, .email-triggers, .scroll-prompt');
   const closeMask = document.querySelector('.close-mask');
+  const closeTrigger = document.querySelector('.los-detalles .close');
   const logo = document.querySelector('.logo');
 
   const openCloseProfile = new TimelineMax({ paused: true });
@@ -49,6 +50,11 @@ export const prepProfileDrawer = () => {
   const splitStaggerCopyLines = new SplitText(splitStaggerCopyByLines, { type: 'lines' }).lines;
   const innerCopyStaggerLines = new SplitText(splitStaggerCopyLines, { type: 'lines' }).lines;
 
+  const splitCloseCopyByLines = document.querySelectorAll('.los-detalles .close .clip');
+  const splitCloseCopyLines = new SplitText(splitCloseCopyByLines, { type: 'lines' }).lines;
+  const innerCloseCopyLines = new SplitText(splitCloseCopyLines, { type: 'lines' }).lines;
+  const closeUnderline = document.querySelector('.los-detalles .close .lines');
+
   const projectsMenu = document.querySelector('.projects-wrapper');
 
   openCloseProfile
@@ -56,7 +62,9 @@ export const prepProfileDrawer = () => {
     .fromTo(innerLabelLines, 1.05, { yPercent: 87 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0)
     .fromTo(innerCopyLines, 0.95, { yPercent: 92 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.165)
     .fromTo(splitCopyUnderlines, 0.52, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut, force3D: true }, '-=.39')
-    .staggerFromTo(innerCopyStaggerLines, 0.95, { yPercent: 92 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.025, 0.15);
+    .staggerFromTo(innerCopyStaggerLines, 0.95, { yPercent: 92 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.025, 0.15)
+    .staggerFromTo(innerCloseCopyLines, 0.95, { yPercent: 92 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.025)
+    .fromTo(closeUnderline, 0.52, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut, force3D: true }, '-=.3');
 
   profileTrigger.addEventListener('click', () => {
     openCloseProfile.timeScale(1).play();
@@ -70,8 +78,7 @@ export const prepProfileDrawer = () => {
     TweenMax.to(logo, 1.1, { y: 4, ease: Expo.easeOut, force3D: true });
     TweenMax.to(profileTray, 1.1, { yPercent: -100, ease: Expo.easeOut, force3D: true });
   });
-  
-  closeMask.addEventListener('click', () => {
+  const closeFunc = () => {
     TweenMax.delayedCall(0.25, () => { openCloseProfile.progress(0).reverse(); });
     if (projectsMenu.classList.contains('open')) {
       TweenMax.to(projectsMenu, 1, { opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });  
@@ -82,8 +89,9 @@ export const prepProfileDrawer = () => {
     TweenMax.to(shiftTheseGlobals, 1.1, { opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });
     TweenMax.to(logo, 1.1, { y: 0, ease: Expo.easeOut, force3D: true });
     TweenMax.to(profileTray, 1, { yPercent: 0, ease: Expo.easeOut, force3D: true });
-  });
-
+  };
+  closeMask.addEventListener('click', closeFunc);
+  closeTrigger.addEventListener('click', closeFunc);
 };
 
 export const pageEntrance = (namespace, firstLoad = false) => {

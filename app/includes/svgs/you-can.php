@@ -13,7 +13,7 @@
                         <path class="pink-fill" d="M248.4,2v386.4c0,35.6-12.5,53.5-37.4,53.5s-37.4-17.8-37.4-53.5V2H207v396.7c0,6.9,1.3,10.4,4,10.4
                             c2.7,0,4-3.4,4-10.4V2H248.4z"/>
                     </g>
-                    <g class="can" style="transform: translateX(-25px);">
+                    <g class="can" style="transform: translateX(-41px);">
                         <path class="pink-fill" d="M341,150.3V52.6c0-6.9-1.3-10.4-4-10.4c-2.7,0-4,3.5-4,10.4V397c0,8,1.3,12.1,4,12.1c2.7,0,4-4,4-12.1V290.6
                             h33.3v97.7c0,35.6-12.5,53.5-37.4,53.5c-11.9,0-21.1-4.6-27.6-13.8c-6.5-9.2-9.8-22.4-9.8-39.7V52.6c0-35.6,12.6-53.5,37.9-53.5
                             c24.5,0,36.8,17.8,36.8,53.5v97.7H341z"/>
@@ -40,12 +40,12 @@
                         <path class="pink-fill" d="M216.8,407.1v32.8h-50.6V2.9h33.4v404.2H216.8z"/>
                         <path class="pink-fill" d="M275.4,407.1v32.8h-50.6V2.9h33.4v404.2H275.4z"/>
                     </g>
-                    <g style="transform: translateX(-25px);">
+                    <g style="transform: translateX(-41px);">
                         <path class="pink-fill" d="M447.3,439.9h-32.2l3.4-368h-5.8l-2.3,78.2l-6.9,289.8h-33.4l-6.9-289.8l-2.3-78.2h-5.8l3.4,368h-32.2V2.9h53.5l4,286.9
                             h5.7l4-286.9h53.5V439.9z"/>
                         <path class="pink-fill" d="M488.7,35.6v169.6H506V238h-17.2v169H506v32.8h-50.6V2.9H506v32.8H488.7z"/>
                     </g>
-                    <g style="transform: translateX(-50px);">
+                    <g style="transform: translateX(-81px);">
                         <path class="pink-fill" d="M623.3,35.6H606v404.2h-33.3V35.6h-17.2V2.9h67.8V35.6z"/>
                         <path class="pink-fill" d="M662.9,35.6v169.6h17.2V238h-17.2v169h17.2v32.8h-50.6V2.9h50.6v32.8H662.9z"/>
                         <path class="pink-fill" d="M729.1,174.2V43.1c0-6.9-1.3-10.3-4-10.3c-2.7,0-4,3.4-4,10.3v125.3c0,11.1,3.5,21.8,10.3,32.2

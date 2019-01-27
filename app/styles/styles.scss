@@ -397,7 +397,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     top: 0;
     margin: 0 auto;
     position: relative;
-    width: 10px;
+    width: 8px;
     display: block;
     &:after {
       content: '';
@@ -441,7 +441,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   left: 0;
   a {
     width: 100%;
-    height: 25px;
+    height: 20px;
     margin-bottom: 35px;
     display: block;
     transform: scale(1);
@@ -612,10 +612,10 @@ h1, h2, h3, h4, h5, h6, p, a, li {
         height: 50%;
         padding-bottom: 3px;
         .svg-wrapper {
-          width: 95%;
+          width: 92.4%;
         }
         .wiper {
-          width: 95%;
+          width: 92.4%;
           left: 0;
           height: 99.5%;
         }
@@ -625,10 +625,10 @@ h1, h2, h3, h4, h5, h6, p, a, li {
         padding-top: 3px;
         height: 50%;
         .svg-wrapper {
-          width: 94%;
+          width: 90.4%;
         }
         .wiper {
-          width: 94.1%;
+          width: 90.4%;
           left: 0;
           height: 99.5%;
         }
@@ -698,10 +698,13 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   top: 2px;
 }
 .projects-wrapper, .title-meta {
-  height: 35.8vw;
+  height: 67.1vh;
   top: 50%;
   position: relative;
   transform: translateY(-50%);
+  @media (max-width: 1500px) {
+    height: 60vh;
+  }
 }
 
 .svg-wrapper, .svg-wrapper-inner {
@@ -739,6 +742,32 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   padding: 0 110px 0 200px;
   transform: none;
   top: auto;
+  @media (max-width: 1500px) {
+    height: 60vh;
+  }
+  @media (max-width: 1430px) {
+    padding: 0 70px 0 160px;
+  }
+  @media (max-width: 1345px) {
+    padding: 0 40px 0 140px;
+    height: 55vh;
+  }
+  @media (max-width: 1235px) {
+    height: 50vh;
+  }
+  @media (max-width: 1125px) {
+    padding: 0 20px 0 120px;
+    height: 48vh;
+  }
+  @media (max-width: 1080px) {
+    height: 43vh;
+  }
+  @media (max-width: 1024px) {
+    padding-right: 10px;
+  }
+  @media (max-width: 959px) {
+    height: auto;
+  }
   .large-svg-title {
     .wiper {
       height: calc(100% - 6px);
@@ -761,13 +790,6 @@ h1, h2, h3, h4, h5, h6, p, a, li {
         left: -70px;
       }
     }
-    //a:first-child {
-    //  .wiper {
-    //    span {
-    //      width: 49%;
-    //    }
-    //  }
-    //}
     h3 {
       font-stretch: expanded;
       line-height: 1.6;
@@ -776,6 +798,10 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       color: $ltBrown;
       font-size: 20px;
       width: 171px;
+      @media (max-width: 1125px) {
+        line-height: 1.55;
+        font-size: 18px;
+      }
       > div {
         overflow: hidden;
       }
@@ -785,8 +811,11 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       line-height: 1.67;
       letter-spacing: 1px;
       font-size: 12px;
-      margin-top: 10px;
+      margin-top: 8px;
       color: $brown;
+      @media (max-width: 1125px) {
+        font-size: 11px;
+      }
       > div {
         overflow: hidden;
       }
@@ -800,6 +829,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
         vertical-align: middle;
         margin-right: 22px;
         position: relative;
+        @media (max-width: 1024px) {
+          margin-right: 15px;
+        }
         svg {
           height: 100%;
           width: auto;
@@ -812,9 +844,21 @@ h1, h2, h3, h4, h5, h6, p, a, li {
         display: inline-block;
         vertical-align: middle;
         margin-top: 2px;
+        @media (max-width: 1125px) {
+          margin-top: 0;
+        }
       }
       &:nth-child(odd) {
         margin-right: 120px;
+        @media (max-width: 1580px) {
+          margin-right: 80px;
+        }
+        @media (max-width: 1345px) {
+          margin-right: 50px;
+        }
+        @media (max-width: 1125px) {
+          margin-right: 17px;
+        }
       }
       &:nth-child(-n+2) {
         padding-bottom: 7px;
@@ -825,8 +869,20 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       &:nth-child(3) {
         clear: left;
         margin-right: 110px;
+        @media (max-width: 1580px) {
+          margin-right: 71px;
+        }
+        @media (max-width: 1345px) {
+          margin-right: 44px;
+        }
+        @media (max-width: 1125px) {
+          margin-right: 13px;
+        }
         .svg-wrapper {
           margin-right: 18px;
+          @media (max-width: 1024px) {
+            margin-right: 11px;
+          }
         }
       }
       &:last-child {
@@ -999,6 +1055,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   display: flex;
   padding-left: 118px;
   padding-top: 79px;
+  .lines {
+    bottom: -2px;
+  }
   .label {
     font-size: 12px;
     line-height: 2.5;
@@ -1021,6 +1080,23 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   }
   a {
     position: relative;
+    &:after {
+      content: '';
+      width: 114%;
+      height: calc(100% + 10px);
+      top: -2px;
+      left: -7%;
+      position: absolute;
+    }
+  }
+  .close {
+    position: absolute;
+    right: 60px;
+    top: 45px;
+    cursor: pointer;
+    .clip > div {
+      overflow: hidden;
+    }
     &:after {
       content: '';
       width: 114%;
@@ -1084,7 +1160,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
  width: 100%;
  height: 100%;
  opacity: 0;
- cursor: s-resize;
+ cursor: pointer;
  z-index: 8;
  display: none;
 }

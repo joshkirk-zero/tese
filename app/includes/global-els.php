@@ -113,6 +113,7 @@ $nav = getByUID("global-content", "global_content");
 </div>
 <div class="close-mask"></div>
 <div class="los-detalles">
+    <p class="close"><span class="clip">Close</span><span class="lines"><span></span><span></p>
     <p class="secondary-bio"><?= RichText::asText($nav->data->profile_copy) ?></p>
     <div class="wrapper">
         <div class="credits">
