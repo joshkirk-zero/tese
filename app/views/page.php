@@ -63,12 +63,12 @@ $document = $WPGLOBAL['document'];
     <style>     
         <?php 
         for ($i = 0; $i < count($projectImages); ++$i) {
-            if ($projectImages[$i]->primary->positioning === "desktop_left" || $projectImages[$i]->primary->positioning === "mobile_left") { ?>
+            if ($projectImages[$i]->primary->positioning === "desktop_left" || $projectImages[$i]->primary->positioning === "medium_left" || $projectImages[$i]->primary->positioning === "mobile_left") { ?>
                 .project-images > div:nth-child(<?php echo $i + 1; ?>) { 
                     margin-top: <?php echo $projectImages[$i]->primary->top_push_pull_desktop; ?>vw;
                     padding-left: <?php echo $projectImages[$i]->primary->side_push_pull_desktop; ?>vw;
                 }
-            <?php } elseif ($projectImages[$i]->primary->positioning === "desktop_right" || $projectImages[$i]->primary->positioning === "mobile_right") { ?>
+            <?php } elseif ($projectImages[$i]->primary->positioning === "desktop_right" || $projectImages[$i]->primary->positioning === "medium_right" || $projectImages[$i]->primary->positioning === "mobile_right") { ?>
                 .project-images > div:nth-child(<?php echo $i + 1; ?>) { 
                     margin-top: <?php echo $projectImages[$i]->primary->top_push_pull_desktop; ?>vw;
                     padding-right: <?php echo $projectImages[$i]->primary->side_push_pull_desktop; ?>vw;
@@ -80,12 +80,12 @@ $document = $WPGLOBAL['document'];
         @media (max-width: 1024px) {
             <?php 
             for ($i = 0; $i < count($projectImages); ++$i) {
-                if ($projectImages[$i]->primary->positioning === "desktop_left" || $projectImages[$i]->primary->positioning === "mobile_left") { ?>
+                if ($projectImages[$i]->primary->positioning === "desktop_left" || $projectImages[$i]->primary->positioning === "medium_left" || $projectImages[$i]->primary->positioning === "mobile_left") { ?>
                     .project-images > div:nth-child(<?php echo $i + 1; ?>) { 
                         margin-top: <?php echo $projectImages[$i]->primary->top_push_pull_medium; ?>vw;
                         padding-left: <?php echo $projectImages[$i]->primary->side_push_pull_medium; ?>vw;
                     }
-                <?php } elseif ($projectImages[$i]->primary->positioning === "desktop_right" || $projectImages[$i]->primary->positioning === "mobile_right") { ?>
+                <?php } elseif ($projectImages[$i]->primary->positioning === "desktop_right" || $projectImages[$i]->primary->positioning === "medium_right" || $projectImages[$i]->primary->positioning === "mobile_right") { ?>
                     .project-images > div:nth-child(<?php echo $i + 1; ?>) { 
                         margin-top: <?php echo $projectImages[$i]->primary->top_push_pull_medium; ?>vw;
                         padding-right: <?php echo $projectImages[$i]->primary->side_push_pull_medium; ?>vw;
@@ -97,12 +97,12 @@ $document = $WPGLOBAL['document'];
         @media (max-width: 767px) {
             <?php 
             for ($i = 0; $i < count($projectImages); ++$i) {
-                if ($projectImages[$i]->primary->positioning === "desktop_left" || $projectImages[$i]->primary->positioning === "mobile_left") { ?>
+                if ($projectImages[$i]->primary->positioning === "desktop_left" || $projectImages[$i]->primary->positioning === "medium_left" || $projectImages[$i]->primary->positioning === "mobile_left") { ?>
                     .project-images > div:nth-child(<?php echo $i + 1; ?>) { 
                         margin-top: <?php echo $projectImages[$i]->primary->top_push_pull_mobile; ?>vw;
                         padding-left: <?php echo $projectImages[$i]->primary->side_push_pull_mobile; ?>vw;
                     }
-                <?php } elseif ($projectImages[$i]->primary->positioning === "desktop_right" || $projectImages[$i]->primary->positioning === "mobile_right") { ?>
+                <?php } elseif ($projectImages[$i]->primary->positioning === "desktop_right" || $projectImages[$i]->primary->positioning === "medium_right" || $projectImages[$i]->primary->positioning === "mobile_right") { ?>
                     .project-images > div:nth-child(<?php echo $i + 1; ?>) { 
                         margin-top: <?php echo $projectImages[$i]->primary->top_push_pull_mobile; ?>vw;
                         padding-right: <?php echo $projectImages[$i]->primary->side_push_pull_mobile; ?>vw;

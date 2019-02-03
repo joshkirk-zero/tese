@@ -8,7 +8,8 @@ export const onEnter = (to, location) => {
 };
 
 export const onEnterCompleted = (from, to, location) => {
-  Anim.pageEntrance(to.view.attributes[0].value);
+  console.log(to.view.dataset.routerView);
+  Anim.pageEntrance(to.view.dataset.routerView);
 };
 
 export const firstLoad = () => {

@@ -1,14 +1,15 @@
-import * as Anim from './anims';
 import Highway from '@dogstudio/highway';
+import HomeSmooth from './smoothscroll_home';
 
 // Renderer
+let homeSmooth;
 class HomeRenderer extends Highway.Renderer {
   onEnter() {
     
   }
 
   onEnterCompleted() {
-    Anim.scrollIntoProject();
+    homeSmooth = new HomeSmooth({});
   }
 
   onLeave() {
@@ -16,7 +17,7 @@ class HomeRenderer extends Highway.Renderer {
   }
 
   onLeaveCompleted() {
-
+    homeSmooth.destroy();
   }
 }
 
