@@ -1,4 +1,4 @@
-import { TweenLite, TimelineMax, Sine, Power0 } from 'gsap';
+import { TweenMax, TimelineMax, Sine, Power0 } from 'gsap';
 import { normalizeRange, globalObject } from '../_functions';
 import { SplitText } from '../thirdparty/SplitText';
 
@@ -31,17 +31,17 @@ export const wheelSkewText = () => {
       const shift = s - (screenGroupStarts[i].offsetTop - 275) + globalObject.wh * 2;
       const lock = screenGroupStops[i].offsetTop;
       if (shift > 0 && shift <= lock) {
-        TweenLite.set(cornerTexts[i], { left: 0, y: 275, x: 120, position: 'fixed', force3D: true });
-        TweenLite.to(cornerTexts[i], dur, { scaleY: normalizedVal, force3D: true, ease: Sine.easeInOut });
-        TweenLite.to(cornerTexts[i], 0.25, { opacity: 0.15, ease: Sine.easeOut });
+        TweenMax.set(cornerTexts[i], { left: 0, y: 275, x: 120, position: 'fixed', force3D: true });
+        TweenMax.to(cornerTexts[i], dur, { scaleY: normalizedVal, force3D: true, ease: Sine.easeInOut });
+        TweenMax.to(cornerTexts[i], 0.25, { opacity: 0.15, ease: Sine.easeOut });
       } else if (shift > lock) {
-        TweenLite.set(cornerTexts[i], { y: lock, x: 0, left: -119, position: 'absolute', force3D: true });
-        TweenLite.to(cornerTexts[i], 0.3, { scaleY: 1, force3D: true, ease: Sine.easeOut });
-        TweenLite.to(cornerTexts[i], 0.25, { opacity: 1, ease: Sine.easeOut });
+        TweenMax.set(cornerTexts[i], { y: lock, x: 0, left: -119, position: 'absolute', force3D: true });
+        TweenMax.to(cornerTexts[i], 0.3, { scaleY: 1, force3D: true, ease: Sine.easeOut });
+        TweenMax.to(cornerTexts[i], 0.25, { opacity: 1, ease: Sine.easeOut });
       } else {
-        TweenLite.set(cornerTexts[i], { y: 0, x: 0, left: -119, position: 'absolute', force3D: true });
-        TweenLite.to(cornerTexts[i], 0.65, { scaleY: 1, force3D: true, ease: Sine.easeOut });
-        TweenLite.to(cornerTexts[i], 0.25, { opacity: 1, ease: Sine.easeOut });
+        TweenMax.set(cornerTexts[i], { y: 0, x: 0, left: -119, position: 'absolute', force3D: true });
+        TweenMax.to(cornerTexts[i], 0.65, { scaleY: 1, force3D: true, ease: Sine.easeOut });
+        TweenMax.to(cornerTexts[i], 0.25, { opacity: 1, ease: Sine.easeOut });
       }
     }
   };
@@ -95,10 +95,10 @@ export const scrollAwayFromHero = () => {
       scrollAwayTL.progress(percentageThrough);
     }
   };
-  // TweenLite.ticker.addEventListener('tick', checkHeroOffset, false, false, 2);
+  // TweenMax.ticker.addEventListener('tick', checkHeroOffset, false, false, 2);
 };
 export const removeScrollAwayFromHero = () => {
-  // TweenLite.ticker.removeEventListener('tick', checkHeroOffset);
+  // TweenMax.ticker.removeEventListener('tick', checkHeroOffset);
 };
 let checkImageOffsets;
 export const overflowImages = () => {
@@ -122,12 +122,12 @@ export const overflowImages = () => {
         percentThrough = 1;
       }
       const yVal = scrollDists[i] * percentThrough;
-      TweenLite.set(scrollImages[i], { y: -yVal, force3D: true });
+      TweenMax.set(scrollImages[i], { y: -yVal, force3D: true });
     }
   };
-  TweenLite.ticker.addEventListener('tick', checkImageOffsets, false, false, 3);
+  TweenMax.ticker.addEventListener('tick', checkImageOffsets, false, false, 3);
 };
 
 export const removeOverflowImages = () => {
-  TweenLite.ticker.removeEventListener('tick', checkImageOffsets);
+  TweenMax.ticker.removeEventListener('tick', checkImageOffsets);
 };

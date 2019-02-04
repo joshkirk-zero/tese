@@ -25,7 +25,8 @@ export const Core = new Highway.Core({
   transitions: {
     default: Fade,
     contextual: {
-      nextProject: NextProject
+      nextProject: NextProject,
+      homeScrollTo: Fade
     }
   }
 });
@@ -45,7 +46,7 @@ Core.on('NAVIGATE_END', ({ to, from, trigger, location }) => { // to, from, trig
 Core.on('NAVIGATE_OUT', ({ from, trigger, location }) => { // from, trigger, location
   // if (location.href === location.origin + '/') {
   //   const leftSideFade = document.querySelector('.vert-left');
-  //   TweenLite.to(leftSideFade, 0.5, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true });
+  //   TweenMax.to(leftSideFade, 0.5, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true });
     
   // }
   // console.log(location.origin + '/', location.href);

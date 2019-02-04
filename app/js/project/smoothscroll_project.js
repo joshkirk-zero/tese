@@ -1,7 +1,7 @@
 import VirtualScroll from 'virtual-scroll';
 import throttle from 'lodash.throttle';
 // import config from '../config';
-import { TweenLite, Expo, Linear, TimelineMax, Sine } from 'gsap';
+import { TweenMax, Expo, Linear, TimelineMax, Sine } from 'gsap';
 import { globalObject } from '../_functions';
 import { SplitText } from '../thirdparty/SplitText';
 
@@ -9,7 +9,7 @@ export default class SmoothProject {
   constructor(options = {}) {
     this.bindMethods();
 
-    TweenLite.defaultEase = Linear.easeNone;
+    TweenMax.defaultEase = Linear.easeNone;
 
     this.el = document.querySelector('[data-smooth]:last-child');
 
@@ -90,10 +90,10 @@ export default class SmoothProject {
     this.scrollAwayTL
       .add('start')
       .add('charsStart', '+=.3')
-      .staggerFromTo(scrollWordsChars, 0.8, { rotationX: 0, skewX: 0, scaleY: 1 }, { rotationX: 65, skewX: -10, scaleY: 0, ease: Sine.easeInOut, force3D: true }, 0.017)
+      .staggerFromTo(scrollWordsChars, 0.9, { rotationX: 0, skewX: 0, scaleY: 1 }, { rotationX: 65, skewX: -10, scaleY: 0, ease: Sine.easeInOut, force3D: true }, 0.017, 0.01)
       .fromTo(scrollWordsChars, 0.8, { y: 0 }, { y: -35, ease: Sine.easeInOut, force3D: true }, 0)
       .staggerFromTo(scrollWordsChars, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeOut, force3D: true }, 'charsStart', 0.016)
-      .staggerFromTo(scrollWordsWraps, 1, { z: 20 }, { z: 0, ease: Sine.easeOut }, 0.02, 'start')
+      .staggerFromTo(scrollWordsWraps, 1, { z: 20 }, { z: 0, ease: Sine.easeOut }, -0.02, 'start')
       .fromTo(staggerFadeScaleEls, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, force3D: true }, -0.055, 'start')
       .fromTo(staggerFadeEls, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, force3D: true }, 'start')
       .fromTo(fadeEls, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, force3D: true }, 'start')
@@ -255,7 +255,7 @@ export default class SmoothProject {
         percentThrough = 1;
       }
       const yVal = this.scrollDists[i] * percentThrough;
-      TweenLite.set(this.scrollImages[i], { y: -yVal, force3D: true });
+      TweenMax.set(this.scrollImages[i], { y: -yVal, force3D: true });
     }
     
     if (this.allAnimsIn === false) {

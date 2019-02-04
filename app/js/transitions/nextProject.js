@@ -1,5 +1,5 @@
 import Highway from '@dogstudio/highway';
-import { TweenLite, Sine, TimelineMax } from 'gsap';
+import { TweenMax, Sine, TimelineMax } from 'gsap';
 import { SplitText } from '../thirdparty/SplitText';
 import { globalObject } from '../_functions';
 import { prepScrollPrompt } from '../global/anims';
@@ -8,7 +8,7 @@ import { prepScrollPrompt } from '../global/anims';
 class NextProject extends Highway.Transition {
   in({ from, to, trigger, done }) {
     window.scrollTo(0, 0);
-    TweenLite.set(to.querySelectorAll('.project-hero .wiper'), { display: 'none' });
+    TweenMax.set(to.querySelectorAll('.project-hero .wiper'), { display: 'none' });
     from.remove();
     prepScrollPrompt(to.dataset.routerView);
     const nextProjectHeroTL = new TimelineMax();
@@ -23,16 +23,16 @@ class NextProject extends Highway.Transition {
       .fromTo(bigPipe, 0.6, { transformOrigin: '50% 0', scaleY: 0 }, { scaleY: 1, ease: Sine.easeInOut }, 0)
       .fromTo(projectFadeEls, 1, { autoAlpha: 0 }, { autoAlpha: 1, scale: 1, ease: Sine.easeInOut, onComplete: () => { done(); } }, '-=.45');
 
-    // TweenLite.to(fadeEls, 0.8, { autoAlpha: 1, ease: Sine.easeInOut });
+    // TweenMax.to(fadeEls, 0.8, { autoAlpha: 1, ease: Sine.easeInOut });
   }
 
   out({ from, trigger, done }) {
     const eyebrow = document.querySelector('.project-footer .eyebrow');
     // const projectFadeEls = document.querySelectorAll('.vert-left .meta, .socials, .email-triggers .email');
-    // TweenLite.set(projectFadeEls, { clearProps: 'all' });
+    // TweenMax.set(projectFadeEls, { clearProps: 'all' });
     globalObject.comingFromFooter = true;
     // Animation
-    TweenLite.to(eyebrow, 0.35, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true,
+    TweenMax.to(eyebrow, 0.35, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true,
       onComplete: () => {
         done();
       } });
