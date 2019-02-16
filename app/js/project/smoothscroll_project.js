@@ -97,8 +97,7 @@ export default class SmoothProject {
       .fromTo(staggerFadeScaleEls, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, force3D: true }, -0.055, 'start')
       .fromTo(staggerFadeEls, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, force3D: true }, 'start')
       .fromTo(fadeEls, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, force3D: true }, 'start')
-      .fromTo(largeTitle, 1.1, { y: 0 }, { y: -120, ease: Sine.easeInOut, force3D: true }, 'start')
-      .fromTo(largeMeta, 1, { y: 0 }, { y: -60, ease: Sine.easeInOut, force3D: true }, 'start');
+      .fromTo(largeTitle, 1.1, { y: 0 }, { y: -50, ease: Sine.easeInOut, force3D: true }, 'start');
 
     this.thisPagesTLs = [];
 

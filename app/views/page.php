@@ -53,12 +53,14 @@ $document = $WPGLOBAL['document'];
         $nextProject = $prismic->get_api()->getByID($document->data->next_project->id);
     ?>
     <section class="project-footer container scroll-enter" data-offset=".4" data-mobile-offset="1" data-entrance="project-footer" data-smooth-section>
-        <a href="/<?php echo $nextProject->uid; ?>/" class="large-svg-title" data-transition="nextProject">
-            <span class="eyebrow">Next Project</span>
-            
-            <span class="idx">0<?php echo $nextProject->data->project_index; ?></span>
-            <?php include __DIR__ . '/../includes/svgs/title-'.$nextProject->uid.'.php'; ?>
-        </a>
+        <div class="shift">
+            <a href="/<?php echo $nextProject->uid; ?>/" class="" data-transition="nextProject">
+                <span class="eyebrow">Next Project</span>
+                
+                <span class="idx">0<?php echo $nextProject->data->project_index; ?></span>
+                <?php include __DIR__ . '/../includes/svgs/title-'.$nextProject->uid.'.php'; ?>
+            </a>
+        </div>
     </section>
     <style>     
         <?php 
@@ -94,7 +96,7 @@ $document = $WPGLOBAL['document'];
             }
             ?>
         }
-        @media (max-width: 767px) {
+        @media (max-width: 959px) {
             <?php 
             for ($i = 0; $i < count($projectImages); ++$i) {
                 if ($projectImages[$i]->primary->positioning === "desktop_left" || $projectImages[$i]->primary->positioning === "medium_left" || $projectImages[$i]->primary->positioning === "mobile_left") { ?>
@@ -111,8 +113,16 @@ $document = $WPGLOBAL['document'];
             }
             ?>
         }
-        @media (max-width: 480px) {
-
+        @media (max-width: 767px) {
+            <?php 
+            for ($i = 0; $i < count($projectImages); ++$i) { ?>
+                .project-images > div:nth-child(<?php echo $i + 1; ?>) { 
+                    margin-top: 0vw;
+                    padding-left: 0vw;
+                    margin-top: 0vw;
+                    padding-right: 0vw;
+                }
+            <?php } ?>
         }
     </style>
 </div>
