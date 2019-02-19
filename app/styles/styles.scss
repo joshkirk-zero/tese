@@ -1003,7 +1003,10 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     font-family: $gtAmerica;
     position: absolute;
   }
-
+  .shift {
+    display: block;
+    height: 100%;
+  }
   .eyebrow {
     top: -3px;
     transform: translateY(-100%);
