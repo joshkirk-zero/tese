@@ -26,7 +26,7 @@ export default class SmoothProject {
       preventTouch = true,
       passive = true
     } = options;
-
+    
     this.dom = {
       el: this.el,
       sections: sections,
@@ -104,16 +104,15 @@ export default class SmoothProject {
 
     this.thisPagesTLs = [];
 
-    this.theseSections = document.querySelectorAll('.scroll-enter:not(.already-played)');
     this.offsetVal = 0;
     this.allAnimsIn = false;
 
-    for (let i = 0; i < this.theseSections.length; i++) {
-      const entranceType = this.theseSections[i].dataset.entrance;
+    for (let i = 0; i < this.dom.scrollBasedElems.length; i++) {
+      const entranceType = this.dom.scrollBasedElems[i].dataset.entrance;
       switch (entranceType) {
         case 'project-intro':
           const projectIntroTL = new TimelineMax({ paused: true });
-          const projectIntroSection = this.theseSections[i];
+          const projectIntroSection = this.dom.scrollBasedElems[i];
           const splitEyebrowByLines = projectIntroSection.querySelector('.eyebrow');
           const splitIntroByLines = projectIntroSection.querySelector('p');
           const splitIntroLines = new SplitText(splitIntroByLines, { type: 'lines' }).lines;
@@ -125,13 +124,13 @@ export default class SmoothProject {
             .fromTo(innerEyebrowLine, 1, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true })
             .add('introIn', '-=.3')
             .staggerFromTo(innerIntroLines, 0.78, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.06, 'introIn');
-  
+          
           this.thisPagesTLs.push(projectIntroTL);
           break;
         
         case 'project-footer':
           const projectFooterTL = new TimelineMax({ paused: true });
-          const projectFooterSection = this.theseSections[i];
+          const projectFooterSection = this.dom.scrollBasedElems[i];
           const splitFooterEyebrowsByLines = projectFooterSection.querySelectorAll('.eyebrow, .idx');
           const splitFooterEyebrowLines = new SplitText(splitFooterEyebrowsByLines, { type: 'lines' }).lines;
           const innerFooterEyebrowLines = new SplitText(splitFooterEyebrowLines, { type: 'lines' }).lines;
@@ -157,7 +156,7 @@ export default class SmoothProject {
           break;
       }
     }
-
+    console.log(this.thisPagesTLs);
   }
 
   bindMethods() {
@@ -240,22 +239,20 @@ export default class SmoothProject {
       if (isVisible) {
         this.intersectRatio(data, start, end)
         const yVal = this.scrollDists[index] * data.progress.current;
-        TweenMax.set(this.scrollImages[index], { y: -yVal, force3D: true });
+        this.scrollImages[index].style.transform = `translate3d(0, ${-yVal}px, 0)`;
       }
     })
   }
   
   checkScrollBasedLoadins() {
-    if (this.allAnimsIn === false) {
+    if (this.thisPagesTLs.length !== this.offsetVal) {
       this.scrollBasedElems.forEach((data, index) => {
-        const { isVisible, start, end } = this.isVisible(data, 0.01)
-        
+        if (data.played) { return }
+        const { isVisible, start, end } = this.isVisible(data, -data.offset)
         if (isVisible) {
-          this.thisPagesTLs[index + this.offsetVal].play();
+          this.thisPagesTLs[index].play();
           this.offsetVal++;
-          if (this.offsetVal === this.thisPagesTLs.length) {
-            this.allAnimsIn = true;
-          }
+          data.played = true;
         }
       })
     }
@@ -333,12 +330,13 @@ export default class SmoothProject {
     this.scrollBasedElems = []
     this.dom.scrollBasedElems.forEach(el => {
       const bounds = el.getBoundingClientRect()
-      const offset = globalObject.ww < 768 ? el.dataset.mobileOffset : el.dataset.offset
       this.scrollBasedElems.push({
         el: el,
-        top: bounds.top > this.data.height ? (bounds.top - (globalObject.wh * offset)) : this.data.height - (globalObject.wh * offset),
+        played: false,
+        top: bounds.top > this.data.height ? bounds.top : this.data.height,
         bottom: bounds.bottom,
-        height: (bounds.bottom - bounds.top)
+        height: (bounds.bottom - bounds.top),
+        offset: globalObject.ww < 768 ? el.dataset.mobileOffset : el.dataset.offset
       })
     })
   }
