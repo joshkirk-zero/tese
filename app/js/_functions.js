@@ -1,4 +1,4 @@
-import { TweenLite } from 'gsap';
+import { TweenMax } from 'gsap';
 
 
 /**
@@ -58,8 +58,8 @@ export const globalObject = {
 export const chromeViewportUnits = () => {
   const setTheseEls = document.querySelectorAll('.chrome-vh');
   for (let i = 0; i < setTheseEls.length; i++) {
-    TweenLite.set(setTheseEls[i], { height: '' });
-    TweenLite.set(setTheseEls[i], { delay: 0.05, height: globalObject.wh });
+    TweenMax.set(setTheseEls[i], { height: '' });
+    TweenMax.set(setTheseEls[i], { delay: 0.05, height: globalObject.wh });
   }
 };
 
@@ -208,7 +208,7 @@ export const matchHeights = (els) => {
 
   for (let i = 0; i < els.length; i++) {
     if (els[i].offsetHeight < max) {
-      TweenLite.set(els[i], { height: `${max}px` });
+      TweenMax.set(els[i], { height: `${max}px` });
     }
   }
 };

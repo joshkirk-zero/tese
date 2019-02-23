@@ -1,7 +1,7 @@
 import VirtualScroll from 'virtual-scroll';
 import throttle from 'lodash.throttle';
 // import config from '../config';
-import { TweenLite, Expo, Linear, TimelineMax, Sine } from 'gsap';
+import { TweenMax, Expo, Linear, TimelineMax, Sine } from 'gsap';
 import { globalObject } from '../_functions';
 import { SplitText } from '../thirdparty/SplitText';
 
@@ -9,13 +9,14 @@ export default class SmoothProject {
   constructor(options = {}) {
     this.bindMethods();
 
-    TweenLite.defaultEase = Linear.easeNone;
+    TweenMax.defaultEase = Linear.easeNone;
 
     this.el = document.querySelector('[data-smooth]:last-child');
 
     const {
       sections = this.el.querySelectorAll('[data-smooth-section]'),
-      elems = this.el.querySelectorAll('[data-from]'),
+      elems = this.el.querySelectorAll('.image-scroll'),
+      scrollBasedElems = this.el.querySelectorAll('.scroll-enter'),
       threshold = !globalObject.isMobile ? 200 : 20,
       ease = 0.15,
       preload = true,
@@ -29,11 +30,13 @@ export default class SmoothProject {
     this.dom = {
       el: this.el,
       sections: sections,
-      elems: elems
+      elems: elems,
+      scrollBasedElems: scrollBasedElems
     };
 
     this.sections = null;
     this.elems = null;
+    this.scrollBasedElems = null;
 
     this.raf = null;
 
@@ -90,15 +93,14 @@ export default class SmoothProject {
     this.scrollAwayTL
       .add('start')
       .add('charsStart', '+=.3')
-      .staggerFromTo(scrollWordsChars, 0.8, { rotationX: 0, skewX: 0, scaleY: 1 }, { rotationX: 65, skewX: -10, scaleY: 0, ease: Sine.easeInOut, force3D: true }, 0.017)
+      .staggerFromTo(scrollWordsChars, 0.9, { rotationX: 0, skewX: 0, scaleY: 1 }, { rotationX: 65, skewX: -10, scaleY: 0, ease: Sine.easeInOut, force3D: true }, 0.017, 0.01)
       .fromTo(scrollWordsChars, 0.8, { y: 0 }, { y: -35, ease: Sine.easeInOut, force3D: true }, 0)
       .staggerFromTo(scrollWordsChars, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeOut, force3D: true }, 'charsStart', 0.016)
-      .staggerFromTo(scrollWordsWraps, 1, { z: 20 }, { z: 0, ease: Sine.easeOut }, 0.02, 'start')
+      .staggerFromTo(scrollWordsWraps, 1, { z: 20 }, { z: 0, ease: Sine.easeOut }, -0.02, 'start')
       .fromTo(staggerFadeScaleEls, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, force3D: true }, -0.055, 'start')
       .fromTo(staggerFadeEls, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, force3D: true }, 'start')
       .fromTo(fadeEls, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, force3D: true }, 'start')
-      .fromTo(largeTitle, 1.1, { y: 0 }, { y: -120, ease: Sine.easeInOut, force3D: true }, 'start')
-      .fromTo(largeMeta, 1, { y: 0 }, { y: -60, ease: Sine.easeInOut, force3D: true }, 'start');
+      .fromTo(largeTitle, 1.1, { y: 0 }, { y: -50, ease: Sine.easeInOut, force3D: true }, 'start');
 
     this.thisPagesTLs = [];
 
@@ -155,12 +157,6 @@ export default class SmoothProject {
           break;
       }
     }
-    this.offsets = [];
-  
-    for (let i = 0; i < this.theseSections.length; i++) {
-      const thisOffset = globalObject.ww < 768 ? this.theseSections[i].dataset.mobileOffset : this.theseSections[i].dataset.offset;
-      this.offsets.push(parseFloat(thisOffset));
-    }
 
   }
 
@@ -206,15 +202,16 @@ export default class SmoothProject {
 
     this.requestAnimationFrame();
     this.transformSections();
-    this.animateElems();
+    this.scrollAwayFromHero();
+    this.animateOverflowImages();
+    this.checkScrollBasedLoadins();
 
     this.data.last = this.data.current;
   }
 
   transformSections() {
     if (!this.sections) return;
-
-    const current = this.data.current;
+    
     const translate = this.data.current.toFixed(2);
 
     this.sections.forEach((data, index) => {
@@ -225,59 +222,48 @@ export default class SmoothProject {
     });
   }
 
-  animateElems() {
-    // if (!this.elems) return;
-    //
-    // this.elems.forEach((data, index) => {
-    //   const { isVisible, start, end } = this.isVisible(data, 0.01);
-    //
-    //   if (isVisible) {
-    //     this.intersectRatio(data, start, end);
-    //     data.tl.progress(data.progress.current);
-    //   }
-    // })
-
-    let percentageThrough = ((this.measureEl.getBoundingClientRect().top * -1) / this.measureElHeight).toFixed(3);
+  scrollAwayFromHero() {
+    let percentageThrough = (this.data.current / this.measureElHeight).toFixed(3);
     if (percentageThrough <= 0) {
       percentageThrough = 0;
     } else if (percentageThrough >= 1) {
       percentageThrough = 1;
     }
     this.scrollAwayTL.progress(percentageThrough);
+  }
 
-    for (let i = 0; i < this.scrollImages.length; i++) {
-      const thisHeight = this.scrollImageWrappers[i].offsetHeight - 700;
-      const thisTop = this.scrollImageWrappers[i].getBoundingClientRect().top + 300;
-      let percentThrough = ((((thisTop + thisHeight) / (globalObject.wh + thisHeight)) - 1) * -1).toFixed(2);
-      if (percentThrough <= 0) {
-        percentThrough = 0;
-      } else if (percentThrough >= 1) {
-        percentThrough = 1;
+  animateOverflowImages() {
+    if (!this.elems) return;
+    this.elems.forEach((data, index) => {
+      const { isVisible, start, end } = this.isVisible(data, 0.01)
+      
+      if (isVisible) {
+        this.intersectRatio(data, start, end)
+        const yVal = this.scrollDists[index] * data.progress.current;
+        TweenMax.set(this.scrollImages[index], { y: -yVal, force3D: true });
       }
-      const yVal = this.scrollDists[i] * percentThrough;
-      TweenLite.set(this.scrollImages[i], { y: -yVal, force3D: true });
-    }
-    
-    if (this.allAnimsIn === false) {
-      for (let i = 0; i < this.theseSections.length; i++) {
-        const viewportOffset = this.theseSections[i].getBoundingClientRect().top;
-        if (viewportOffset < (globalObject.wh * this.offsets[i + this.offsetVal])) {
-          this.theseSections[i].classList.add('already-played');
-          this.thisPagesTLs[i + this.offsetVal].play();
+    })
+  }
   
-          this.theseSections = document.querySelectorAll('.scroll-enter:not(.already-played)');
+  checkScrollBasedLoadins() {
+    if (this.allAnimsIn === false) {
+      this.scrollBasedElems.forEach((data, index) => {
+        const { isVisible, start, end } = this.isVisible(data, 0.01)
+        
+        if (isVisible) {
+          this.thisPagesTLs[index + this.offsetVal].play();
           this.offsetVal++;
-          if (this.theseSections.length === 0) {
+          if (this.offsetVal === this.thisPagesTLs.length) {
             this.allAnimsIn = true;
           }
         }
-      }
-    } 
+      })
+    }
   }
 
   intersectRatio(data, top, bottom) {
     const start = top - this.data.height;
-    const end = (this.data.height + bottom + data.height) * data.duration;
+    const end = this.data.height + bottom + data.height;
 
     data.progress.current = Math.abs(start / end);
     data.progress.current = Math.max(0, Math.min(1, data.progress.current));
@@ -306,6 +292,8 @@ export default class SmoothProject {
 
   getCache() {
     this.getSections();
+    this.getOverflowElems();
+    this.getScrollBasedSections();
   }
 
   getSections() {
@@ -323,9 +311,40 @@ export default class SmoothProject {
     });
   }
 
+  getOverflowElems() {
+    if (!this.dom.elems) return
+    this.elems = []
+    this.dom.elems.forEach(el => {
+      const bounds = el.getBoundingClientRect()
+      this.elems.push({
+        el: el,
+        top: bounds.top > this.data.height ? bounds.top + 300 : this.data.height + 300,
+        bottom: bounds.bottom,
+        height: (bounds.bottom - bounds.top) - 700,
+        progress: {
+          current: 0
+        }
+      })
+    })
+  }
+  
+  getScrollBasedSections() {
+    if (!this.dom.scrollBasedElems) return
+    this.scrollBasedElems = []
+    this.dom.scrollBasedElems.forEach(el => {
+      const bounds = el.getBoundingClientRect()
+      const offset = globalObject.ww < 768 ? el.dataset.mobileOffset : el.dataset.offset
+      this.scrollBasedElems.push({
+        el: el,
+        top: bounds.top > this.data.height ? (bounds.top - (globalObject.wh * offset)) : this.data.height - (globalObject.wh * offset),
+        bottom: bounds.bottom,
+        height: (bounds.bottom - bounds.top)
+      })
+    })
+  }
+
   getBounding() {
     const bounding = this.dom.el.getBoundingClientRect();
-
     this.data.height = window.innerHeight;
     this.data.bounding = bounding;
     this.data.max = bounding.height - this.data.height;
@@ -367,6 +386,7 @@ export default class SmoothProject {
     this.data = null;
     this.sections = null;
     this.elems = null;
+    this.scrollBasedElems = null;
     this.raf = null;
   }
 }

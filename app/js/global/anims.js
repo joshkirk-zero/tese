@@ -1,4 +1,4 @@
-import { TimelineMax, Sine, TweenLite, Expo } from 'gsap';
+import { TimelineMax, Sine, TweenMax, Expo } from 'gsap';
 import { SplitText } from '../thirdparty/SplitText';
 import { globalObject } from '../_functions';
 
@@ -11,14 +11,14 @@ export const prepScrollPrompt = (context) => {
   
   switch (context) {
     case 'home':
-      TweenLite.set([homeLetters, projectLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
-      TweenLite.set(prompts, { display: 'none' });
-      TweenLite.set(prompts[0], { display: 'block' });
+      TweenMax.set([homeLetters, projectLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
+      TweenMax.set(prompts, { display: 'none' });
+      TweenMax.fromTo(prompts[0], 0.5, { display: 'block', opacity: 0 }, { opacity: 1, ease: Sine.easeInOut });
       break;
     case 'project':
-      TweenLite.set([homeLetters, projectLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
-      TweenLite.set(prompts, { display: 'none' });
-      TweenLite.set(prompts[1], { display: 'block' });
+      TweenMax.set([homeLetters, projectLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
+      TweenMax.set(prompts, { display: 'none' });
+      TweenMax.fromTo(prompts[1], 0.5, { display: 'block', opacity: 0 }, { opacity: 1, ease: Sine.easeInOut });
       break;
     default:
 
@@ -69,26 +69,26 @@ export const prepProfileDrawer = () => {
   profileTrigger.addEventListener('click', () => {
     openCloseProfile.timeScale(1).play();
     if (projectsMenu.classList.contains('open')) {
-      TweenLite.to(projectsMenu, 1, { scale: 1, opacity: 0.2, y: -60, ease: Expo.easeOut, force3D: true });  
+      TweenMax.to(projectsMenu, 1, { opacity: 0.2, y: -60, ease: Expo.easeOut, force3D: true });  
     } else {
-      TweenLite.to('.shift', 1, { scale: 1, opacity: 0.2, y: -60, ease: Expo.easeOut, force3D: true });
+      TweenMax.to('.shift', 1, { opacity: 0.2, y: -60, ease: Expo.easeOut, force3D: true });
     }
-    TweenLite.set(closeMask, { display: 'block' });
-    TweenLite.to(shiftTheseGlobals, 1.1, { opacity: 0.3, y: -21, ease: Expo.easeOut, force3D: true });
-    TweenLite.to(logo, 1.1, { y: 4, ease: Expo.easeOut, force3D: true });
-    TweenLite.to(profileTray, 1.1, { yPercent: -100, ease: Expo.easeOut, force3D: true });
+    TweenMax.set(closeMask, { display: 'block' });
+    TweenMax.to(shiftTheseGlobals, 1.1, { opacity: 0.3, y: -21, ease: Expo.easeOut, force3D: true });
+    TweenMax.to(logo, 1.1, { y: 4, ease: Expo.easeOut, force3D: true });
+    TweenMax.to(profileTray, 1.1, { yPercent: -100, ease: Expo.easeOut, force3D: true });
   });
   const closeFunc = () => {
-    TweenLite.delayedCall(0.25, () => { openCloseProfile.progress(0).reverse(); });
+    TweenMax.delayedCall(0.25, () => { openCloseProfile.progress(0).reverse(); });
     if (projectsMenu.classList.contains('open')) {
-      TweenLite.to(projectsMenu, 1, { opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });  
+      TweenMax.to(projectsMenu, 1, { opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });  
     } else {
-      TweenLite.to('.shift', 1, { scale: 1, opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });
+      TweenMax.to('.shift', 1, { opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });
     }
-    TweenLite.set(closeMask, { display: 'none' });
-    TweenLite.to(shiftTheseGlobals, 1.1, { opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });
-    TweenLite.to(logo, 1.1, { y: 0, ease: Expo.easeOut, force3D: true });
-    TweenLite.to(profileTray, 1, { yPercent: 0, ease: Expo.easeOut, force3D: true });
+    TweenMax.set(closeMask, { display: 'none' });
+    TweenMax.to(shiftTheseGlobals, 1.1, { opacity: 1, y: 0, ease: Expo.easeOut, force3D: true });
+    TweenMax.to(logo, 1.1, { y: 0, ease: Expo.easeOut, force3D: true });
+    TweenMax.to(profileTray, 1, { yPercent: 0, ease: Expo.easeOut, force3D: true });
   };
   closeMask.addEventListener('click', closeFunc);
   closeTrigger.addEventListener('click', closeFunc);
@@ -107,7 +107,6 @@ export const pageEntrance = (namespace, firstLoad = false) => {
       const splitWelcomeLines = new SplitText(splitWelcomeByLines, { type: 'lines' }).lines;
       const innerWelcomeLines = new SplitText(splitWelcomeLines, { type: 'lines' }).lines;
 
-      const vertLeft = document.querySelector('.vert-left');
       const youCan = document.querySelector('.you-can');
       const wipers = document.querySelectorAll('.you-can .wiper');
       const wiperBars = document.querySelectorAll('.you-can .wiper span');
@@ -124,7 +123,7 @@ export const pageEntrance = (namespace, firstLoad = false) => {
         .to(beacon, 1.85, { scale: 1.1, ease: Sine.easeInOut });
       
       const beaconPlay = () => {
-        TweenLite.fromTo(beacon, 1.1, { scale: 0 }, { scale: 1, ease: Expo.easeInOut, onComplete: () => {
+        TweenMax.fromTo(beacon, 1.1, { scale: 0 }, { scale: 1, ease: Expo.easeInOut, onComplete: () => {
           beaconTL.play();
         } });
       };
@@ -133,22 +132,21 @@ export const pageEntrance = (namespace, firstLoad = false) => {
         .to('.global-mask', 0.001, { pointerEvents: 'none', autoAlpha: 0 })
         .add('start')
         .add('returnVert', '+=.85')
-        .add('startTwo', '+=.6')
-        .add('startThree', '+=1');
+        .add('startTwo', '+=.4');
       if (firstLoad) {
         homeEntranceTL
-          .add('welcomeStart', '+=1.25')
-          .add('bioStart', '+=1.95');
+          .add('welcomeStart', '+=0.65')
+          .add('bioStart', '+=1.35');
       } else {
         homeEntranceTL
-          .add('welcomeStart', '+=.25')
-          .add('bioStart', '+=.55');
+          .add('welcomeStart', '-=.35')
+          .add('bioStart', '-=.05');
       }
       homeEntranceTL
-        .fromTo(wiperBars, 2.1, { x: 0, scaleX: 0 }, { x: 90, scaleX: 1, ease: Expo.easeOut, force3D: true }, 'startTwo')
-        .fromTo(wipers, 1, { scaleX: 1 }, { scaleX: 0, ease: Expo.easeInOut, force3D: true }, 'startTwo')
-        .staggerFromTo(lettersOne, 1.15, { x: 50 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'startThree')
-        .staggerFromTo(lettersTwo, 1.15, { x: 50 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'startThree');
+        .fromTo(wiperBars, 2.1, { x: -15, scaleX: 0 }, { x: 130, scaleX: 1, ease: Expo.easeOut, force3D: true }, 'start')
+        .fromTo(wipers, 1, { scaleX: 1 }, { scaleX: 0, ease: Expo.easeInOut, force3D: true }, 'start')
+        .staggerFromTo(lettersOne, 1.15, { x: 50 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'startTwo')
+        .staggerFromTo(lettersTwo, 1.15, { x: 50 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'startTwo');
       if (firstLoad) {
         homeEntranceTL
           .fromTo(globalEls, 1.3, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut }, 'bioStart')
@@ -156,9 +154,7 @@ export const pageEntrance = (namespace, firstLoad = false) => {
           .staggerFromTo(innerBioLines, 0.78, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045, 'bioStart');
       } else {
         homeEntranceTL
-          .fromTo(youCan, 2.1, { x: 20 }, { x: 0, ease: Expo.easeOut, force3D: true }, 'startTwo')
-          .fromTo(vertLeft, 0.35, { x: 0, opacity: 1, scale: 1 }, { x: -25, opacity: 0.3, scale: 1, ease: Sine.easeOut, force3D: true }, 'start')
-          .to(vertLeft, 0.5, { x: 0, opacity: 1, scale: 1, ease: Sine.easeOut, force3D: true }, 'returnVert')
+          .fromTo(youCan, 2.1, { x: 20 }, { x: 0, ease: Expo.easeOut, force3D: true }, 'start')
           .staggerFromTo(innerWelcomeLines, 0.76, { skewY: 0, yPercent: 101 }, { skewY: 0, yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045, 'welcomeStart')
           .staggerFromTo(innerBioLines, 0.76, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045, 'bioStart');
       }
@@ -169,7 +165,7 @@ export const pageEntrance = (namespace, firstLoad = false) => {
         .add(beaconPlay, '-=1.25');
 
 
-      TweenLite.delayedCall(0.7, () => {
+      TweenMax.delayedCall(0.7, () => {
         homeEntranceTL.play();
       });
       break;
@@ -202,7 +198,7 @@ export const pageEntrance = (namespace, firstLoad = false) => {
           projectEntranceTL.fromTo(globalEls, 1.3, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut }, 'startPipe'); 
         }
         
-        TweenLite.delayedCall(0.2, () => {
+        TweenMax.delayedCall(0.2, () => {
           projectEntranceTL.play();
         });
       }
@@ -263,7 +259,7 @@ export const pageEntrance = (namespace, firstLoad = false) => {
         .to(notFoundBeacon, 0.85, { scale: 1, ease: Sine.easeInOut });
 
 
-      TweenLite.delayedCall(0.5, () => {
+      TweenMax.delayedCall(0.5, () => {
         notFoundEntranceTL.play();
       });
       break;
@@ -450,14 +446,14 @@ export const openCloseProjectsMenu = () => {
       currentOpacity = window.getComputedStyle(document.querySelector('.vert-left .meta')).getPropertyValue('opacity');
       console.log(currentOpacity);
       openMenuTL.timeScale(1).play();
-      TweenLite.to(fadeEls, 0.5, { opacity: 1, ease: Sine.easeInOut, force3D: true, onComplete: () => { TweenLite.set(fadeEls, { clearProps: 'opacity' }); } });
-      TweenLite.to(scrollPrompt, 0.5, { opacity: 0, ease: Sine.easeInOut, force3D: true });
-      // TweenLite.to(projectsContainerWrapper, 0.2, { autoAlpha: 1, ease: Expo.easeOut, force3D: true });
+      TweenMax.to(fadeEls, 0.5, { opacity: 1, ease: Sine.easeInOut, force3D: true, onComplete: () => { TweenMax.set(fadeEls, { clearProps: 'opacity' }); } });
+      TweenMax.to(scrollPrompt, 0.5, { opacity: 0, ease: Sine.easeInOut, force3D: true });
+      // TweenMax.to(projectsContainerWrapper, 0.2, { autoAlpha: 1, ease: Expo.easeOut, force3D: true });
     } else {
       openMenuTL.timeScale(1.3).reverse();
-      // TweenLite.to(projectsContainerWrapper, 1.3, { autoAlpha: 0, ease: Expo.easeInOut, force3D: true });
-      TweenLite.to(fadeEls, 0.5, { opacity: currentOpacity, ease: Sine.easeInOut, force3D: true });
-      TweenLite.to(scrollPrompt, 0.8, { opacity: 1, ease: Sine.easeInOut, force3D: true });
+      // TweenMax.to(projectsContainerWrapper, 1.3, { autoAlpha: 0, ease: Expo.easeInOut, force3D: true });
+      TweenMax.to(fadeEls, 0.5, { opacity: currentOpacity, ease: Sine.easeInOut, force3D: true });
+      TweenMax.to(scrollPrompt, 0.8, { opacity: 1, ease: Sine.easeInOut, force3D: true });
     }
     globalObject.openCloseCount++;
   });

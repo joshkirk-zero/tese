@@ -17,7 +17,7 @@
   "rules": {
     "array-bracket-spacing": "warn",
     "arrow-body-style": "off",
-    "arrow-parens": "warn",
+    "arrow-parens": "off",
     "class-methods-use-this" : "off",
     "comma-dangle": ["warn", "never"],
     "comma-spacing": "warn",
@@ -139,7 +139,7 @@
         ]
       }
     }],
-    "semi": ["warn", "always"],
+    "semi": "off",
     "sort-imports": "off",
     "space-before-function-paren": "warn",
     "space-in-parens": "warn",

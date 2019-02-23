@@ -1,6 +1,6 @@
 import VirtualScroll from 'virtual-scroll';
 import throttle from 'lodash.throttle';
-import { TweenLite, Expo, Linear, TimelineMax, Sine } from 'gsap';
+import { TweenMax, TimelineMax, Sine } from 'gsap';
 import { globalObject } from '../_functions';
 import { SplitText } from '../thirdparty/SplitText';
 import { Core } from '../main';
@@ -9,8 +9,6 @@ export default class HomeSmooth {
   constructor(options = {}) {
     this.bindMethods();
 
-    TweenLite.defaultEase = Linear.easeNone;
-
     this.el = document.querySelector('[data-smooth]:last-child');
 
     const {
@@ -18,16 +16,16 @@ export default class HomeSmooth {
       threshold = !globalObject.isMobile ? 200 : 20,
       ease = 0.15,
       preload = true,
-      mouseMultiplier = 0.3,
+      mouseMultiplier = 0.5,
       touchMultiplier = 2.5,
-      firefoxMultiplier = 15,
+      firefoxMultiplier = 90,
       preventTouch = true,
       passive = true
     } = options;
 
     this.dom = {
       el: this.el,
-      sections: sections,
+      sections: sections
     };
 
     this.sections = null;
@@ -68,14 +66,21 @@ export default class HomeSmooth {
     const scrollWords = document.querySelectorAll('.scroll-prompt p span:first-child');
     const scrollWordsWraps = new SplitText(scrollWords, { type: 'words' }).words;
     const scrollWordsChars = new SplitText(scrollWordsWraps, { type: 'chars' }).chars;
-
+    const fadeEls = document.querySelectorAll('.home, .arrow');
+    TweenMax.delayedCall(0.1, () => {
+      TweenMax.set(scrollWordsWraps, { z: 20, x: 1 });
+    });
+    const redirectToFirst = () => {
+      Core.redirect('https://tesecreates.com/facebook-careers', 'homeScrollTo');
+    };
     this.scrollAwayTL
       .add('start')
-      .add('charsStart', '+=.3')
-      .staggerFromTo(scrollWordsChars, 0.8, { rotationX: 0, skewX: 0, scaleY: 1 }, { rotationX: 65, skewX: -10, scaleY: 0, ease: Sine.easeInOut, force3D: true }, 0.017)
-      .fromTo(scrollWordsChars, 0.8, { y: 0 }, { y: -35, ease: Sine.easeInOut, force3D: true }, 0)
+      .add('charsStart', '+=.28')
+      .staggerFromTo(scrollWordsChars, 0.9, { rotationX: 0, skewX: 0, scaleY: 1 }, { rotationX: 65, skewX: -10, scaleY: 0, ease: Sine.easeInOut, force3D: true }, 0.017, 0.01)
+      .fromTo(scrollWordsChars, 0.8, { y: 0 }, { y: -32, ease: Sine.easeInOut, force3D: true }, 0)
       .staggerFromTo(scrollWordsChars, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeOut, force3D: true }, 'charsStart', 0.016)
-      .staggerFromTo(scrollWordsWraps, 1, { z: 20 }, { z: 0, ease: Sine.easeOut }, 0.02, 'start', () => { Core.redirect('http://joshs-imac.local:5757/facebook-careers'); });
+      .staggerFromTo(scrollWordsWraps, 1, { z: 20 }, { z: 0, ease: Sine.easeOut }, -0.02, 'start')
+      .fromTo(fadeEls, 0.9, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, force3D: true, onComplete: redirectToFirst }, 'start');
   }
 
   bindMethods() {
