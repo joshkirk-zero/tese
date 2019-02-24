@@ -9,4 +9,4 @@
   <div class="global-els">
       <?php include __DIR__ . '/../includes/global-els.php'; ?>
   </div>
-  <div data-router-wrapper>
+  <main data-router-wrapper>

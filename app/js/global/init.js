@@ -16,13 +16,12 @@ export const firstLoad = () => {
   const namespace = document.querySelector('[data-router-view]').dataset.routerView;
   globalObject.namespace = namespace;
   Anim.prepScrollPrompt(namespace);
-  const logo = document.querySelector('.logo');
   switch (namespace) {
-    case "home":
+    case 'home':
       quicklink({ el: document.querySelector('.projects-wrapper') });
       break;
-    case "project":
-      let viewEl = document.querySelector('[data-router-view]');
+    case 'project':
+      const viewEl = document.querySelector('[data-router-view]');
       if (viewEl.classList.contains('facebook-careers')) {
         quicklink({urls:['/', '/microsoft-teams/', '/honorable-mentions/']});
       } else if (viewEl.classList.contains('microsoft-teams')) {

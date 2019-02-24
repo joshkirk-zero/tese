@@ -14,7 +14,7 @@ $document = $WPGLOBAL['document'];
   <div class="global-els">
       <?php include __DIR__ . '/../includes/global-els.php';?>
   </div>
-  <div data-router-wrapper>
+  <main data-router-wrapper>
     <div data-router-view="404">
       <div class="container not-found">
         <div class="profile-wrapper">
@@ -27,7 +27,7 @@ $document = $WPGLOBAL['document'];
         </div>
       </div>
     </div>
-  </div>
+  </main>
 <script src="../js/main-min.js"></script>
 </body>
 

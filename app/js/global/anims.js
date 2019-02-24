@@ -3,7 +3,6 @@ import { SplitText } from '../thirdparty/SplitText';
 import { globalObject } from '../_functions';
 
 export const prepScrollPrompt = (context) => {
-  //   0: home  1: project
   const prompts = document.querySelectorAll('.scroll-prompt p span');
   const homeLetters = prompts[0].querySelectorAll('div div');
   const projectLetters = prompts[1].querySelectorAll('div div');
@@ -12,13 +11,15 @@ export const prepScrollPrompt = (context) => {
   switch (context) {
     case 'home':
       TweenMax.set([homeLetters, projectLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
-      TweenMax.set(prompts, { display: 'none' });
-      TweenMax.fromTo(prompts[0], 0.5, { display: 'block', opacity: 0 }, { opacity: 1, ease: Sine.easeInOut });
+      TweenMax.set([prompts, promptArrow], { display: 'none' });
+      if (!globalObject.isMobile) {
+        TweenMax.fromTo([prompts[0], promptArrow], 0.5, { display: 'block', opacity: 0 }, { opacity: 1, ease: Sine.easeInOut });
+      }
       break;
     case 'project':
       TweenMax.set([homeLetters, projectLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
       TweenMax.set(prompts, { display: 'none' });
-      TweenMax.fromTo(prompts[1], 0.5, { display: 'block', opacity: 0 }, { opacity: 1, ease: Sine.easeInOut });
+      TweenMax.fromTo([prompts[1], promptArrow], 0.5, { display: 'block', opacity: 0 }, { opacity: 1, ease: Sine.easeInOut });
       break;
     default:
 
@@ -139,8 +140,8 @@ export const pageEntrance = (namespace, firstLoad = false) => {
           .add('bioStart', '+=1.35');
       } else {
         homeEntranceTL
-          .add('welcomeStart', '-=.35')
-          .add('bioStart', '-=.05');
+          .add('welcomeStart')
+          .add('bioStart', '+=.3');
       }
       homeEntranceTL
         .fromTo(wiperBars, 2.1, { x: -15, scaleX: 0 }, { x: 130, scaleX: 1, ease: Expo.easeOut, force3D: true }, 'start')

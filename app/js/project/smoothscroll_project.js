@@ -7,17 +7,30 @@ import { SplitText } from '../thirdparty/SplitText';
 
 export default class SmoothProject {
   constructor(options = {}) {
+    this.isMobile = globalObject.isMobile;
     this.bindMethods();
 
     TweenMax.defaultEase = Linear.easeNone;
 
     this.el = document.querySelector('[data-smooth]:last-child');
+    this.mobileOverflowEl = document.querySelector('main');
+
+    // project page specific animations
+    this.scrollImageWrappers = document.querySelectorAll('.image-scroll');
+    this.scrollImages = document.querySelectorAll('.image-scroll img');
+    this.scrollDists = [];
+    this.scrollAwayTL = new TimelineMax({ paused: true });
+    this.measureEl = document.querySelector('.project-hero .measure-el');
+    this.measureElHeight = this.measureEl.offsetHeight;
+    this.thisPagesTLs = [];
+    this.offsetVal = 0;
+    this.allAnimsIn = false;
 
     const {
       sections = this.el.querySelectorAll('[data-smooth-section]'),
       elems = this.el.querySelectorAll('.image-scroll'),
       scrollBasedElems = this.el.querySelectorAll('.scroll-enter'),
-      threshold = !globalObject.isMobile ? 200 : 20,
+      threshold = !this.isMobile ? 200 : 20,
       ease = 0.15,
       preload = true,
       mouseMultiplier = 0.3,
@@ -29,7 +42,7 @@ export default class SmoothProject {
     
     this.dom = {
       el: this.el,
-      sections: sections,
+      sections: this.isMobile ? false : sections,
       elems: elems,
       scrollBasedElems: scrollBasedElems
     };
@@ -50,35 +63,29 @@ export default class SmoothProject {
       current: 0,
       last: 0,
       target: 0,
-      bounding: 0,
       height: 0,
       max: 0
     };
 
-    this.vs = new VirtualScroll({
-      el: this.el,
-      mouseMultiplier: mouseMultiplier,
-      touchMultiplier: touchMultiplier,
-      firefoxMultiplier: firefoxMultiplier,
-      preventTouch: preventTouch,
-      passive: passive
-    });
+    if (!this.isMobile) {
+      this.vs = new VirtualScroll({
+        el: this.el,
+        mouseMultiplier: mouseMultiplier,
+        touchMultiplier: touchMultiplier,
+        firefoxMultiplier: firefoxMultiplier,
+        preventTouch: preventTouch,
+        passive: passive
+      });
+    } else {
+      this.mobileOverflowEl.addEventListener('scroll', this.run(), true)
+    }
 
     this.init();
-
-    // project page specific animations
-    this.scrollImageWrappers = document.querySelectorAll('.image-scroll');
-    this.scrollImages = document.querySelectorAll('.image-scroll img');
-    this.scrollDists = [];
 
     for (let i = 0; i < this.scrollImages.length; i++) {
       const scrollImgDist = this.scrollImages[i].offsetHeight - this.scrollImageWrappers[i].offsetHeight;
       this.scrollDists.push(scrollImgDist);
     }
-
-    this.scrollAwayTL = new TimelineMax({ paused: true });
-    this.measureEl = document.querySelector('.project-hero .measure-el');
-    this.measureElHeight = this.measureEl.offsetHeight;
 
     const fadeEls = document.querySelectorAll('.email-triggers .email, .email-triggers .availability, .arrow, .title-meta');
     const largeTitle = document.querySelectorAll('.project-hero .large-svg-title, .project-hero .idx');
@@ -101,11 +108,6 @@ export default class SmoothProject {
       .fromTo(staggerFadeEls, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, force3D: true }, 'start')
       .fromTo(fadeEls, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, force3D: true }, 'start')
       .fromTo(largeTitle, 1.1, { y: 0 }, { y: -50, ease: Sine.easeInOut, force3D: true }, 'start');
-
-    this.thisPagesTLs = [];
-
-    this.offsetVal = 0;
-    this.allAnimsIn = false;
 
     for (let i = 0; i < this.dom.scrollBasedElems.length; i++) {
       const entranceType = this.dom.scrollBasedElems[i].dataset.entrance;
@@ -156,7 +158,6 @@ export default class SmoothProject {
           break;
       }
     }
-    console.log(this.thisPagesTLs);
   }
 
   bindMethods() {
@@ -169,12 +170,14 @@ export default class SmoothProject {
   }
 
   on() {
-    this.dom.el.classList.add('is-virtual-scroll');
-    this.setStyles();
+    if (!this.isMobile) {
+      this.dom.el.classList.add('is-virtual-scroll');
+      this.setStyles();
+      this.vs.on(this.event);
+    }
     this.getCache();
     this.getBounding();
     this.addListeners();
-    this.vs.on(this.event);
     // this.preload();
     this.requestAnimationFrame();
   }
@@ -197,15 +200,20 @@ export default class SmoothProject {
 
   run() {
     if (this.state.resizing) return;
-    this.data.current += (this.data.target - this.data.current) * this.data.ease;
+    if (!this.isMobile) {
+      this.data.current += (this.data.target - this.data.current) * this.data.ease;
+      this.transformSections();
+      this.data.last = this.data.current;
+    } else {
+      this.data.current = this.mobileOverflowEl.scrollTop;
+      this.data.last = this.data.current;
+    }
+    
 
     this.requestAnimationFrame();
-    this.transformSections();
     this.scrollAwayFromHero();
     this.animateOverflowImages();
-    this.checkScrollBasedLoadins();
-
-    this.data.last = this.data.current;
+    this.checkScrollBasedLoadins(); 
   }
 
   transformSections() {
@@ -342,25 +350,29 @@ export default class SmoothProject {
   }
 
   getBounding() {
-    const bounding = this.dom.el.getBoundingClientRect();
     this.data.height = window.innerHeight;
-    this.data.bounding = bounding;
-    this.data.max = bounding.height - this.data.height;
+    if (!this.isMobile) {
+      this.data.max = this.dom.el.getBoundingClientRect().height - this.data.height;
+    }
   }
 
   resize() {
     this.state.resizing = true;
     this.getCache();
-    this.transformSections();
+    if (!this.isMobile) {
+      this.transformSections();
+    }
     this.getBounding();
     this.state.resizing = false;
   }
 
   off() {
     this.state.rafCancelled = true;
-    this.vs.off(this.event);
+    if (!this.isMobile) {
+      this.vs.off(this.event);
+      this.dom.el.classList.remove('is-virtual-scroll');
+    }
     this.cancelAnimationFrame();
-    this.dom.el.classList.remove('is-virtual-scroll');
     this.removeListeners();
   }
 
@@ -379,7 +391,9 @@ export default class SmoothProject {
 
   destroy() {
     this.off();
-    this.vs.destroy();
+    if (!this.isMobile) {
+      this.vs.destroy();
+    }
     this.dom = null;
     this.data = null;
     this.sections = null;

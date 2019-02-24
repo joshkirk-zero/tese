@@ -145,8 +145,7 @@ export default class HomeSmooth {
   }
 
   animateElems() {
-    let percentageThrough = ((this.measureEl.getBoundingClientRect().top / this.measureElHeight) - 1).toFixed(3) * -1;
-    console.log(percentageThrough);
+    let percentageThrough = (this.data.current / this.measureElHeight).toFixed(3);
     if (percentageThrough <= 0) {
       percentageThrough = 0;
     } else if (percentageThrough >= 1) {

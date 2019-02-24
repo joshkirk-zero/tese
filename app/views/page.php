@@ -54,7 +54,6 @@ $document = $WPGLOBAL['document'];
         $nextProject = $prismic->get_api()->getByID($document->data->next_project->id);
     ?>
     <section class="project-footer container scroll-enter" data-offset=".4" data-mobile-offset="1" data-entrance="project-footer" data-smooth-section>
-
         <span class="shift">
             <a href="/<?php echo $nextProject->uid; ?>/" data-transition="nextProject">
 

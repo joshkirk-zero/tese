@@ -37,15 +37,20 @@ $pink: #E8B9AB;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-html, body {
+body, html, main {
   height: 100%;
   min-height: 100%;
   max-height: 100%;
-  overflow: hidden;
+  width: 100%;
   position: relative;
   overflow: hidden;
 }
-
+main {
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+}
 body {
   font-family: $gtAmerica;
   margin: 0;
@@ -94,6 +99,9 @@ ul {
   pointer-events: none;
   position: absolute;
   left: 0;
+  @media (max-width: 767px) {
+    bottom: -5px;
+  }
   span {
     height: 2px;
     width: 100%;
@@ -114,7 +122,7 @@ ul {
 [data-router-wrapper] {
   // transform-origin: 50% 0%;
 }
-a:hover, p:hover {
+body:not(.touch) a:hover, body:not(.touch) p:hover {
   .lines {
     span {
       transform: translateX(-102%);
@@ -194,8 +202,11 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       padding: 0 0 0 80px;
     }
     @media (max-width: 767px) {
-      padding: 0 52px 0 47px;
-    } 
+      padding: 0 20px 0 44px;
+    }
+    @media (max-width: 320px) {
+      padding: 0 10px 0 45px;
+    }
   }
 }
 .container-padding {
@@ -251,6 +262,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     opacity: 0;
     pointer-events: none;
   }
+}
+.shift:not(.project-images) {
+  will-change: transform;
 }
 .project-hero {
   padding-left: 16.5vw;
@@ -317,9 +331,6 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     font-family: $gtAmerica;
     margin-bottom: 5px;
     margin-top: 45vh;
-    @media (max-height: 820px) {
-      margin-top: 38vh;
-    }
     > div {
       overflow: hidden;
     }
@@ -332,10 +343,14 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   font-size: 14px;
   line-height: 1.57;
   letter-spacing: 0.1px;
+  @media (max-width: 959px) {
+    max-width: 450px;
+  }
   @media (max-width: 767px) {
     font-size: 10px;
     line-height: 1.8;
-    letter-spacing: 0;
+    letter-spacing: 0.05px;
+    max-width: 270px;
   }
   > div {
     overflow: hidden;
@@ -433,6 +448,11 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       margin: 0;
     }
   }
+  @media (max-width: 767px) {
+    .logo {
+      width: 6px;
+    }
+  }
   .meta {
     font-size: 12px;
     font-family: $gtAmerica;
@@ -520,6 +540,14 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     left: -17px;
     position: relative;
   }
+  @media (max-width: 767px) {
+    margin-left: 12px;
+    p {
+      font-size: 10px;
+      line-height: 1.7;
+      letter-spacing: 0.8px;
+    }
+  }
 }
 .beacon {
   width: 10px;
@@ -530,6 +558,11 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   left: -17px;
   top: 5px;
   transform: scale(0);
+  @media (max-width: 767px) {
+    width: 6px;
+    height: 6px;
+    left: -12px;
+  }
 }
 .pin-width {
   width: 483px;
@@ -550,6 +583,15 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   .triggers {
     margin-left: 117px;
   }
+  .label {
+    color: $brown;
+    font-stretch: expanded;
+    font-size: 12px;
+    font-family: $gtAmerica;
+    letter-spacing: 1px;
+    line-height: 1;
+    padding-top: 5px; 
+  }
   @media (max-width: 959px) {
     padding-right: 0;
     right: -187px;
@@ -563,14 +605,13 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       margin-left: 0;
     } 
   }
-  .label {
-    color: $brown;
-    font-stretch: expanded;
-    font-size: 12px;
-    font-family: $gtAmerica;
-    letter-spacing: 1px;
-    line-height: 1;
-    padding-top: 5px; 
+  @media (max-width: 767px) {
+    right: -163px;
+    top: 5px;
+    font-size: 10px;
+    .label {
+      font-size: 10px;
+    }
   }
   p, span {
     display: inline-block;
@@ -635,7 +676,8 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     display: inline-block;
     padding: 6px 1px;
     > span {
-      display: inline-block;
+      float: left;
+      clear: left;
       position: relative;
       svg {
         height: 100%;
@@ -733,6 +775,11 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   display: inline-block;
   color: $pink;
   margin: 0 10px;
+  @media (max-width: 767px) {
+    font-size: 11px;
+    position: relative;
+    bottom: -1px;
+  }
 }
 .big-pipe {
   position: absolute;
@@ -1106,6 +1153,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     float: left;
     clear: left;
   }
+  a {
+    display: block;
+  }
   .eyebrow, .idx {
     > div {
       overflow: hidden;
@@ -1159,8 +1209,17 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   bottom: -450px;
   z-index: 9;
   display: flex;
-  padding-left: 118px;
+  padding-left: 7vw;
+  will-change: transform;
   padding-top: 79px;
+  // .bg {
+  //   height: 100%;
+  //   width: 100%;
+  //   left: 0;
+  //   top: 100%;
+  //   position: absolute;
+  //   background-color: #1b2218;
+  // }
   .lines {
     bottom: -2px;
   }
@@ -1180,6 +1239,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     letter-spacing: 1px;
     color: $ltBrown;
     display: inline-block;
+    div div {
+      will-change: transform;
+    }
     + p, + a {
       margin-top: 21px;
     }
@@ -1195,11 +1257,24 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       position: absolute;
     }
   }
+  @media (max-width: 1200px) {
+    padding-left: 5vw;
+    .label {
+      font-size: 11px;
+    }
+    p, a {
+      font-size: 12px;
+    }
+  }
   .close {
     position: absolute;
     right: 60px;
     top: 45px;
     cursor: pointer;
+    @media (max-width: 1300px) {
+      top: 30px;
+      right: 40px;
+    }
     .clip > div {
       overflow: hidden;
     }
@@ -1217,7 +1292,17 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     color: $ltBrown;
     width: 85%;
     max-width: 363px;
-    margin-right: 119px;
+    margin-right: 8.6vw;
+    @media (max-width: 1300px) {
+      margin-right: 6vw;
+    }    
+    @media (max-width: 1200px) {
+      max-width: 293px;
+      margin-right: 8vw;
+    }
+    @media (max-width: 1080px) {
+      margin-right: 3.5vw;
+    }
     > div {
       overflow: hidden;
     }
@@ -1236,8 +1321,30 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     }
   }
   .credits {
-    margin-right: 110px;
-    max-width: 305px;
+    margin-right: 8vw;
+    max-width: 302px;
+    @media (max-width: 1300px) {
+      margin-right: 6vw;
+    }
+    @media (max-width: 1200px) {
+      max-width: 278px;
+      margin-right: 7vw;
+    }
+    @media (max-width: 1080px) {
+      margin-right: 3.5vw;
+    }
+    @media (max-width: 959px) {
+      
+    }
+    @media (max-width: 767px) {
+      
+    }
+    @media (max-width: 480px) {
+      
+    }
+    @media (max-width: 320px) {
+      
+    }
     p, a {
       > div {
         overflow: hidden;
@@ -1409,6 +1516,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       align-self: flex-end;
     }
     @media (max-width: 767px) {
+      max-height: 400px;
       &.desktop_left {
         flex: 0 1 100vw;
         width: 100vw;
@@ -1477,12 +1585,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
 @media (max-width: 959px) {
   .profile-wrapper {
     flex-direction: column;
-    height: 82vh;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .bio {
-    max-width: 450px;
+    top: 25px;
   }
   .home .you-can, .not-found .you-can {
     position: relative;
@@ -1515,7 +1618,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     top: 18%;
   }
   .home .you-can, .not-found .you-can {
-    margin-bottom: 30px;
+    margin-bottom: 18px;
     span:first-child, span:last-child {
       height: 35vw;
     }
@@ -1526,4 +1629,18 @@ h1, h2, h3, h4, h5, h6, p, a, li {
 }
 @media (max-width: 480px) {
 
+}
+@media (max-width: 320px) {
+  .profile-wrapper {
+    top: 25px;
+  }
+  .availability {
+    margin-top: 15px;
+  }
+  .home .you-can, .not-found .you-can {
+    margin-bottom: 8px;
+    span:first-child, span:last-child {
+      height: 32vw;
+    }
+  }
 }
