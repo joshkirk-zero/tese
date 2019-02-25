@@ -1217,14 +1217,6 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   padding-left: 7vw;
   will-change: transform;
   padding-top: 79px;
-  // .bg {
-  //   height: 100%;
-  //   width: 100%;
-  //   left: 0;
-  //   top: 100%;
-  //   position: absolute;
-  //   background-color: #1b2218;
-  // }
   .lines {
     bottom: -2px;
   }
@@ -1236,6 +1228,15 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     display: block;
     > div {
       overflow: hidden;
+    }
+  }
+  .wrapper {
+    display: flex;
+    > div > div {
+      margin-bottom: 26px;
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
   p, a {
@@ -1260,15 +1261,6 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       top: -2px;
       left: -7%;
       position: absolute;
-    }
-  }
-  @media (max-width: 1200px) {
-    padding-left: 5vw;
-    .label {
-      font-size: 11px;
-    }
-    p, a {
-      font-size: 12px;
     }
   }
   .close {
@@ -1339,7 +1331,8 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       margin-right: 3.5vw;
     }
     @media (max-width: 959px) {
-      
+      margin-right: 0;
+      max-width: none;
     }
     @media (max-width: 767px) {
       
@@ -1361,14 +1354,19 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       }
     }
   }
-  .wrapper {
-    display: flex;
-    > div > div {
-      margin-bottom: 26px;
-      &:last-child {
-        margin-bottom: 0;
-      }
+  @media (max-width: 1200px) {
+    padding-left: 5vw;
+    .label {
+      font-size: 11px;
     }
+    p, a {
+      font-size: 12px;
+    }
+  }
+  @media (max-width: 959px) {
+    height: 100%;
+    bottom: -100%;
+    flex-wrap: wrap
   }
 }
 .close-mask {
