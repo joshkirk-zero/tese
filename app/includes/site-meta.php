@@ -4,6 +4,8 @@ $fb_img = "/images/facebook-share.png";
 $tw_img = "/images/twitter-share.png";
 // grab Featured Image from page 
 ?>
+
+<title>Matese Fields</title>
 <meta name="description" content="<?php echo $description; ?>" />
 <!-- Facebook Meta -->
 <meta property="og:description" content="<?php echo $description; ?>" /> 

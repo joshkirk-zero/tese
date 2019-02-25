@@ -261,6 +261,14 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     width: 1px;
     opacity: 0;
     pointer-events: none;
+    will-change: transform;
+  }
+}
+.touch {
+  .home-view {
+    .measure-el {
+      display: none;
+    }
   }
 }
 .shift:not(.project-images) {
@@ -638,7 +646,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
 /* Specific selector styles
 
 **********************************************/
-.switch-overlay, .reverse-overlay {
+.switch-overlay {
   position: absolute;
   left: 0;
   top: 0;
@@ -648,9 +656,6 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-}
-.reverse-overlay {
-  z-index: 3;
 }
 .wiper {
   position: absolute;
@@ -1109,7 +1114,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   }
 }
 .idx {
-  line-height: 1;
+  line-height: 1.01;
   color: $brown;
   letter-spacing: 1px;
   font-size: 12px;
@@ -1387,7 +1392,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   align-items: flex-end;
   margin-bottom: 115px;
   @media (max-width: 767px) {
-    padding: 0 56px 0 44px;
+    padding: 0 48px 0 38px;
     > div {
       margin-bottom: 70px;
     }
@@ -1532,6 +1537,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
           float: none;
         }
       }
+    }
+    @media (max-width: 480px) {
+      max-height: 350px;
     }
     &:after {
       position: absolute;

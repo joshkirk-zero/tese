@@ -25,7 +25,7 @@ export default class SmoothProject {
     this.thisPagesTLs = [];
     this.offsetVal = 0;
     this.allAnimsIn = false;
-
+    this.body = document.body;
     const {
       sections = this.el.querySelectorAll('[data-smooth-section]'),
       elems = this.el.querySelectorAll('.image-scroll'),
@@ -199,7 +199,7 @@ export default class SmoothProject {
   }
 
   run() {
-    if (this.state.resizing) return;
+    if (this.state.resizing || this.body.classList.contains('transitioning')) return;
     if (!this.isMobile) {
       this.data.current += (this.data.target - this.data.current) * this.data.ease;
       this.transformSections();
@@ -251,7 +251,7 @@ export default class SmoothProject {
       }
     })
   }
-  
+
   checkScrollBasedLoadins() {
     if (this.thisPagesTLs.length !== this.offsetVal) {
       this.scrollBasedElems.forEach((data, index) => {
@@ -323,9 +323,9 @@ export default class SmoothProject {
       const bounds = el.getBoundingClientRect()
       this.elems.push({
         el: el,
-        top: bounds.top > this.data.height ? bounds.top + 300 : this.data.height + 300,
+        top: bounds.top > this.data.height ? bounds.top + 100 : this.data.height,
         bottom: bounds.bottom,
-        height: (bounds.bottom - bounds.top) - 700,
+        height: this.data.height - 140,
         progress: {
           current: 0
         }
@@ -393,6 +393,8 @@ export default class SmoothProject {
     this.off();
     if (!this.isMobile) {
       this.vs.destroy();
+    } else {
+      this.mobileOverflowEl.removeEventListener('scroll', this.run(), true)
     }
     this.dom = null;
     this.data = null;

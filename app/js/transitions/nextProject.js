@@ -7,7 +7,11 @@ import { prepScrollPrompt } from '../global/anims';
 
 class NextProject extends Highway.Transition {
   in({ from, to, trigger, done }) {
-    window.scrollTo(0, 0);
+    if (!globalObject.isMobile) {
+      window.scrollTo(0, 0);
+    } else {
+      document.querySelector('main').scrollTo(0, 0);
+    }
     TweenMax.set(to.querySelectorAll('.project-hero .wiper'), { display: 'none' });
     from.remove();
     prepScrollPrompt(to.dataset.routerView);
@@ -22,16 +26,11 @@ class NextProject extends Highway.Transition {
       .staggerFromTo(innerEntranceLines, 0.79, { skewY: 0, yPercent: 101 }, { skewY: 0, yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.05, 'start')
       .fromTo(bigPipe, 0.6, { transformOrigin: '50% 0', scaleY: 0 }, { scaleY: 1, ease: Sine.easeInOut }, 0)
       .fromTo(projectFadeEls, 1, { autoAlpha: 0 }, { autoAlpha: 1, scale: 1, ease: Sine.easeInOut, onComplete: () => { done(); } }, '-=.45');
-
-    // TweenMax.to(fadeEls, 0.8, { autoAlpha: 1, ease: Sine.easeInOut });
   }
 
   out({ from, trigger, done }) {
     const eyebrow = document.querySelector('.project-footer .eyebrow');
-    // const projectFadeEls = document.querySelectorAll('.vert-left .meta, .socials, .email-triggers .email');
-    // TweenMax.set(projectFadeEls, { clearProps: 'all' });
     globalObject.comingFromFooter = true;
-    // Animation
     TweenMax.to(eyebrow, 0.35, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true,
       onComplete: () => {
         done();

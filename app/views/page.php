@@ -22,7 +22,7 @@ $document = $WPGLOBAL['document'];
         </div>
         <div class="measure-el"><span></span></div>
     </section>
-    
+
     <section class="project-body" data-smooth-section>
         <div class="intro shift container scroll-enter" data-offset=".88" data-mobile-offset="1" data-entrance="project-intro">
             <div>

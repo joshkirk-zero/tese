@@ -93,6 +93,14 @@ export const prepProfileDrawer = () => {
   };
   closeMask.addEventListener('click', closeFunc);
   closeTrigger.addEventListener('click', closeFunc);
+  document.addEventListener('keyup', (event) => {
+    const key = event.key;
+    if (key === 'Escape' || key === 'Esc') {
+      if (openCloseProfile.progress() > 0) {
+        closeFunc();
+      }
+    }
+  });
 };
 
 export const pageEntrance = (namespace, firstLoad = false) => {

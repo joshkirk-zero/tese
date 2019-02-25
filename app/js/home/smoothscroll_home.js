@@ -8,7 +8,7 @@ import { Core } from '../main';
 export default class HomeSmooth {
   constructor(options = {}) {
     this.bindMethods();
-
+    this.body = document.body;
     this.el = document.querySelector('[data-smooth]:last-child');
 
     const {
@@ -71,7 +71,7 @@ export default class HomeSmooth {
       TweenMax.set(scrollWordsWraps, { z: 20, x: 1 });
     });
     const redirectToFirst = () => {
-      Core.redirect('https://tesecreates.com/facebook-careers', 'homeScrollTo');
+      Core.redirect('http://joshs-imac.local:5757/facebook-careers', 'homeScrollTo');
     };
     this.scrollAwayTL
       .add('start')
@@ -124,8 +124,10 @@ export default class HomeSmooth {
     this.data.current += (this.data.target - this.data.current) * this.data.ease;
 
     this.requestAnimationFrame();
-    this.transformSections();
-    this.animateElems();
+    if (!this.body.classList.contains('transitioning')) {
+      this.transformSections();
+      this.animateElems();
+    }
 
     this.data.last = this.data.current;
   }

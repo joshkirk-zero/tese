@@ -4,7 +4,7 @@ use Prismic\Dom\RichText;
 $document = $WPGLOBAL['document'];
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <?php include __DIR__ . '/../includes/head.php'; ?>

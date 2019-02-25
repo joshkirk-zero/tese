@@ -6,7 +6,6 @@ $nav = getByUID("global-content", "global_content");
 // print_r(json_encode($document, JSON_PRETTY_PRINT));
 ?>
 <div class="switch-overlay"></div>
-<div class="reverse-overlay"></div>
 <div class="vert-holder">
     <div class="projects-wrapper container">
         <div class="large-svg-title">
@@ -67,7 +66,7 @@ $nav = getByUID("global-content", "global_content");
 <div class="global-mask"></div>
 <div class="vert-left">
     <a href="/" class="logo">
-        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
              viewBox="0 0 9.3 62.4" style="enable-background:new 0 0 9.3 62.4;" xml:space="preserve">
             <g>
                 <path class="pink-fill" d="M9.3,4.5H7v55.7H2.4V4.5H0V0h9.3V4.5z"/>
@@ -106,21 +105,28 @@ $nav = getByUID("global-content", "global_content");
 <div class="scroll-prompt">
     <p><span class="home-prompt"><?= RichText::asText($nav->data->home_scroll_prompt) ?></span><span class="project-prompt"><?= RichText::asText($nav->data->project_scroll_prompt) ?></span></p>
     <div class="arrow">
-        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 71.9 95" style="enable-background:new 0 0 71.9 95;" xml:space="preserve"><path class="pink-fill" d="M39.7,93.4l30.6-30.6c2.1-2.1,2.1-5.5,0-7.5c-2.1-2.1-5.5-2.1-7.5,0L41.2,76.8l0-71.5c0-2.9-2.4-5.3-5.3-5.3
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 71.9 95" style="enable-background:new 0 0 71.9 95;" xml:space="preserve"><path class="pink-fill" d="M39.7,93.4l30.6-30.6c2.1-2.1,2.1-5.5,0-7.5c-2.1-2.1-5.5-2.1-7.5,0L41.2,76.8l0-71.5c0-2.9-2.4-5.3-5.3-5.3
 	c-2.9,0-5.3,2.4-5.3,5.3v71.5L9.1,55.3c-2.1-2.1-5.5-2.1-7.5,0c-1,1-1.6,2.4-1.6,3.8c0,1.4,0.5,2.7,1.6,3.8l30.5,30.5
 	c1,1,2.4,1.6,3.8,1.6C37.3,95,38.7,94.4,39.7,93.4z"/></svg>
     </div>
 </div>
 <div class="close-mask"></div>
 <div class="los-detalles">
-    <div class="bg"></div>
-    <p class="close"><span class="clip">Close</span><span class="lines"><span></span><span></p>
+    <p class="close">
+        <span class="clip">Close</span>
+        <span class="lines">
+            <span></span>
+            <span></span>
+        </span>
+    </p>
     <p class="secondary-bio"><?= RichText::asText($nav->data->profile_copy) ?></p>
     <div class="wrapper">
         <div class="credits">
             <div>
                 <span class="label">Development</span>
-                <a href="https://twitter.com/joshgkirk" target="_blank"><span class="clip">Josh Kirk</span><span class="lines"><span></span><span></span></span></a>
+                <a href="https://twitter.com/joshgkirk" target="_blank">
+                    <span class="clip">Josh Kirk</span><span class="lines"><span></span><span></span></span>
+                </a>
             </div>
             <div>
                 <span class="label">Typefaces</span>

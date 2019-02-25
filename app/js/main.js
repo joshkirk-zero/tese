@@ -15,7 +15,7 @@ import * as Global from './global/init';
 if ('scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'manual';
 }
-
+const body = document.body;
 // Highway
 export const Core = new Highway.Core({
   renderers: {
@@ -39,7 +39,7 @@ Core.on('NAVIGATE_IN', ({ to, trigger, location }) => { // to, trigger, location
 Core.on('NAVIGATE_END', ({ to, from, trigger, location }) => { // to, from, trigger, location
   Global.onEnterCompleted(from, to, location);
   globalObject.comingFromFooter = false;
-  // console.log(to, location);
+  body.classList.remove('transitioning');
 
 });
 
@@ -50,6 +50,7 @@ Core.on('NAVIGATE_OUT', ({ from, trigger, location }) => { // from, trigger, loc
     
   // }
   // console.log(location.origin + '/', location.href);
+  body.classList.add('transitioning');
 });
 
 document.addEventListener('DOMContentLoaded', () => {
