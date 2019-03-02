@@ -776,7 +776,6 @@ h1, h2, h3, h4, h5, h6, p, a, li {
             width: 25%;
           }
         }
-
       }
       &:last-child {
         padding-top: 3px;
@@ -788,6 +787,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
           width: 90.4%;
           left: 0;
           height: 99.5%;
+          @include tablet {
+            height: 100.5%;
+          }
           span {
             left: -80px;
             width: 22%;

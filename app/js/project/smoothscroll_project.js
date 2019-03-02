@@ -5,7 +5,7 @@ import { TweenMax, Expo, Linear, TimelineMax, Sine } from 'gsap';
 import { globalObject } from '../_functions';
 import { SplitText } from '../thirdparty/SplitText';
 
-export default class SmoothProject {
+export default class ProjectSmooth {
   constructor(options = {}) {
     this.isMobile = globalObject.isMobile;
     this.bindMethods();
@@ -39,7 +39,7 @@ export default class SmoothProject {
       preventTouch = true,
       passive = true
     } = options;
-    
+
     this.dom = {
       el: this.el,
       sections: this.isMobile ? false : sections,
@@ -120,15 +120,15 @@ export default class SmoothProject {
           const innerIntroLines = new SplitText(splitIntroLines, { type: 'lines' }).lines;
           const splitEyebrowLines = new SplitText(splitEyebrowByLines, { type: 'lines' }).lines;
           const innerEyebrowLine = new SplitText(splitEyebrowLines, { type: 'lines' }).lines;
-  
+
           projectIntroTL
             .fromTo(innerEyebrowLine, 1, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true })
             .add('introIn', '-=.3')
             .staggerFromTo(innerIntroLines, 0.78, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.06, 'introIn');
-          
+
           this.thisPagesTLs.push(projectIntroTL);
           break;
-        
+
         case 'project-footer':
           const projectFooterTL = new TimelineMax({ paused: true });
           const projectFooterSection = this.dom.scrollBasedElems[i];
@@ -151,9 +151,9 @@ export default class SmoothProject {
           // document.querySelector('.project-footer').addEventListener('click', () => { projectFooterTL.progress(0).play(); });
           this.thisPagesTLs.push(projectFooterTL);
           break;
-  
+
         default:
-  
+
           break;
       }
     }
@@ -207,17 +207,16 @@ export default class SmoothProject {
       this.data.current = this.mobileOverflowEl.scrollTop;
       this.data.last = this.data.current;
     }
-    console.log(this.data.current);
 
     this.requestAnimationFrame();
     this.scrollAwayFromHero();
     this.animateOverflowImages();
-    this.checkScrollBasedLoadins(); 
+    this.checkScrollBasedLoadins();
   }
 
   transformSections() {
     if (!this.sections) return;
-    
+
     const translate = this.data.current.toFixed(2);
 
     this.sections.forEach((data, index) => {
@@ -241,11 +240,12 @@ export default class SmoothProject {
   animateOverflowImages() {
     if (!this.elems) return;
     this.elems.forEach((data, index) => {
-      const { isVisible, start, end } = this.isVisible(data, 0.01)
-      
+      const { isVisible, start, end } = this.isVisible(data, -0.01)
+
       if (isVisible) {
         this.intersectRatio(data, start, end)
-        const yVal = this.scrollDists[index] * data.progress.current;
+        let yVal = (this.scrollDists[index] * data.progress.current) * 1.15;
+        yVal = Math.min(this.scrollDists[index], yVal);
         this.scrollImages[index].style.transform = `translate3d(0, ${-yVal}px, 0)`;
       }
     })
@@ -324,14 +324,14 @@ export default class SmoothProject {
         el: el,
         top: bounds.top > this.data.height ? bounds.top + 100 : this.data.height,
         bottom: bounds.bottom,
-        height: this.data.height - 140,
+        height: this.data.height,
         progress: {
           current: 0
         }
       })
     })
   }
-  
+
   getScrollBasedSections() {
     if (!this.dom.scrollBasedElems) return
     this.scrollBasedElems = []

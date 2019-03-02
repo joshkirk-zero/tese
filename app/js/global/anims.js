@@ -287,111 +287,6 @@ export const pageEntrance = (namespace, firstLoad = false) => {
 
 /**
 
- Scroll based loadin animations
- ------------------------------
-
- - Getting ready to add lil animations as sections
- come into view.
-
- -------------------------------------------------- * */
-export const prepScrollBasedLoadins = () => {
-  if (!document.querySelector('.scroll-enter')) {
-    return;
-  }
-
-  const thisPagesTLs = [];
-
-  let theseSections = document.querySelectorAll('.scroll-enter:not(.already-played)');
-  let offsetVal = 0;
-
-  for (let i = 0; i < theseSections.length; i++) {
-    const entranceType = theseSections[i].dataset.entrance;
-    switch (entranceType) {
-      case 'project-intro':
-        const projectIntroTL = new TimelineMax({ paused: true });
-        const projectIntroSection = theseSections[i];
-        const splitEyebrowByLines = projectIntroSection.querySelectorAll('.intro .eyebrow');
-        const splitIntroByLines = projectIntroSection.querySelectorAll('.intro div > p');
-        const splitIntroLines = new SplitText(splitIntroByLines, { type: 'lines' }).lines;
-        const innerIntroLines = new SplitText(splitIntroLines, { type: 'lines' }).lines;
-        const splitEyebrowLines = new SplitText(splitEyebrowByLines, { type: 'lines' }).lines;
-        const innerEyebrowLine = new SplitText(splitEyebrowLines, { type: 'lines' }).lines;
-
-        projectIntroTL
-          .fromTo(innerEyebrowLine, 1, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true })
-          .add('introIn', '-=1')
-          .staggerFromTo(innerIntroLines, 0.75, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.05, 'introIn');
-
-        thisPagesTLs.push(projectIntroTL);
-        break;
-      case 'project-footer':
-
-        const projectFooterTL = new TimelineMax({ paused: true });
-        const projectFooterSection = theseSections[i];
-        const splitFooterEyebrowsByLines = projectFooterSection.querySelectorAll('.eyebrow, .idx');
-        const splitFooterEyebrowLines = new SplitText(splitFooterEyebrowsByLines, { type: 'lines' }).lines;
-        const innerFooterEyebrowLines = new SplitText(splitFooterEyebrowLines, { type: 'lines' }).lines;
-        const wordWipers = document.querySelectorAll('.project-footer .large-svg-title .wiper');
-        const wordWiperBars = document.querySelectorAll('.project-footer .large-svg-title .wiper span');
-        const projectLettersOne = document.querySelectorAll('.project-footer .large-svg-title .svg-wrapper:nth-last-child(2) path');
-        const projectLettersTwo = document.querySelectorAll('.project-footer .large-svg-title .svg-wrapper:last-child path');
-
-        projectFooterTL
-          .add('wordsStart')
-          .add('lettersIn', '+=.32')
-          .fromTo(wordWiperBars, 2, { x: -5, scaleX: 0 }, { x: 90, scaleX: 1, ease: Expo.easeOut, force3D: false })
-          .fromTo(wordWipers, 1, { scaleX: 1 }, { scaleX: 0, ease: Expo.easeInOut, force3D: false }, 'wordsStart')
-          .staggerFromTo(projectLettersOne, 1.15, { x: 55 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'lettersIn')
-          .staggerFromTo(projectLettersTwo, 1.15, { x: 55 }, { x: 0, ease: Expo.easeOut, force3D: true }, 0.035, 'lettersIn')
-          .add('eyebrowsIn', '-=1.6')
-          .staggerFromTo(innerFooterEyebrowLines, 0.78, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.06, 'eyebrowsIn');
-        // document.querySelector('.project-footer').addEventListener('click', () => { projectFooterTL.progress(0).play(); });
-        thisPagesTLs.push(projectFooterTL);
-        break;
-
-      default:
-
-        break;
-    }
-  }
-
-  const offsets = [];
-
-  for (let i = 0; i < theseSections.length; i++) {
-    const thisOffset = globalObject.ww < 768 ? theseSections[i].dataset.mobileOffset : theseSections[i].dataset.offset;
-    offsets.push(parseFloat(thisOffset));
-  }
-
-  const checkOffsets = () => {
-    for (let i = 0; i < theseSections.length; i++) {
-      const viewportOffset = theseSections[i].getBoundingClientRect().top;
-
-      if (viewportOffset < (globalObject.wh * offsets[i + offsetVal])) {
-        theseSections[i].classList.add('already-played');
-        thisPagesTLs[i + offsetVal].play();
-
-        // they're scrolled down the page, so we need to play
-        // all previous timelines
-        if (i <= offsetVal) {
-          for (let j = 0; j <= offsetVal; j++) {
-            thisPagesTLs[j].play();
-          }
-        }
-
-        theseSections = document.querySelectorAll('.scroll-enter:not(.already-played)');
-        offsetVal++;
-        if (theseSections.length === 0) {
-          window.removeEventListener('scroll', checkOffsets);
-        }
-      }
-    }
-  };
-  checkOffsets();
-  window.addEventListener('scroll', checkOffsets);
-};
-
-/**
-
  Global open/close project menu
  ------------------------------
 
@@ -458,7 +353,6 @@ export const openCloseProjectsMenu = () => {
   projectsTrigger.addEventListener('click', () => {
     if (globalObject.openCloseCount % 2 === 0) {
       currentOpacity = window.getComputedStyle(document.querySelector('.vert-left .meta')).getPropertyValue('opacity');
-      console.log(currentOpacity);
       openMenuTL.timeScale(1).play();
       TweenMax.to(fadeEls, 0.5, { opacity: 1, ease: Sine.easeInOut, force3D: true, onComplete: () => { TweenMax.set(fadeEls, { clearProps: 'opacity' }); } });
       TweenMax.to(scrollPrompt, 0.5, { opacity: 0, ease: Sine.easeInOut, force3D: true });

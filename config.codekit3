@@ -30,6 +30,13 @@
 		"oAP": "/build/.idea",
 		"oF": 0
 		},
+	"/app/app.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "/app/app.php",
+		"oF": 0
+		},
 	"/app/fonts": {
 		"ft": 65536,
 		"oA": 1,
@@ -40,6 +47,20 @@
 		"ft": 65536,
 		"oA": 1,
 		"oAP": "/build/app/images",
+		"oF": 0
+		},
+	"/app/includes/elasticsearch.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "/app/includes/elasticsearch.php",
+		"oF": 0
+		},
+	"/app/includes/functions.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "/app/includes/functions.php",
 		"oF": 0
 		},
 	"/app/includes/global-els.php": {
@@ -55,6 +76,41 @@
 		"oA": 0,
 		"oAP": "/build/includes/head.php",
 		"oF": 2
+		},
+	"/app/includes/http.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "/app/includes/http.php",
+		"oF": 0
+		},
+	"/app/includes/middleware.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "/app/includes/middleware.php",
+		"oF": 0
+		},
+	"/app/includes/PrismicHelper.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "/app/includes/PrismicHelper.php",
+		"oF": 0
+		},
+	"/app/includes/routing.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "/app/includes/routing.php",
+		"oF": 0
+		},
+	"/app/includes/shopify.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "/app/includes/shopify.php",
+		"oF": 0
 		},
 	"/app/includes/site-meta.php": {
 		"cB": 0,
@@ -139,8 +195,15 @@
 		"oAP": "/build/app/js",
 		"oF": 0
 		},
+	"/app/LinkResolver.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "/app/LinkResolver.php",
+		"oF": 0
+		},
 	"/app/styles/styles.scss": {
-		"aP": 0,
+		"aP": 1,
 		"bl": 0,
 		"dP": 10,
 		"dS": 0,
@@ -149,7 +212,7 @@
 		"oA": 0,
 		"oAP": "/build/styles/styles.css",
 		"oF": 2,
-		"oS": 0,
+		"oS": 3,
 		"uL": 1
 		},
 	"/app/views/404.php": {
@@ -271,7 +334,7 @@
 	"displayValueWasSetByUser": 0,
 	"iconImageName": "meme-ive",
 	"iconImageWasSetByUser": 0,
-	"lastBuiltDate": 569909163
+	"lastBuiltDate": 573256468.03034699
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,
@@ -2196,8 +2259,8 @@
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
-		"outputStyle": 0,
-		"shouldRunAutoprefixer": 0,
+		"outputStyle": 3,
+		"shouldRunAutoprefixer": 1,
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},

@@ -71,7 +71,7 @@ export default class HomeSmooth {
       TweenMax.set(scrollWordsWraps, { z: 20, x: 1 });
     });
     const redirectToFirst = () => {
-      Core.redirect('http://joshs-imac.local:5757/facebook-careers', 'homeScrollTo');
+      Core.redirect('https://tesecreates.com/facebook-careers', 'homeScrollTo');
     };
     this.scrollAwayTL
       .add('start')
