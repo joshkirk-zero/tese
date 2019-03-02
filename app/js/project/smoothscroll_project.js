@@ -106,8 +106,7 @@ export default class SmoothProject {
       .staggerFromTo(scrollWordsWraps, 1, { z: 20 }, { z: 0, ease: Sine.easeOut }, -0.02, 'start')
       .fromTo(staggerFadeScaleEls, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, force3D: true }, -0.055, 'start')
       .fromTo(staggerFadeEls, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, force3D: true }, 'start')
-      .fromTo(fadeEls, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, force3D: true }, 'start')
-      .fromTo(largeTitle, 1.1, { y: 0 }, { y: -50, ease: Sine.easeInOut, force3D: true }, 'start');
+      .fromTo(fadeEls, 1.2, { opacity: 1 }, { opacity: 0, ease: Sine.easeInOut, force3D: true }, 'start');
 
     for (let i = 0; i < this.dom.scrollBasedElems.length; i++) {
       const entranceType = this.dom.scrollBasedElems[i].dataset.entrance;
@@ -208,7 +207,7 @@ export default class SmoothProject {
       this.data.current = this.mobileOverflowEl.scrollTop;
       this.data.last = this.data.current;
     }
-    
+    console.log(this.data.current);
 
     this.requestAnimationFrame();
     this.scrollAwayFromHero();

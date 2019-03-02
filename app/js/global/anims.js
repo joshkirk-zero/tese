@@ -58,6 +58,11 @@ export const prepProfileDrawer = () => {
 
   const projectsMenu = document.querySelector('.projects-wrapper');
 
+  const shiftOpacity = globalObject.ww > 767 ? 0.2 : 0.08;
+  const globalsShiftOpacity = globalObject.ww > 767 ? 0.3 : 0.15;
+
+  const playTimescale = globalObject.isMobile ? 0.8 : 1;
+
   openCloseProfile
     .staggerFromTo(innerProfileBioLines, 0.9, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045)
     .fromTo(innerLabelLines, 1.05, { yPercent: 87 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0)
@@ -68,14 +73,14 @@ export const prepProfileDrawer = () => {
     .fromTo(closeUnderline, 0.52, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut, force3D: true }, '-=.3');
 
   profileTrigger.addEventListener('click', () => {
-    openCloseProfile.timeScale(1).play();
+    openCloseProfile.timeScale(playTimescale).play();
     if (projectsMenu.classList.contains('open')) {
-      TweenMax.to(projectsMenu, 1, { opacity: 0.2, y: -60, ease: Expo.easeOut, force3D: true });  
+      TweenMax.to(projectsMenu, 1, { opacity: shiftOpacity, y: -60, ease: Expo.easeOut, force3D: true });  
     } else {
-      TweenMax.to('.shift', 1, { opacity: 0.2, y: -60, ease: Expo.easeOut, force3D: true });
+      TweenMax.to('.shift', 1, { opacity: shiftOpacity, y: -60, ease: Expo.easeOut, force3D: true });
     }
     TweenMax.set(closeMask, { display: 'block' });
-    TweenMax.to(shiftTheseGlobals, 1.1, { opacity: 0.3, y: -21, ease: Expo.easeOut, force3D: true });
+    TweenMax.to(shiftTheseGlobals, 1.1, { opacity: globalsShiftOpacity, y: -21, ease: Expo.easeOut, force3D: true });
     TweenMax.to(logo, 1.1, { y: 4, ease: Expo.easeOut, force3D: true });
     TweenMax.to(profileTray, 1.1, { yPercent: -100, ease: Expo.easeOut, force3D: true });
   });

@@ -15,6 +15,74 @@
   font-style: normal;
 }
 
+/* ------------------------------------------------------------------ */
+/*        BREAKPOINTS
+/* ------------------------------------------------------------------ */
+
+$breakpoint-small-mobile       : 340px;
+$breakpoint-mobile             : 767px;
+$breakpoint-tablet             : 959px;
+$breakpoint-small-desktop      : 1300px;
+$breakpoint-very-large-desktop : 1700px;
+$breakpoint-small-height       : 700px;
+
+/* ------------------------------------------------------------------ */
+/*        MEDIA QUERIES
+/* ------------------------------------------------------------------ */
+
+@mixin small-mobile {
+  @media screen and (max-width: $breakpoint-small-mobile) {
+    @content;
+  }
+}
+
+@mixin four80 {
+    @media screen and (max-width: 480px) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media screen and (max-width: $breakpoint-mobile) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and (max-width: $breakpoint-tablet) {
+        @content;
+    }
+}
+
+@mixin tablet-landscape {
+    @media screen and (max-width: $breakpoint-tablet) and (orientation: landscape) {
+        @content;
+    }
+}
+
+@mixin ten80 {
+  @media screen and (max-width: 1080px) {
+        @content;
+    }
+}
+
+@mixin twelve {
+  @media screen and (max-width: 1200px) {
+        @content;
+    }
+}
+
+@mixin small-desktop {
+  @media screen and (max-width: $breakpoint-small-desktop) {
+        @content;
+    }
+}
+
+@mixin very-large-desktop {
+  @media screen and (min-width: $breakpoint-very-large-desktop) {
+        @content;
+    }
+}
 
 /* Vars
 
@@ -299,7 +367,10 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   }
   .large-svg-title {
     @media (max-width: 959px) {
-      height: 67%;
+      height: 67vw;
+    }
+    @include mobile {
+      top: 25vh;
     }
     .wiper {
       span {
@@ -619,6 +690,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     font-size: 10px;
     .label {
       font-size: 10px;
+
     }
   }
   p, span {
@@ -793,6 +865,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   background-color: #E8B9AB;
   left: 0;
   top: 2px;
+  @include mobile {
+    width: 4px;
+  }
 }
 .projects-wrapper, .title-meta {
   height: 67.1vh;
@@ -801,6 +876,10 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   transform: translateY(-50%);
   @media (max-width: 1500px) {
     height: 60vh;
+  }
+  @include mobile {
+    top: 25vh;
+    transform: none;
   }
 }
 
@@ -863,7 +942,15 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     padding-right: 10px;
   }
   @media (max-width: 959px) {
-    height: auto;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    top: 0;
+    padding: 150px 0 0 18vw;
+  }
+  @include mobile {
+    padding: 190px 0 0 46px;
   }
   .large-svg-title {
     .wiper {
@@ -877,10 +964,26 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       float: left;
       clear: both;
     }
+    @include tablet {
+      height: 50vw;
+      margin-bottom: 45px;
+      display: block;
+    }
+    @include mobile {
+      height: 60vw;
+    }
+    @include four80 {
+      height: 66.5vw;
+    }
   }
   .projects {
     height: 100%;
     float: right;
+    @include tablet {
+      padding-bottom: 60px;
+      height: auto;
+      float: left;
+    }
     .wiper {
       span {
         width: 60%;
@@ -899,6 +1002,10 @@ h1, h2, h3, h4, h5, h6, p, a, li {
         line-height: 1.55;
         font-size: 18px;
       }
+      @include tablet {
+        line-height: 1.44;
+        letter-spacing: 0.3px;
+      }
       > div {
         overflow: hidden;
       }
@@ -912,6 +1019,12 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       color: $brown;
       @media (max-width: 1125px) {
         font-size: 11px;
+      }
+      @include tablet {
+        font-size: 10px;
+        line-height: 2;
+        margin-top: 3px;
+        letter-spacing: 0.8px;
       }
       > div {
         overflow: hidden;
@@ -956,6 +1069,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
         @media (max-width: 1125px) {
           margin-right: 17px;
         }
+        @include ten80 {
+          margin-right: 5px;
+        }
       }
       &:nth-child(-n+2) {
         padding-bottom: 7px;
@@ -975,6 +1091,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
         @media (max-width: 1125px) {
           margin-right: 13px;
         }
+        @include ten80 {
+          margin-right: 1px;
+        }
         .svg-wrapper {
           margin-right: 18px;
           @media (max-width: 1024px) {
@@ -984,6 +1103,36 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       }
       &:last-child {
         margin-left: -3px;
+      }
+      @include tablet {
+        height: 150px;
+      }
+      @include mobile {
+        height: 120px;
+        margin-bottom: 24px;
+        &:nth-child(2) {
+          .svg-wrapper {
+            margin-right: 10px;
+          }
+        }
+        &:last-child {
+          margin-left: 0;
+          margin-bottom: 0;
+          .svg-wrapper {
+            margin-right: 12px;
+          }
+        }
+        &:nth-child(-n+2) {
+          padding-bottom: 0;
+        }
+        &:nth-child(n+3) {
+          padding-top: 0;
+        }
+      }
+      @media (max-width: 540px) {
+        &:nth-child(n+2) {
+          clear: left;
+        }
       }
     }
   }
@@ -1012,8 +1161,11 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       bottom: 0;
     }
     @media (max-width: 767px) {
-      padding-left: 19px;
-      padding-right: 23px;
+      padding-left: 18px;
+      padding-top: 1px;
+      padding-right: 0;
+      position: relative;
+      margin-top: 25px;
     }
     > div  {
       margin-bottom: 15px;
@@ -1045,7 +1197,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     @media (max-width: 767px) {
       a, > div {
         font-size: 10px;
-        letter-spacing: 0.8px;
+        letter-spacing: 0.1px;
       }
     }
   }
@@ -1061,6 +1213,10 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     position: relative;
     padding-top: 150px;
     padding-bottom: 340px;
+    @include mobile {
+      padding-top: 82px;
+      padding-bottom: 235px;
+    }
     > div {
       padding-left: 122px;
     }
@@ -1132,6 +1288,35 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   }
 }
 .project-footer {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  padding-left: 16.5vw;
+  @media (min-width: 1500px) {
+    padding-left: 14vw;
+  }
+  @include mobile {
+    padding-left: 47px;
+  }
+  .wiper span {
+    left: -90px;
+  }
+  a {
+    height: 33.8vw;
+    display: block;
+    top: 50%;
+    transform: translateY(-50%);
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+    @media (max-width: 959px) {
+      height: 67%;
+    }
+    @include mobile {
+      top: 25vh;
+      transform: none;
+      height: auto;
+    }
+  }
   .shift {
     position: relative;
     height: 100%;
@@ -1153,39 +1338,29 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     top: -3px;
     transform: translateY(-100%);
     left: 0;
+    @include mobile {
+      font-size: 10px;
+      line-height: 2;
+      margin-bottom: 4px;
+      left: -1px;
+      letter-spacing: normal;
+    }
   }
   .svg-wrapper {
     float: left;
     clear: left;
-  }
-  a {
-    display: block;
   }
   .eyebrow, .idx {
     > div {
       overflow: hidden;
     }
   }
-}
-.project-footer {
-  height: 100vh;
-  width: 100%;
-  position: relative;
-  padding-left: 16.5vw;
-  @media (min-width: 1500px) {
-    padding-left: 14vw;
-  }
-  .wiper span {
-    left: -90px;
-  }
-  a {
-    height: 33.8vw;
-    display: block;
-    top: 50%;
-    transform: translateY(-50%);
-    position: relative;
+  .large-svg-title {
     @media (max-width: 959px) {
-      height: 67%;
+      height: 67vw;
+    }
+    @include mobile {
+      position: relative;
     }
   }
 }
@@ -1232,8 +1407,14 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   }
   .wrapper {
     display: flex;
+    @media (max-width: 700px) {
+      flex-direction: column;
+    }
     > div > div {
       margin-bottom: 26px;
+      @include mobile {
+        margin-bottom: 16px;
+      }
       &:last-child {
         margin-bottom: 0;
       }
@@ -1245,6 +1426,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     letter-spacing: 1px;
     color: $ltBrown;
     display: inline-block;
+    @include mobile {
+      line-height: 1.83;
+    }
     div div {
       will-change: transform;
     }
@@ -1300,12 +1484,25 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     @media (max-width: 1080px) {
       margin-right: 3.5vw;
     }
+    @include tablet {
+      margin-bottom: 60px;
+      max-width: 320px;
+    }
+    @include mobile {
+      max-width: 300px;
+    }
+    @include small-mobile {
+      max-width: 290px;
+    }
     > div {
       overflow: hidden;
     }
   }
   .experience {
     max-width: 290px;
+    @media (max-width: 700px) {
+      order: 1;
+    }
     p, a {
       > div {
         overflow: hidden;
@@ -1331,11 +1528,18 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       margin-right: 3.5vw;
     }
     @media (max-width: 959px) {
-      margin-right: 0;
-      max-width: none;
+      margin-right: 60px;
     }
-    @media (max-width: 767px) {
-      
+    @include tablet {
+      padding-bottom: 100px;
+    }
+    @media (max-width: 700px) {
+      margin-right: 0;
+      order: 2;
+      margin-top: 60px;
+    }
+    @include small-mobile {
+      padding-bottom: 60px;
     }
     @media (max-width: 480px) {
       
@@ -1361,12 +1565,23 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     }
     p, a {
       font-size: 12px;
+      letter-spacing: 0.9px;
     }
   }
-  @media (max-width: 959px) {
-    height: 100%;
-    bottom: -100%;
-    flex-wrap: wrap
+  @include tablet {
+    padding-left: 30px;
+    height: 70%;
+    bottom: -70%;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  @include mobile {
+    .label {
+      font-size: 10px;
+      line-height: 2;
+    }
   }
 }
 .close-mask {
@@ -1392,7 +1607,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   @media (max-width: 767px) {
     padding: 0 48px 0 38px;
     > div {
-      margin-bottom: 70px;
+      margin-bottom: 60px;
     }
   }
   .image-wrap {
@@ -1537,7 +1752,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       }
     }
     @media (max-width: 480px) {
-      max-height: 350px;
+      max-height: 210px;
     }
     &:after {
       position: absolute;

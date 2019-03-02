@@ -35,9 +35,9 @@ export const firstLoad = () => {
       break;
       
   }
-  TweenMax.delayedCall(0.2, () => {
+  TweenMax.delayedCall(0.3, () => {
     Anim.pageEntrance(namespace, true);
     Anim.openCloseProjectsMenu();
+    Anim.prepProfileDrawer();
   });
-  Anim.prepProfileDrawer();
 };
