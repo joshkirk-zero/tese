@@ -5,7 +5,9 @@ import { globalObject } from '../_functions';
 import { TweenMax } from 'gsap';
 
 export const onEnter = (to, location) => {
-  
+  if (globalObject.isMobileSafari) {
+    TweenMax.set('.project-hero, .project-footer', { height: globalObject.wh });
+  }
 };
 
 export const onEnterCompleted = (from, to, location) => {
@@ -21,6 +23,9 @@ export const firstLoad = () => {
       quicklink({ el: document.querySelector('.projects-wrapper') });
       break;
     case 'project':
+      if (globalObject.isMobileSafari) {
+        TweenMax.set('.project-hero, .project-footer', { height: globalObject.wh });
+      }
       const viewEl = document.querySelector('[data-router-view]');
       if (viewEl.classList.contains('facebook-careers')) {
         quicklink({urls:['/', '/microsoft-teams/', '/honorable-mentions/']});

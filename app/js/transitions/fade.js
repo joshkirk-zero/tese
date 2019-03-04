@@ -7,7 +7,11 @@ import { prepScrollPrompt } from '../global/anims';
 class Fade extends Highway.Transition {
   in({ from, to, trigger, done }) {
     from.remove();
-    window.scrollTo(0, 0);
+    if (!globalObject.isMobile) {
+      window.scrollTo(0, 0);
+    } else {
+      document.querySelector('main').scrollTo(0, 0);
+    }
     prepScrollPrompt(to.dataset.routerView);
     const projectFadeEls = document.querySelectorAll('.vert-left .meta, .scroll-prompt, .socials, .email-triggers .email');
     TweenMax.set('.global-mask', { pointerEvents: 'none', autoAlpha: 0, onComplete: () => { done(); } });

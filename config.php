@@ -35,7 +35,8 @@ define('DISPLAY_ERROR_DETAILS', true);
 /*
  * Path Settings
  */
-define("FILE_CACHE", __DIR__ . "/build/cache/");
+define("ENABLE_CACHE", false);
+define("FILE_CACHE", __DIR__ . "/cache/");
 
 /*
  * Protocols

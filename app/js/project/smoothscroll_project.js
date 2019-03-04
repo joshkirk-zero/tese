@@ -26,6 +26,7 @@ export default class ProjectSmooth {
     this.offsetVal = 0;
     this.allAnimsIn = false;
     this.body = document.body;
+    this.overflowImageDur = this.isMobile ? 0.12 : 0.05;
     const {
       sections = this.el.querySelectorAll('[data-smooth-section]'),
       elems = this.el.querySelectorAll('.image-scroll'),
@@ -240,13 +241,13 @@ export default class ProjectSmooth {
   animateOverflowImages() {
     if (!this.elems) return;
     this.elems.forEach((data, index) => {
-      const { isVisible, start, end } = this.isVisible(data, -0.01)
+      const { isVisible, start, end } = this.isVisible(data, 1)
 
       if (isVisible) {
         this.intersectRatio(data, start, end)
-        let yVal = (this.scrollDists[index] * data.progress.current) * 1.15;
+        let yVal = this.scrollDists[index] * (data.progress.current).toFixed(2);
         yVal = Math.min(this.scrollDists[index], yVal);
-        this.scrollImages[index].style.transform = `translate3d(0, ${-yVal}px, 0)`;
+        TweenMax.to(this.scrollImages[index], this.overflowImageDur, { y: -yVal, ease: Sine.easeOut });
       }
     })
   }

@@ -1,6 +1,7 @@
-import { TimelineMax, Sine, TweenMax, Expo } from 'gsap';
+import { TimelineMax, Sine, TweenMax, Expo, Power0 } from 'gsap';
 import { SplitText } from '../thirdparty/SplitText';
 import { globalObject } from '../_functions';
+import { Linear } from 'gsap/TweenLite';
 
 export const prepScrollPrompt = (context) => {
   const prompts = document.querySelectorAll('.scroll-prompt p span');
@@ -62,17 +63,28 @@ export const prepProfileDrawer = () => {
   const globalsShiftOpacity = globalObject.ww > 767 ? 0.3 : 0.15;
 
   const playTimescale = globalObject.isMobile ? 0.8 : 1;
-
-  openCloseProfile
-    .staggerFromTo(innerProfileBioLines, 0.9, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045)
-    .fromTo(innerLabelLines, 1.05, { yPercent: 87 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0)
-    .fromTo(innerCopyLines, 0.95, { yPercent: 92 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.165)
-    .fromTo(splitCopyUnderlines, 0.52, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut, force3D: true }, '-=.39')
-    .staggerFromTo(innerCopyStaggerLines, 0.95, { yPercent: 92 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.025, 0.15)
-    .staggerFromTo(innerCloseCopyLines, 0.95, { yPercent: 92 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.025)
-    .fromTo(closeUnderline, 0.52, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut, force3D: true }, '-=.3');
+  if (globalObject.isMobile) {
+    openCloseProfile
+      .staggerFromTo(innerProfileBioLines, 0.8, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.043)
+      .fromTo(innerLabelLines, 1.05, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.1)
+      .fromTo(innerCopyLines, 1, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.363)
+      .fromTo(splitCopyUnderlines, 0.52, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut, force3D: true }, '-=.39')
+      .staggerFromTo(innerCopyStaggerLines, 0.98, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.025, 0.25)
+      .staggerFromTo(innerCloseCopyLines, 0.95, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.025, 0.55)
+      .fromTo(closeUnderline, 0.52, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut, force3D: true }, '-=.3');
+  } else {
+    openCloseProfile
+      .staggerFromTo(innerProfileBioLines, 0.9, { yPercent: 101 }, { yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.045)
+      .fromTo(innerLabelLines, 1.05, { yPercent: 87 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0)
+      .fromTo(innerCopyLines, 0.95, { yPercent: 92 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.165)
+      .fromTo(splitCopyUnderlines, 0.52, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut, force3D: true }, '-=.39')
+      .staggerFromTo(innerCopyStaggerLines, 0.95, { yPercent: 92 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.025, 0.15)
+      .staggerFromTo(innerCloseCopyLines, 0.95, { yPercent: 92 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.025)
+      .fromTo(closeUnderline, 0.52, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut, force3D: true }, '-=.3');
+  }
 
   profileTrigger.addEventListener('click', () => {
+    profileTray.scrollTop = 0;
     openCloseProfile.timeScale(playTimescale).play();
     if (projectsMenu.classList.contains('open')) {
       TweenMax.to(projectsMenu, 1, { opacity: shiftOpacity, y: -60, ease: Expo.easeOut, force3D: true });  
@@ -130,15 +142,17 @@ export const pageEntrance = (namespace, firstLoad = false) => {
       const beacon = document.querySelector('.beacon');
       const availability = document.querySelector('.availability');
       const globalEls = document.querySelectorAll('.vert-left, .email-triggers, .scroll-prompt');
-      const beaconTL = new TimelineMax({ repeat: -1, paused: true });
+      const beaconTL = new TimelineMax({ repeat: -1, repeatDelay: 1, paused: true });
 
       beaconTL
-        .fromTo(beacon, 1, { immediateRender: false, scale: 1 }, { scale: 0.7, ease: Sine.easeOut })
-        .to(beacon, 1.85, { scale: 1.1, ease: Sine.easeInOut });
+        .fromTo(beacon, 0.8, { immediateRender: false, scale: 1 }, { scale: 1.35, ease: Power0.easeNone })
+        .to(beacon, 1.2, { scale: 1, ease: Sine.easeOut });
       
       const beaconPlay = () => {
         TweenMax.fromTo(beacon, 1.1, { scale: 0 }, { scale: 1, ease: Expo.easeInOut, onComplete: () => {
-          beaconTL.play();
+          TweenMax.delayedCall(0.0, () => {
+            beaconTL.play();
+          })
         } });
       };
 
@@ -175,8 +189,8 @@ export const pageEntrance = (namespace, firstLoad = false) => {
       homeEntranceTL
         .add('fadeAndScale', '-=.3')
         .fromTo(availability, 1, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut }, 'fadeAndScale')
-        .fromTo('.availability p', 1.55, { x: 0 }, { x: 17, ease: Expo.easeInOut }, '+=0')
-        .add(beaconPlay, '-=1.25');
+        .fromTo('.availability p', 1.55, { x: -11 }, { x: 0, ease: Expo.easeInOut }, '+=0')
+        .add(beaconPlay, '-=1.2');
 
 
       TweenMax.delayedCall(0.7, () => {
@@ -297,16 +311,18 @@ export const openCloseProjectsMenu = () => {
   const projectsContainerWrapper = document.querySelector('.vert-holder');
   const switchOverlay = document.querySelector('.switch-overlay');
   const openMenuTL = new TimelineMax({ paused: true });
-  const wordWipers = document.querySelectorAll('.projects-wrapper .large-svg-title .wiper');
-  const wordWiperBars = document.querySelectorAll('.projects-wrapper .large-svg-title .wiper span');
-  const numWipers = document.querySelectorAll('.projects-wrapper .projects .wiper');
-  const numWiperBars = document.querySelectorAll('.projects-wrapper .projects .wiper span');
-  const numbersOne = document.querySelectorAll('.projects-wrapper .project-link:first-child path');
-  const numbersTwo = document.querySelectorAll('.projects-wrapper .project-link:nth-child(2) path');
-  const numbersThree = document.querySelectorAll('.projects-wrapper .project-link:nth-child(3) path');
-  const numbersFour = document.querySelectorAll('.projects-wrapper .project-link:nth-child(4) path');
-  const lettersOne = document.querySelectorAll('.projects-wrapper .large-svg-title .svg-wrapper:first-child path');
-  const lettersTwo = document.querySelectorAll('.projects-wrapper .large-svg-title .svg-wrapper:last-child path');
+  const wordWipers = projectsContainer.querySelectorAll('.large-svg-title .wiper');
+  const wordWiperBars = projectsContainer.querySelectorAll('.large-svg-title .wiper span');
+  const numWipers = projectsContainer.querySelectorAll('.projects .wiper');
+  const numWiperBars = projectsContainer.querySelectorAll('.projects .wiper span');
+  const numbersOne = projectsContainer.querySelectorAll('.project-link:first-child path');
+  const numbersTwo = projectsContainer.querySelectorAll('.project-link:nth-child(2) path');
+  const numbersThree = projectsContainer.querySelectorAll('.project-link:nth-child(3) path');
+  const numbersFour = projectsContainer.querySelectorAll('.project-link:nth-child(4) path');
+  const lettersOne = projectsContainer.querySelectorAll('.large-svg-title .svg-wrapper:first-child path');
+  const lettersTwo = projectsContainer.querySelectorAll('.large-svg-title .svg-wrapper:last-child path');
+  const closeTrigger = document.querySelector('.vert-holder > .close');
+  const closeBars = closeTrigger.querySelectorAll('span');
 
   const splitByLines = document.querySelectorAll('.projects-wrapper .text-wrapper > *');
   const splitLines = new SplitText(splitByLines, { type: 'lines' }).lines;
@@ -346,23 +362,30 @@ export const openCloseProjectsMenu = () => {
     .staggerFromTo(innerLinesOne, 0.8, { yPercent: 92 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.016, 'linesUpStart')
     .staggerFromTo(innerLinesTwo, 0.8, { yPercent: 92 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.016, 'linesUpStart')
     .staggerFromTo(innerLinesThree, 0.8, { yPercent: 92 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.016, 'linesUpStart')
-    .staggerFromTo(innerLinesFour, 0.8, { yPercent: 92 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.016, 'linesUpStart');
+    .staggerFromTo(innerLinesFour, 0.8, { yPercent: 92 }, { yPercent: 0, ease: Sine.easeOut, force3D: true }, 0.016, 'linesUpStart')
+    .staggerFromTo(closeBars, 0.6, { scaleX: 0 }, { scaleX: 1, ease: Expo.easeInOut }, 0.08, 'linesUpStart');
 
   globalObject.openCloseMenu = openMenuTL;
   let currentOpacity;
   projectsTrigger.addEventListener('click', () => {
     if (globalObject.openCloseCount % 2 === 0) {
       currentOpacity = window.getComputedStyle(document.querySelector('.vert-left .meta')).getPropertyValue('opacity');
+      projectsContainer.scrollTop = 0;
       openMenuTL.timeScale(1).play();
       TweenMax.to(fadeEls, 0.5, { opacity: 1, ease: Sine.easeInOut, force3D: true, onComplete: () => { TweenMax.set(fadeEls, { clearProps: 'opacity' }); } });
       TweenMax.to(scrollPrompt, 0.5, { opacity: 0, ease: Sine.easeInOut, force3D: true });
-      // TweenMax.to(projectsContainerWrapper, 0.2, { autoAlpha: 1, ease: Expo.easeOut, force3D: true });
     } else {
       openMenuTL.timeScale(1.3).reverse();
-      // TweenMax.to(projectsContainerWrapper, 1.3, { autoAlpha: 0, ease: Expo.easeInOut, force3D: true });
       TweenMax.to(fadeEls, 0.5, { opacity: currentOpacity, ease: Sine.easeInOut, force3D: true });
       TweenMax.to(scrollPrompt, 0.8, { opacity: 1, ease: Sine.easeInOut, force3D: true });
     }
+    globalObject.openCloseCount++;
+  });
+
+  closeTrigger.addEventListener('click', () => {
+    openMenuTL.timeScale(1.3).reverse();
+    TweenMax.to(fadeEls, 0.5, { opacity: currentOpacity, ease: Sine.easeInOut, force3D: true });
+    TweenMax.to(scrollPrompt, 0.8, { opacity: 1, ease: Sine.easeInOut, force3D: true });
     globalObject.openCloseCount++;
   });
 

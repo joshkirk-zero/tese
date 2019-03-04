@@ -24,7 +24,7 @@ $document = $WPGLOBAL['document'];
     </section>
 
     <section class="project-body" data-smooth-section>
-        <div class="intro shift container scroll-enter" data-offset=".88" data-mobile-offset="1" data-entrance="project-intro">
+        <div class="intro shift container scroll-enter" data-offset=".88" data-mobile-offset="1.3" data-entrance="project-intro">
             <div>
                 <span class="eyebrow">About</span>
                 <p><?= RichText::asText($document->data->project_summary) ?></p>
@@ -53,7 +53,7 @@ $document = $WPGLOBAL['document'];
         global $prismic;
         $nextProject = $prismic->get_api()->getByID($document->data->next_project->id);
     ?>
-    <section class="project-footer container scroll-enter" data-offset=".4" data-mobile-offset="1" data-entrance="project-footer" data-smooth-section>
+    <section class="project-footer container scroll-enter" data-offset=".4" data-mobile-offset=".4" data-entrance="project-footer" data-smooth-section>
         <span class="shift">
             <a href="/<?php echo $nextProject->uid; ?>/" data-transition="nextProject">
 

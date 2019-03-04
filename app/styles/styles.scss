@@ -176,7 +176,7 @@ ul {
     position: absolute;
     background-color: $pink;
     &:first-child {
-      transition: transform 1s cubic-bezier(.23,1,.32,1);
+      transition: transform 1s cubic-bezier(.3,1,.32,1);
       transform: translateX(0);
       opacity: 1;
     }
@@ -198,8 +198,8 @@ body:not(.touch) a:hover, body:not(.touch) p:hover {
         opacity: 0;
       }
       &:last-child {
-        transition: transform 1.2s cubic-bezier(.23,1,.32,1);
-        transform: translateX(102%);
+        transition: transform 1.2s cubic-bezier(.3,1,.32,1);
+        transform: translateX(101%);
         opacity: 1;
       }
     }
@@ -242,6 +242,7 @@ svg {
   height: 100%;
   width: 100%;
   overflow: visible;
+  transform: scaleY(.999);
 }
 h1, h2, h3, h4, h5, h6, p, a, li {
   font-weight: normal;
@@ -263,11 +264,14 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   }
   &.home {
     padding: 0 117px 0 150px;
-    @media (max-width: 1200px) {
-      padding: 0 40px 0 100px;
+    @media (max-width: 1400px) {
+      padding: 0 50px 0 100px;
     }
+    // @media (max-width: 1200px) {
+    //   padding: 0 40px 0 100px;
+    // }
     @media (max-width: 959px) {
-      padding: 0 0 0 80px;
+      padding: 0 0 0 120px;
     }
     @media (max-width: 767px) {
       padding: 0 20px 0 44px;
@@ -351,7 +355,13 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     padding-left: 20vw;
   }
   @media (max-width: 767px) {
-    padding-left: 47px;
+    padding-left: 44px;
+  }
+  @media (max-width: 320px) {
+    padding-left: 45px;
+  }
+  @include small-mobile {
+    padding-left: 35px;
   }
   .measure-el {
     height: 72%;
@@ -376,7 +386,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       span {
         width: 25%;
         left: -90px;
-        height: calc(100% - 8px);
+        height: calc(100% - 1px);
       }
     }
     .svg-wrapper {
@@ -393,6 +403,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
 .profile-wrapper {
   display: flex;
   flex-direction: row;
+  @media (min-width: 1525px) {
+    justify-content: center;
+  }
 }
 .profile {
   width: 100%;
@@ -423,12 +436,12 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   line-height: 1.57;
   letter-spacing: 0.1px;
   @media (max-width: 959px) {
-    max-width: 450px;
+    max-width: 380px;
   }
   @media (max-width: 767px) {
     font-size: 10px;
     line-height: 1.8;
-    letter-spacing: 0.05px;
+    letter-spacing: 0;
     max-width: 270px;
   }
   > div {
@@ -528,6 +541,8 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     }
   }
   @media (max-width: 767px) {
+    width: 6px;
+    left: 20px;
     .logo {
       width: 6px;
     }
@@ -614,13 +629,11 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   color: $brown;
   position: relative;
   margin-top: 12px;
-  margin-left: 17px;
+  margin-left: 15px;
   p {
-    left: -17px;
     position: relative;
   }
   @media (max-width: 767px) {
-    margin-left: 12px;
     p {
       font-size: 10px;
       line-height: 1.7;
@@ -640,7 +653,8 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   @media (max-width: 767px) {
     width: 6px;
     height: 6px;
-    left: -12px;
+    left: -13px;
+    transform-origin: 50% 45%;
   }
 }
 .pin-width {
@@ -659,8 +673,14 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   letter-spacing: 1px;
   display: flex;
   justify-content: space-between;
+  @media (max-width: 1400px) {
+    padding-right: 80px;
+  }
   .triggers {
     margin-left: 117px;
+    @media (max-width: 1400px) {
+      margin-left: 100px;
+    }
   }
   .label {
     color: $brown;
@@ -685,8 +705,8 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     } 
   }
   @media (max-width: 767px) {
-    right: -163px;
-    top: 5px;
+    right: -168px;
+    top: 6px;
     font-size: 10px;
     .label {
       font-size: 10px;
@@ -752,6 +772,12 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     height: 100%;
     display: inline-block;
     padding: 6px 1px;
+    max-height: 1000px;
+    @media (min-height: 1001px) {
+      top: 50%;
+      position: relative;
+      transform: translateY(-50%);
+    }
     > span {
       float: left;
       clear: left;
@@ -770,7 +796,10 @@ h1, h2, h3, h4, h5, h6, p, a, li {
         .wiper {
           width: 92.4%;
           left: 0;
-          height: 99.5%;
+          height: 99.2%;
+          @include tablet {
+            height: calc(100% - 3px);
+          }
           span {
             left: -80px;
             width: 25%;
@@ -778,17 +807,17 @@ h1, h2, h3, h4, h5, h6, p, a, li {
         }
       }
       &:last-child {
-        padding-top: 3px;
+        padding-top: 4px;
         height: 50%;
         .svg-wrapper {
           width: 90.4%;
         }
         .wiper {
-          width: 90.4%;
+          width: 90.6%;
           left: 0;
-          height: 99.5%;
+          height: 99.2%;
           @include tablet {
-            height: 100.5%;
+            height: calc(100% - 3px);
           }
           span {
             left: -80px;
@@ -839,10 +868,18 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     height: 50%;
     position: relative;
     &:nth-last-child(2) {
-      padding-bottom: 7px;
+      padding-bottom: 3px;
     }
     &:last-child {
-      padding-top: 7px;
+      padding-top: 3px;
+    }
+    @include mobile {
+      &:nth-last-child(2) {
+        padding-bottom: 2px;
+      }
+      &:last-child {
+        padding-top: 2px;
+      } 
     }
     svg {
       height: 100%;
@@ -859,6 +896,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     position: relative;
     bottom: -1px;
   }
+  @include small-mobile {
+    margin: 0 7px;
+  } 
 }
 .big-pipe {
   position: absolute;
@@ -869,6 +909,8 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   top: 2px;
   @include mobile {
     width: 4px;
+    height: calc(100% - 6px);
+    top: 5px;
   }
 }
 .projects-wrapper, .title-meta {
@@ -912,6 +954,46 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  .close {
+    position: absolute;
+    right: 15px;
+    bottom: 40px;
+    width: 25px;
+    height: 16px;
+    display: none;
+    z-index: 3;
+    &:after {
+      position: absolute;
+      width: 35px;
+      height: 35px;
+      left: -5px;
+      top: -11px;
+      z-index: 3;
+      content: '';
+    }
+    @include mobile {
+      display: block;
+    }
+    @include small-mobile {
+      right: 25px;
+      bottom: 35px;
+    }
+    span {
+      top: 6px;
+      left: 0;
+      width: 100%;
+      transform-origin: 50%;
+      height: 2px;
+      background-color: $pink;
+      position: absolute;
+      &:first-child {
+        transform: rotate(-45deg);
+      }
+      &:last-child {
+        transform: rotate(45deg);
+      }
+    }
+  }
 }
 .projects-wrapper {
   pointer-events: all;
@@ -952,14 +1034,21 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     padding: 150px 0 0 18vw;
   }
   @include mobile {
-    padding: 190px 0 0 46px;
+    padding: 14vh 0 0 44px;
+  }
+  @include small-mobile {
+    padding: 190px 0 0 45px;
   }
   .large-svg-title {
     .wiper {
-      height: calc(100% - 6px);
+      height: calc(100% - 1px);
       span {
         width: 25%;
         left: -70px;
+        @include mobile {
+          width: 19%;
+          left: -65px;
+        }
       }
     }
     .svg-wrapper {
@@ -990,6 +1079,10 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       span {
         width: 60%;
         left: -70px;
+        @include mobile {
+          width: 50%; 
+          left: -45px;
+        }
       }
     }
     h3 {
@@ -1006,7 +1099,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       }
       @include tablet {
         line-height: 1.44;
-        letter-spacing: 0.3px;
+      }
+      @media (max-width: 540px) {
+        width: auto;
       }
       > div {
         overflow: hidden;
@@ -1050,7 +1145,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
         }
       }
       .wiper {
-        right: 0;
+        // right: 0;
       }
       .text-wrapper {
         display: inline-block;
@@ -1076,10 +1171,10 @@ h1, h2, h3, h4, h5, h6, p, a, li {
         }
       }
       &:nth-child(-n+2) {
-        padding-bottom: 7px;
+        padding-bottom: 4px;
       }
       &:nth-child(n+3) {
-        padding-top: 7px;
+        padding-top: 4px;
       }
       &:nth-child(3) {
         clear: left;
@@ -1169,6 +1264,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       position: relative;
       margin-top: 25px;
     }
+    @include small-mobile {
+      padding-left: 12px;
+    }
     > div  {
       margin-bottom: 15px;
       letter-spacing: 1px;
@@ -1200,6 +1298,11 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       a, > div {
         font-size: 10px;
         letter-spacing: 0.1px;
+      }
+    }
+    @include small-mobile {
+      a, > div {
+        letter-spacing: 0;
       }
     }
   }
@@ -1246,8 +1349,8 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     }
     @media (max-width: 600px) {
       > div {
-        padding-left: 16px;
-        padding-right: 25px;
+        padding-left: 13px;
+        padding-right: 20px;
       }
     }
   }
@@ -1298,7 +1401,10 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     padding-left: 14vw;
   }
   @include mobile {
-    padding-left: 47px;
+    padding-left: 44px;
+  }
+  @include small-mobile {
+    padding-left: 35px;
   }
   .wiper span {
     left: -90px;
@@ -1311,12 +1417,12 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     position: relative;
     -webkit-tap-highlight-color: transparent;
     @media (max-width: 959px) {
-      height: 67%;
+      height: 67vw;
     }
     @include mobile {
       top: 25vh;
       transform: none;
-      height: auto;
+      position: absolute;
     }
   }
   .shift {
@@ -1358,6 +1464,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     }
   }
   .large-svg-title {
+    display: block;
     @media (max-width: 959px) {
       height: 67vw;
     }
@@ -1585,6 +1692,13 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       line-height: 2;
     }
   }
+  @include small-mobile {
+    padding-left: 20px;
+    .close {
+      top: 25px;
+      right: 25px;
+    }
+  } 
 }
 .close-mask {
  position: fixed;
@@ -1607,7 +1721,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   align-items: flex-end;
   margin-bottom: 115px;
   @media (max-width: 767px) {
-    padding: 0 48px 0 38px;
+    padding: 0 43px 0 35px;
     > div {
       margin-bottom: 60px;
     }
@@ -1754,7 +1868,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
       }
     }
     @media (max-width: 480px) {
-      max-height: 210px;
+      max-height: 350px;
     }
     &:after {
       position: absolute;
@@ -1784,7 +1898,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     top: 50%;
     transform: translateY(-50%);
     height: auto;
-    span:first-child, span:last-child {
+    > span:first-child, > span:last-child {
       height: 30vw;
     }
   }
@@ -1792,23 +1906,23 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     position: absolute;
     right: 0;
     height: 100%;
-    max-width: 28vw;
+    max-width: 30vw;
     .welcome {
       margin-top: 40vh;
     }
   }
 }
-@media (max-width: 1024px) {
+@media (max-width: 1080px) {
   .profile {
     .welcome {
-      margin-top: 30vh;
+      margin-top: 31vw;
     }
   }
 }
 @media (max-width: 959px) {
   .profile-wrapper {
     flex-direction: column;
-    top: 25px;
+    padding-top: 10vh;
   }
   .home .you-can, .not-found .you-can {
     position: relative;
@@ -1818,7 +1932,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     display: block;
     padding: 0;
     margin-bottom: 60px;
-    span:first-child, span:last-child {
+    > span:first-child, > span:last-child {
       height: 30vw;
     }
   }
@@ -1830,6 +1944,8 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     max-width: none;
     .welcome {
       margin-top: 0;
+      font-size: 11px;
+      letter-spacing: 0.8px;
     }
   }
 
@@ -1838,13 +1954,21 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   .profile-wrapper {
     height: auto;
     transform: none;
-    top: 18%;
+    top: 14%;
+    padding-top: 0;
   }
+  // .profile .welcome {
+  //   display: none;
+  // }
   .home .you-can, .not-found .you-can {
-    margin-bottom: 18px;
-    span:first-child, span:last-child {
+    margin-bottom: 22px;
+    > span:first-child, > span:last-child {
       height: 35vw;
     }
+  }
+  .availability {
+    font-size: 10px;
+    letter-spacing: 0.8px;
   }
 }
 @media (max-width: 600px) {
