@@ -33,6 +33,7 @@ export function getViewport() {
  -------------------------------------------------- * */
  let mobileCheck = false;
  let mobileSafariCheck = false;
+ let firefoxCheck = false;
  const ua = navigator.userAgent;
  const browser = navigator.userAgent.toLowerCase();
  if (browser.indexOf('firefox') > -1) {
