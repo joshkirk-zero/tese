@@ -37,7 +37,7 @@ $nav = getByUID("global-content", "global_content");
                     <p>2017 | UI Design</p>
                 </div>
             </a>
-            <div class="project-link coming-soon">
+            <a href="/odyssey-beacon-tour/" class="project-link">
                 <div class="svg-wrapper">
                     <span class="wiper"><span></span></span>
                     <span class="svg-wrapper-inner">
@@ -45,10 +45,10 @@ $nav = getByUID("global-content", "global_content");
                     </span>
                 </div>
                 <div class="text-wrapper">
-                    <h3 class="title">Facebook<br> Life Blog</h3>
+                    <h3 class="title">Odyssey<br> Beacon Tour</h3>
                     <p>Coming Soon</p>
                 </div>
-            </div>
+            </a>
             <a href="/honorable-mentions/" class="project-link">
                 <div class="svg-wrapper">
                     <span class="wiper"><span></span></span>
