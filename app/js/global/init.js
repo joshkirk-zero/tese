@@ -12,6 +12,14 @@ export const onEnter = (to, location) => {
 
 export const onEnterCompleted = (from, to, location) => {
   Anim.pageEntrance(to.view.dataset.routerView);
+  if (typeof gtag !== 'undefined') {
+    // eslint-disable-next-line
+    gtag('config', 'UA-98434002-2', {
+      page_path: location.pathname,
+      page_title: to.page.title,
+      page_location: location.href
+    });
+}
 };
 
 export const firstLoad = () => {
