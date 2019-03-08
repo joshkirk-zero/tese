@@ -796,9 +796,12 @@ h1, h2, h3, h4, h5, h6, p, a, li {
         .wiper {
           width: 92.4%;
           left: 0;
-          height: 99.2%;
+          height: 99.4%;
           @include tablet {
             height: calc(100% - 3px);
+          }
+          @include mobile {
+            height: calc(100% - 1px);
           }
           span {
             left: -80px;
