@@ -3,29 +3,13 @@ import { SplitText } from '../thirdparty/SplitText';
 import { globalObject } from '../_functions';
 import { Linear } from 'gsap/TweenLite';
 
-export const prepScrollPrompt = (context) => {
-  const prompts = document.querySelectorAll('.scroll-prompt p span');
-  const homeLetters = prompts[0].querySelectorAll('div div');
-  const projectLetters = prompts[1].querySelectorAll('div div');
+export const prepScrollPrompt = () => {
+  const projectLetters = document.querySelector('.scroll-prompt p span div div');
   const promptArrow = document.querySelector('.scroll-prompt .arrow');
   
-  switch (context) {
-    case 'home':
-      TweenMax.set([homeLetters, projectLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
-      TweenMax.set([prompts, promptArrow], { display: 'none' });
-      if (!globalObject.isMobile) {
-        TweenMax.fromTo([prompts[0], promptArrow], 0.5, { display: 'block', opacity: 0 }, { opacity: 1, ease: Sine.easeInOut });
-      }
-      break;
-    case 'project':
-      TweenMax.set([homeLetters, projectLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
-      TweenMax.set(prompts, { display: 'none' });
-      TweenMax.fromTo([prompts[1], promptArrow], 0.5, { display: 'block', opacity: 0 }, { opacity: 1, ease: Sine.easeInOut });
-      break;
-    default:
-
-      break;
-  }
+  TweenMax.set([projectLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
+  TweenMax.set(projectLetters, { display: 'none' });
+  TweenMax.fromTo([projectLetters, promptArrow], 0.5, { display: 'block', opacity: 0 }, { opacity: 1, ease: Sine.easeInOut });
 };
 
 export const prepProfileDrawer = () => {

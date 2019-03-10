@@ -1,5 +1,4 @@
 import Highway from '@dogstudio/highway';
-import HomeSmooth from './smoothscroll_home';
 import { globalObject } from '../_functions';
 
 // Renderer
@@ -10,9 +9,7 @@ class HomeRenderer extends Highway.Renderer {
   }
 
   onEnterCompleted() {
-    if (!globalObject.isMobile) {
-      homeSmooth = new HomeSmooth({});
-    }
+
   }
 
   onLeave() {

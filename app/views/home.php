@@ -15,5 +15,4 @@ $document = $WPGLOBAL['document'];
       </div>
     </div>
   </div>
-  <div class="measure-el" data-smooth-section></div>
 </div>

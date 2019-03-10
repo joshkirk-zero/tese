@@ -1,6 +1,6 @@
 import * as Anim from './anims';
 import 'intersection-observer';
-import quicklink from "quicklink/dist/quicklink.mjs";
+import quicklink from 'quicklink/dist/quicklink.mjs';
 import { globalObject } from '../_functions';
 import { TweenMax } from 'gsap';
 
