@@ -1,6 +1,7 @@
 import * as Anim from './anims';
 import 'intersection-observer';
 import quicklink from 'quicklink/dist/quicklink.mjs';
+import { SplitText } from '../thirdparty/SplitText';
 import { globalObject } from '../_functions';
 import { TweenMax } from 'gsap';
 
@@ -12,20 +13,11 @@ export const onEnter = (to, location) => {
 
 export const onEnterCompleted = (from, to, location) => {
   Anim.pageEntrance(to.view.dataset.routerView);
-  if (typeof gtag !== 'undefined') {
-    // eslint-disable-next-line
-    gtag('config', 'UA-98434002-2', {
-      page_path: location.pathname,
-      page_title: to.page.title,
-      page_location: location.href
-    });
-}
 };
 
 export const firstLoad = () => {
   const namespace = document.querySelector('[data-router-view]').dataset.routerView;
   globalObject.namespace = namespace;
-  Anim.prepScrollPrompt(namespace);
   switch (namespace) {
     case 'home':
       quicklink({ el: document.querySelector('.projects-wrapper') });
@@ -36,18 +28,20 @@ export const firstLoad = () => {
       }
       const viewEl = document.querySelector('[data-router-view]');
       if (viewEl.classList.contains('facebook-careers')) {
-        quicklink({urls:['/', '/microsoft-teams/', '/honorable-mentions/']});
+        quicklink({ urls: ['/', '/microsoft-teams/', '/honorable-mentions/'] });
       } else if (viewEl.classList.contains('microsoft-teams')) {
-        quicklink({urls:['/', '/facebook-careers/', '/honorable-mentions/']});
+        quicklink({ urls: ['/', '/facebook-careers/', '/honorable-mentions/'] });
       } else if (viewEl.classList.contains('honorable-mentions')) {
-        quicklink({urls:['/', '/microsoft-teams/', '/facebook-careers/']});
+        quicklink({ urls: ['/', '/microsoft-teams/', '/facebook-careers/'] });
       }
       break;
     default:
 
-      break;
-      
+      break
   }
+  const splitWords = new SplitText(document.querySelector('.project-prompt'), { type: 'words' }).words;
+  const splitChars = new SplitText(splitWords, { type: 'chars' });
+  Anim.prepScrollPrompt(namespace);
   TweenMax.delayedCall(0.3, () => {
     Anim.pageEntrance(namespace, true);
     Anim.openCloseProjectsMenu();

@@ -51,13 +51,12 @@ export const globalObject = {
   menuModels: [],
   modelsLoaded: false,
   header: '',
-  readyToSwitch: false,
   comingFromFooter: false,
   openCloseMenu: '',
+  mainEl: document.querySelector('main'),
   namespace: '',
   isMobile: mobileCheck,
   isMobileSafari: mobileSafariCheck,
-  // isMobile: (navigator.maxTouchPoints || 'ontouchstart' in document.documentElement),
   openCloseCount: 0
 };
 if (globalObject.isMobile) {

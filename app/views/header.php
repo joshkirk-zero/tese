@@ -7,4 +7,4 @@
   <div class="global-els">
       <?php include __DIR__ . '/../includes/global-els.php'; ?>
   </div>
-  <main data-router-wrapper>
+  <main class="locked" data-router-wrapper>

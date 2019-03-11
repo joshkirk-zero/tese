@@ -1,5 +1,5 @@
 <?php
-require_once dirname(dirname(__DIR__)) . "/public_html/vendor/autoload.php";
+require_once dirname(dirname(__DIR__)) . "/vendor/autoload.php";
 
 use Prismic\Api;
 use Prismic\Predicates;

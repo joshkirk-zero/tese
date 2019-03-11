@@ -1,15 +1,18 @@
 import { TimelineMax, Sine, TweenMax, Expo, Power0 } from 'gsap';
 import { SplitText } from '../thirdparty/SplitText';
 import { globalObject } from '../_functions';
-import { Linear } from 'gsap/TweenLite';
 
-export const prepScrollPrompt = () => {
-  const projectLetters = document.querySelector('.scroll-prompt p span div div');
+export const prepScrollPrompt = (namespace) => {
   const promptArrow = document.querySelector('.scroll-prompt .arrow');
-  
-  TweenMax.set([projectLetters, promptArrow], { clearProps: 'transform, opacity, visibility' });
-  TweenMax.set(projectLetters, { display: 'none' });
-  TweenMax.fromTo([projectLetters, promptArrow], 0.5, { display: 'block', opacity: 0 }, { opacity: 1, ease: Sine.easeInOut });
+  const promptText = document.querySelectorAll('.scroll-prompt p div div');
+  if (namespace === 'home') {
+    TweenMax.set([promptArrow, promptText], { autoAlpha: 0 })
+  } else if (namespace === 'project') {
+    const letters = document.querySelectorAll('.scroll-prompt p div');
+    TweenMax.set([letters, promptArrow], { clearProps: 'transform, opacity, visibility' });
+    TweenMax.set(letters, { display: 'none' });
+    TweenMax.fromTo([letters, promptArrow], 0.5, { display: 'inline-block', opacity: 0 }, { opacity: 1, ease: Sine.easeInOut }); 
+  }
 };
 
 export const prepProfileDrawer = () => {
@@ -95,8 +98,7 @@ export const prepProfileDrawer = () => {
   closeMask.addEventListener('click', closeFunc);
   closeTrigger.addEventListener('click', closeFunc);
   document.addEventListener('keyup', (event) => {
-    const key = event.key;
-    if (key === 'Escape' || key === 'Esc') {
+    if (event.key === 'Escape' || event.key === 'Esc') {
       if (openCloseProfile.progress() > 0) {
         closeFunc();
       }
@@ -125,16 +127,16 @@ export const pageEntrance = (namespace, firstLoad = false) => {
 
       const beacon = document.querySelector('.beacon');
       const availability = document.querySelector('.availability');
-      const globalEls = document.querySelectorAll('.vert-left, .email-triggers, .scroll-prompt');
+      const globalEls = document.querySelectorAll('.vert-left, .email-triggers');
       const beaconTL = new TimelineMax({ repeat: -1, repeatDelay: 1, paused: true });
 
       beaconTL
-        .fromTo(beacon, 0.8, { immediateRender: false, scale: 1 }, { scale: 1.35, ease: Power0.easeNone })
-        .to(beacon, 1.2, { scale: 1, ease: Sine.easeOut });
+        .fromTo(beacon, 0.8, { immediateRender: false, scale: 1 }, { scale: 1.2, ease: Power0.easeNone })
+        .to(beacon, 1.2, { immediateRender: false, scale: 1, ease: Sine.easeOut });
       
       const beaconPlay = () => {
         TweenMax.fromTo(beacon, 1.1, { scale: 0 }, { scale: 1, ease: Expo.easeInOut, onComplete: () => {
-          TweenMax.delayedCall(0.0, () => {
+          TweenMax.delayedCall(0.5, () => {
             beaconTL.play();
           })
         } });
@@ -173,8 +175,8 @@ export const pageEntrance = (namespace, firstLoad = false) => {
       homeEntranceTL
         .add('fadeAndScale', '-=.3')
         .fromTo(availability, 1, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut }, 'fadeAndScale')
-        .fromTo('.availability p', 1.55, { x: -11 }, { x: 0, ease: Expo.easeInOut }, '+=0')
-        .add(beaconPlay, '-=1.2');
+        .fromTo('.availability p', 1.9, { x: -16 }, { x: 0, ease: Expo.easeInOut }, '+=0')
+        .add(beaconPlay, '-=1.3');
 
 
       TweenMax.delayedCall(0.7, () => {
@@ -207,14 +209,13 @@ export const pageEntrance = (namespace, firstLoad = false) => {
           .staggerFromTo(innerEntranceLines, 0.75, { skewY: 0, yPercent: 101 }, { skewY: 0, yPercent: 0, ease: Sine.easeInOut, force3D: true }, 0.04, 'startProjectMeta')
           .fromTo(bigPipe, 0.57, { transformOrigin: '50% 0', scaleY: 0 }, { scaleY: 1, ease: Sine.easeInOut }, 'startPipe');
         if (firstLoad) {
-          projectEntranceTL.fromTo(globalEls, 1.3, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut }, 'startPipe'); 
+          projectEntranceTL.fromTo(globalEls, 1.3, { opacity: 0 }, { opacity: 1, ease: Sine.easeInOut }, 'startPipe')
         }
         
         TweenMax.delayedCall(0.2, () => {
           projectEntranceTL.play();
         });
       }
-
       break;
     
     case '404':
