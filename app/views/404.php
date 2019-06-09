@@ -14,7 +14,7 @@ $document = $WPGLOBAL['document'];
   <div class="global-els">
       <?php include __DIR__ . '/../includes/global-els.php';?>
   </div>
-  <main data-router-wrapper>
+  <main class="locked" data-router-wrapper>
     <div data-router-view="404">
       <div class="container not-found">
         <div class="profile-wrapper">

@@ -37,7 +37,7 @@ $nav = getByUID("global-content", "global_content");
                     <p>2017 | UI Design</p>
                 </div>
             </a>
-            <a href="/odyssey-beacon-tour/" class="project-link">
+            <div class="project-link">
                 <div class="svg-wrapper">
                     <span class="wiper"><span></span></span>
                     <span class="svg-wrapper-inner">
@@ -48,7 +48,19 @@ $nav = getByUID("global-content", "global_content");
                     <h3 class="title">Odyssey<br> Beacon Tour</h3>
                     <p>Coming Soon</p>
                 </div>
-            </a>
+            </div>
+            <!-- <a href="/odyssey-beacon-tour/" class="project-link">
+                <div class="svg-wrapper">
+                    <span class="wiper"><span></span></span>
+                    <span class="svg-wrapper-inner">
+                        <?php include __DIR__ . '/../includes/svgs/03.php'; ?>
+                    </span>
+                </div>
+                <div class="text-wrapper">
+                    <h3 class="title">Odyssey<br> Beacon Tour</h3>
+                    <p>Coming Soon</p>
+                </div>
+            </a> -->
             <a href="/honorable-mentions/" class="project-link">
                 <div class="svg-wrapper">
                     <span class="wiper"><span></span></span>
@@ -101,6 +113,14 @@ $nav = getByUID("global-content", "global_content");
         <span class="label">Links<span class="pipe">|</span></span>
         <p class="projects-trigger">Projects<span class="lines"><span></span><span></span></span></p>
         <p class="profile-trigger">Profile<span class="lines"><span></span><span></span></span></p>
+    </div>
+</div>
+<div class="scroll-prompt">
+    <p class="project-prompt"><?= RichText::asText($nav->data->project_scroll_prompt) ?></p>
+    <div class="arrow">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 71.9 95" style="enable-background:new 0 0 71.9 95;" xml:space="preserve"><path class="pink-fill" d="M39.7,93.4l30.6-30.6c2.1-2.1,2.1-5.5,0-7.5c-2.1-2.1-5.5-2.1-7.5,0L41.2,76.8l0-71.5c0-2.9-2.4-5.3-5.3-5.3
+	c-2.9,0-5.3,2.4-5.3,5.3v71.5L9.1,55.3c-2.1-2.1-5.5-2.1-7.5,0c-1,1-1.6,2.4-1.6,3.8c0,1.4,0.5,2.7,1.6,3.8l30.5,30.5
+	c1,1,2.4,1.6,3.8,1.6C37.3,95,38.7,94.4,39.7,93.4z"/></svg>
     </div>
 </div>
 <div class="close-mask"></div>

@@ -34,7 +34,7 @@ export default class ProjectSmooth {
       threshold = !this.isMobile ? 200 : 20,
       ease = 0.15,
       preload = true,
-      mouseMultiplier = 0.3,
+      mouseMultiplier = (["Win32", "Win64", "Windows", "WinCE"].indexOf(window.navigator.platform) !== -1 ? 0.6 : 0.3),
       touchMultiplier = 2.5,
       firefoxMultiplier = 15,
       preventTouch = true,
@@ -89,14 +89,11 @@ export default class ProjectSmooth {
     }
 
     const fadeEls = document.querySelectorAll('.email-triggers .email, .email-triggers .availability, .arrow, .title-meta');
-    const largeTitle = document.querySelectorAll('.project-hero .large-svg-title, .project-hero .idx');
-    const largeMeta = document.querySelector('.project-hero .meta');
     const staggerFadeEls = document.querySelectorAll('.vert-left .meta');
     const staggerFadeScaleEls = document.querySelectorAll('.socials');
 
-    const scrollWords = document.querySelectorAll('.scroll-prompt p span:last-child');
-    const scrollWordsWraps = new SplitText(scrollWords, { type: 'words' }).words;
-    const scrollWordsChars = new SplitText(scrollWordsWraps, { type: 'chars' }).chars;
+    const scrollWordsWraps = document.querySelectorAll('.scroll-prompt p div');
+    const scrollWordsChars = document.querySelectorAll('.scroll-prompt p div div');
 
     this.scrollAwayTL
       .add('start')

@@ -17,9 +17,7 @@ class HomeRenderer extends Highway.Renderer {
   }
 
   onLeaveCompleted() {
-    if (!globalObject.isMobile) {
-      homeSmooth.destroy();
-    }
+    
   }
 }
 

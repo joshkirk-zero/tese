@@ -15,7 +15,8 @@ import * as Global from './global/init';
 if ('scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'manual';
 }
-const body = document.body;
+console.log('%c link underline by aristide benoist: https://aristidebenoist.com/', 'font-weight: bold; font-size: 12px; color: #1f271b;');
+console.log('%c smooth scroll math and strategy practiced on this site was developed with jesper landberg: http://twotwentytwo.se/', 'font-weight: bold; font-size: 12px; color: #1f271b;');
 // Highway
 export const Core = new Highway.Core({
   renderers: {
@@ -39,18 +40,13 @@ Core.on('NAVIGATE_IN', ({ to, trigger, location }) => { // to, trigger, location
 Core.on('NAVIGATE_END', ({ to, from, trigger, location }) => { // to, from, trigger, location
   Global.onEnterCompleted(from, to, location);
   globalObject.comingFromFooter = false;
-  body.classList.remove('transitioning');
+  document.body.classList.remove('transitioning');
 
 });
 
 Core.on('NAVIGATE_OUT', ({ from, trigger, location }) => { // from, trigger, location
-  // if (location.href === location.origin + '/') {
-  //   const leftSideFade = document.querySelector('.vert-left');
-  //   TweenMax.to(leftSideFade, 0.5, { autoAlpha: 0, ease: Sine.easeInOut, force3D: true });
-    
-  // }
-  // console.log(location.origin + '/', location.href);
-  body.classList.add('transitioning');
+  document.body.classList.add('transitioning');
+  globalObject.mainEl.classList.add('locked');
 });
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -118,6 +118,9 @@ main {
   overflow-x: hidden;
   position: relative;
   -webkit-overflow-scrolling: touch;
+  &.locked {
+    overflow-y: hidden;
+  }
 }
 body {
   font-family: $gtAmerica;
@@ -521,6 +524,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     position: relative;
     width: 8px;
     display: block;
+    cursor: pointer;
     &:after {
       content: '';
       width: 28px;
@@ -629,9 +633,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   color: $brown;
   position: relative;
   margin-top: 12px;
-  margin-left: 15px;
   p {
     position: relative;
+    margin-left: 17px;
   }
   @media (max-width: 767px) {
     p {
@@ -647,8 +651,8 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   border-radius: 50%;
   background-color: #87a878;
   position: absolute;
-  left: -17px;
-  top: 5px;
+  left: 0;
+  top: 4px;
   transform: scale(0);
   @media (max-width: 767px) {
     width: 6px;
